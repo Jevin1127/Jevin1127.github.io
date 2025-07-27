@@ -1,5 +1,5 @@
         const genericChordImages = {
-            guitar: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/mayores/c-mayor-acorde-de-la-guitarra-ilustración.png',
+            guitar: 'assets/img/guitar/f8f9bf638ed2c5822cea3e5a26e0add9-guitarra-inconformista.webp',
             piano: 'assets/img/bass/6196550.png',
             bass: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp'
         };
