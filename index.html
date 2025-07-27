@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Repertorio Musical Presbiteriano</title>
+</head>
+
+<body>
+    <div class="container">
+        <header id="indice">
+            <h1>Repertorio Musical Presbiteriano</h1>
+            <p>Índice de cantos</p>
+        </header>
+
+        <!-- Barra de búsqueda -->
+        <div class="search-container">
+            <input type="text" id="song-search" placeholder="Buscar canto...">
+            <button onclick="searchSong()">Buscar</button>
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Sección de Librería de Acordes -->
+        <div class="chord-library-section">
+            <h2>📚 Librería de Acordes</h2>
+            <div class="chord-library-intro">
+                <p>Explora nuestra completa librería de acordes para guitarra, piano y bajo. Aprende diferentes
+                    posiciones, digitaciones y variaciones para cada acorde.</p>
+                <a href="#chord-library" class="chord-library-link">Ir a la Librería de Acordes</a>
+            </div>
+        </div>
+
+        <!-- Menú desplegable de Cantos de Adoración -->
+        <div class="category">
+            <div class="category-title">
+                Cantos de Adoración
+                <span class="category-icon">▶</span>
+            </div>
+            <ul class="songs-list">
+                <li><a href="#a-quien-ire">A quién iré (LEE)</a></li>
+                <li><a href="#a-sus-pies">A Sus pies (JAR)</a></li>
+                <li><a href="#abre-los-cielos">Abre los cielos (JAR)</a></li>
+                <li><a href="#al-borde">Al borde (MW)</a></li>
+                <li><a href="#al-estar-ante-ti">Al estar ante ti (JAR)</a></li>
+                <li><a href="#al-trono">Al que está sentado en el trono</a></li>
+                <li><a href="#alaba-a-dios">Alaba a Dios</a></li>
+                <li><a href="#aleluya">Aleluya</a></li>
+                <li><a href="#altisimo">Altisimo</a></li>
+                <li><a href="#amamos-tu-presencia">Amamos tu presencia</a></li>
+                <li><a href="#amante-de-ti">Amante de ti Señor</a></li>
+                <li><a href="#aqui-estoy-02">Aqui estoy 02</a></li>
+                <li><a href="#aqui-estoy-jm">Aqui estoy JM</a></li>
+                <li><a href="#cambia-senor">Cambia Señor</a></li>
+                <li><a href="#cantare-de-tu-amor">Cantaré de tu amor</a></li>
+                <li><a href="#cerca-de-ti">Cerca de Ti</a></li>
+                <li><a href="#como-la-brisa">Como la brisa</a></li>
+                <li><a href="#de-gloria-en-gloria">De gloria en gloria</a></li>
+                <li><a href="#desde-mi-interior">Desde mi interior</a></li>
+                <li><a href="#dios-de-pactos">Dios de Pactos</a></li>
+                <li><a href="#dios-esta-aqui">Dios está aquí</a></li>
+                <li><a href="#doxologia">Doxología</a></li>
+                <li><a href="#el-borde-de-su-manto">El borde de su manto</a></li>
+                <li><a href="#el-espiritu-de-dios">El Espíritu de Dios</a></li>
+                <li><a href="#el-himno-de-victoria">El himno de victoria</a></li>
+                <li><a href="#el-me-levantara">El me levantará</a></li>
+                <li><a href="#el-rey-te-mando-a-llamar">El Rey te mandó a llamar</a></li>
+                <li><a href="#el-senor-es-mi-pastor">El Señor es mi Pastor</a></li>
+                <li><a href="#en-el-nombre-de-jesus">En el nombre de Jesús</a></li>
+                <li><a href="#enamorame">Enamórame</a></li>
+                <li><a href="#enciende-una-luz">Enciende una luz</a></li>
+                <li><a href="#envia-me-a-mi">Envíame a mí</a></li>
+                <li><a href="#eres-digno">Eres digno</a></li>
+                <li><a href="#es-por-tu-gracia">Es por tu gracia</a></li>
+                <li><a href="#escucharte-hablar">Escucharte hablar</a></li>
+                <li><a href="#escudrinamos">Escudriñemos</a></li>
+                <li><a href="#esta-cayendo">Esta cayendo</a></li>
+                <li><a href="#exaltate">Exáltate</a></li>
+                <li><a href="#glorificad-a-jehova">Glorificad a Jehová</a></li>
+                <li><a href="#gracias">Gracias</a></li>
+                <li><a href="#hay-una-uncion">Hay una Unción</a></li>
+                <li><a href="#hossana-hillsong">Hossana - Hillsong</a></li>
+                <li><a href="#jesus-es-el-senor">Jesús es el Señor</a></li>
+                <li><a href="#jesus-has-mi-caracter">Jesús Has mi Carácter</a></li>
+                <li><a href="#jesus-mi-amigo">Jesús mi fiel Amigo</a></li>
+                <li><a href="#junto-a-tus-pies">Junto a tus Pies</a></li>
+                <li><a href="#kadosh">Kadosh</a></li>
+                <li><a href="#la-nina-de-tus-ojos">La Niña de tus Ojos</a></li>
+                <li><a href="#la-paz-de-dios">La Paz de Dios</a></li>
+                <li><a href="#levanto-mis-manos">Levanto mis Manos</a></li>
+                <li><a href="#majestuoso-poderoso">Majestuoso, Poderoso</a></li>
+                <li><a href="#manto-de-tu-gloria">Manto de tu Gloria</a></li>
+                <li><a href="#me-dice-que-me-ama">Me Dice que me Ama</a></li>
+                <li><a href="#mi-alma-anhela-estar">Mi Alma Anhela Estar</a></li>
+                <li><a href="#mi-jesus-mi-amado">Mi Jesús mi Amado</a></li>
+                <li><a href="#mi-mejor-adoracion">Mi Mejor Adoración</a></li>
+                <li><a href="#mi-universo">Mi Universo</a></li>
+                <li><a href="#mi-vida-llena-de-ti">Mi Vida esta llena de Ti</a></li>
+                <li><a href="#no-basta-solo-con-cantar">No Basta solo con cantar</a></li>
+                <li><a href="#no-hay-argumento">No hay argumento</a></li>
+                <li><a href="#no-merecia-tanto-amor">No Merecia tanto Amor</a></li>
+                <li><a href="#perfume-a-tus-pies">Perfume a tu Pies</a></li>
+                <li><a href="#poderoso">Poderoso</a></li>
+                <li><a href="#por-que-para-siempre-dios">Por que Para Siempre Dios</a></li>
+                <li><a href="#que-seria-de-mi">Que Seria de Mi</a></li>
+                <li><a href="#quiero-mirar-tu-hermosura">Quiero Mirar tu Hermosura</a></li>
+                <li><a href="#renuevame">Renuevame</a></li>
+                <li><a href="#rey-de-reyes">Rey de Reyes</a></li>
+                <li><a href="#sana-nuestra-tierra">Sana Nuestra Tierra</a></li>
+                <li><a href="#sananos">Sananos</a></li>
+                <li><a href="#se-debastaran-mis-suenos">Se Debastaran mis Sueños</a></li>
+                <li><a href="#sendas-dios-hara">Sendas Dios Hara</a></li>
+                <li><a href="#sentado-en-su-trono">Sentado en su Trono</a></li>
+                <li><a href="#senor-llevame-a-tus-atrios">Señor Llevame a tus Atrios</a></li>
+                <li><a href="#si-hubiera-estado-alli">Si Hubiera Estado Alli</a></li>
+                <li><a href="#sin-reservas">Sin Reservas</a></li>
+                <li><a href="#soberano">Soberano</a></li>
+                <li><a href="#solo-el-eco">Solo el Eco</a></li>
+                <li><a href="#solo-pienso-en-ti">Solo Pienso en Ti</a></li>
+                <li><a href="#soplando-vida">Soplando Vida</a></li>
+                <li><a href="#sumergeme">Sumergeme</a></li>
+                <li><a href="#supe-que-me-amabas">Supe que me Amabas</a></li>
+                <li><a href="#tal-como-soy">Tal Como Soy</a></li>
+                <li><a href="#te-amo">Te Amo</a></li>
+                <li><a href="#te-pido-la-paz">Te Pido la Paz</a></li>
+                <li><a href="#temprano-te-buscare">Temprano te Buscare</a></li>
+                <li><a href="#tiene-tu-color">Tiene tu Color</a></li>
+                <li><a href="#toda-gloria-y-majestad">Toda Gloria y Majestad</a></li>
+                <li><a href="#tu-amor-por-mi">Tu Amor por Mi</a></li>
+                <li><a href="#tu-estas-aqui">Tu Estas Aqui</a></li>
+                <li><a href="#tu-fidelidad">Tu Fidelidad</a></li>
+                <li><a href="#tu-mirada">Tu Mirada</a></li>
+                <li><a href="#unidos">Unidos</a></li>
+                <li><a href="#vuelve-a-llamar">Vuelve a Llamar</a></li>
+                <li><a href="#yo-creo-msm">Yo Creo (MSM)</a></li>
+                <li><a href="#yo-entro-al-lugar-santo">Yo Entro al Lugar mas Santo</a></li>
+                <li><a href="#yo-solo-quiero-estar">Yo Solo Quiero Estar</a></li>
+                <li><a href="#yo-te-busco">Yo Te Busco</a></li>
+            </ul>
+        </div>
+
+        <!-- Menú desplegable de Cantos de Alabanza -->
+        <div class="category">
+            <div class="category-title">
+                Cantos de Alabanza
+                <span class="category-icon">▶</span>
+            </div>
+            <ul class="songs-list">
+                <li><a href="#abba-padre">Abba Padre</a></li>
+                <li><a href="#abre-mis-ojos">Abre mis ojos</a></li>
+                <li><a href="#aclamad-al-senor">Aclamad al Señor</a></li>
+                <li><a href="#agnus-dei">Agnus Dei</a></li>
+                <li><a href="#al-que-me-cine">Al que me ciñe de poder</a></li>
+                <li><a href="#al-rey">Al Rey</a></li>
+                <li><a href="#alabad-a-jehova">Alabad a Jehová</a></li>
+                <li><a href="#alegrense">Alégrense</a></li>
+                <li><a href="#amor-sin-condicion">Amor sin condicion</a></li>
+                <li><a href="#bueno-es-alabar">Bueno es alabar oh Señor</a></li>
+                <li><a href="#bueno-es-dios">Bueno es Dios</a></li>
+                <li><a href="#cambiare-mi-tristeza">Cambiaré mi tristeza</a></li>
+                <li><a href="#cancion-feliz">Canción feliz</a></li>
+                <li><a href="#canto-danzo-salto">Canto, Danzo, Salto</a></li>
+                <li><a href="#como-hizo-david">Como hizo David</a></li>
+                <li><a href="#con-mi-dios">Con mi Dios</a></li>
+                <li><a href="#cristo-es-la-pena">Cristo es la Peña de Horeb</a></li>
+                <li><a href="#cristo-no-esta-muerto">Cristo no está muerto</a></li>
+                <li><a href="#cristo-vive">Cristo Vive JCA</a></li>
+                <li><a href="#cuando-pienso">Cuando pienso</a></li>
+                <li><a href="#cuenta-conmigo">Cuenta conmigo</a></li>
+                <li><a href="#david-danzaba">David David danzaba</a></li>
+                <li><a href="#de-los-montes">De los montes</a></li>
+                <li><a href="#derrama-de-tu-fuego">Derrama de tu fuego</a></li>
+                <li><a href="#dias-de-elias">Dias de Elías</a></li>
+                <li><a href="#dios-no-nos-trajo">Dios no nos trajo hasta aqui</a></li>
+                <li><a href="#dios-poderoso">Dios poderoso</a></li>
+                <li><a href="#el-ejercito-de-dios">El ejército de Dios</a></li>
+                <li><a href="#el-es-el-rey">Él es el Rey</a></li>
+                <li><a href="#el-es-jehova">El es Jehová</a></li>
+                <li><a href="#el-gozo-del-senor">El gozo del Señor</a></li>
+                <li><a href="#el-gozo-que-siento">El gozo que siento yo</a></li>
+                <li><a href="#el-ha-cambiado">Él ha cambiado</a></li>
+                <li><a href="#el-maestro-de-galilea">El Maestro de Galilea</a></li>
+                <li><a href="#el-poderoso-de-israel">El Poderoso de Israel</a></li>
+                <li><a href="#el-santo-de-israel">El Santo de Israel</a></li>
+                <li><a href="#el-senor-esta-aqui">El Señor está en este lugar</a></li>
+                <li><a href="#el-senor-me-lleno">El Señor me llenó de gozo</a></li>
+                <li><a href="#en-los-montes">En los montes, En los valles</a></li>
+                <li><a href="#es-hora-de-adorarle">Es hora de adorarle</a></li>
+                <li><a href="#espiritu-santo">Espíritu Santo</a></li>
+                <li><a href="#generacion-que-danza">Generación que Danza</a></li>
+                <li><a href="#gozo">Gozo</a></li>
+                <li><a href="#grande-es-el-senor">Grande es el Señor</a></li>
+                <li><a href="#grande-y-fuerte">Grande y Fuerte</a></li>
+                <li><a href="#has-aumentado">Has Aumentado</a></li>
+                <li><a href="#has-cambiado-mi-lamento">Has cambiado mi Lamento en Baile</a></li>
+                <li><a href="#hashem-es-varon">Hashem es Varón</a></li>
+                <li><a href="#hay-poder">Hay Poder</a></li>
+                <li><a href="#hazme-un-radical">Hazme un Radical</a></li>
+                <li><a href="#he-decidido">He Decidido</a></li>
+                <li><a href="#hossana-mb">Hossana - MB</a></li>
+                <li><a href="#huele-a-victoria">Huele a Victoria</a></li>
+                <li><a href="#jehova-de-gibbor">Jehová de Gibbor</a></li>
+                <li><a href="#jehova-es-mi-guerrero">Jehová es mi Guerrero</a></li>
+                <li><a href="#jehova-es-vencedor">Jehová es Vencedor</a></li>
+                <li><a href="#jesus-esta-pasando">Jesús está Pasando por aquí</a></li>
+                <li><a href="#la-casa-de-dios">La Casa de Dios</a></li>
+                <li><a href="#la-cosecha">La Cosecha</a></li>
+                <li><a href="#levantate-msm">Levántate (MSM)</a></li>
+                <li><a href="#levantate-mw">Levántate (MW)</a></li>
+                <li><a href="#levantate-pw">Levántate (PW)</a></li>
+                <li><a href="#libertad">Libertad</a></li>
+                <li><a href="#libre">Libre</a></li>
+                <li><a href="#loor-a-ti">Loor a Ti</a></li>
+                <li><a href="#los-muros-caen">Los Muros Caen</a></li>
+                <li><a href="#manda-el-fuego">Manda el Fuego</a></li>
+                <li><a href="#manda-lluvia">Manda Lluvia</a></li>
+                <li><a href="#me-gozare-ebenezer">Me Gozare (Ebenezer, Toda la Cadena)</a></li>
+                <li><a href="#me-gozare-ja">Me Gozare (JA)</a></li>
+                <li><a href="#me-gozare-me-alegrare">Me Gozare, Me Alegrare</a></li>
+                <li><a href="#mi-corazon-dispuesto">Mi Corazón esta Dispuesto</a></li>
+                <li><a href="#movimiento-de-gloria">Movimiento de Gloria</a></li>
+                <li><a href="#musica-del-cielo">Música del Cielo</a></li>
+                <li><a href="#oh-jesus">Oh Jesus</a></li>
+                <li><a href="#oh-moradora">Oh Moradora</a></li>
+                <li><a href="#pasa-por-aqui">Pasa por Aqui</a></li>
+                <li><a href="#por-que-soy-sacerdote">Por que Soy un Sacerdote</a></li>
+                <li><a href="#queremos-a-cristo">Queremos a Cristo Proclamar</a></li>
+                <li><a href="#remolineando">Remolineando</a></li>
+                <li><a href="#se-oye-en-las-naciones">Se Oye en las Naciones</a></li>
+                <li><a href="#shalom">Shalom, sea la Paz</a></li>
+                <li><a href="#somos-el-pueblo">Somos el Pueblo de Dios</a></li>
+                <li><a href="#somos-pueblo">Somos Pueblo</a></li>
+                <li><a href="#soy-una-nueva-criatura">Soy una Nueva Criatura</a></li>
+                <li><a href="#sube-sube-sube">Sube, Sube, Sube</a></li>
+                <li><a href="#te-alabare">Te Alabare</a></li>
+                <li><a href="#te-dare-lo-mejor">Te Dare lo Mejor</a></li>
+                <li><a href="#te-doy-gloria">Te Doy Gloria</a></li>
+                <li><a href="#toma-el-pandero">Toma el Pandero</a></li>
+                <li><a href="#tomalo">Tomalo</a></li>
+                <li><a href="#tu-eres-la-luz">Tu Eres la Luz</a></li>
+                <li><a href="#tu-nombre-oh-dios">Tu Nombre Oh Dios</a></li>
+                <li><a href="#tu-y-yo-somos">Tu y Yo Somos un Pueblo</a></li>
+                <li><a href="#vencio">Vencio</a></li>
+                <li><a href="#vino-celestial">Vino Celestial</a></li>
+                <li><a href="#yeshua">Yeshua</a></li>
+                <li><a href="#yeshua-hamashiach">Yeshua Hamashiach</a></li>
+                <li><a href="#yo-creo-mw">Yo Creo (MW)</a></li>
+                <li><a href="#yo-te-adoro">Yo te Adoro</a></li>
+                <li><a href="#yo-vencere">Yo Vencere</a></li>
+            </ul>
+        </div>
+
+        <!-- Menú desplegable de Cantos de Bienvenida -->
+        <div class="category">
+            <div class="category-title">
+                Cantos de Bienvenida
+                <span class="category-icon">▶</span>
+            </div>
+            <ul class="songs-list">
+                <li><a href="#bienvenidos">Bienvenidos - Con gran gozo</a></li>
+                <li><a href="#saludo-cristiano">El saludo del Cristiano</a></li>
+            </ul>
+        </div>
+
+        <!-- Menú desplegable de Cantos Especiales -->
+        <div class="category">
+            <div class="category-title">
+                Cantos Especiales
+                <span class="category-icon">▶</span>
+            </div>
+            <ul class="songs-list">
+                <li><a href="#taller-del-maestro">Al taller del Maestro</a></li>
+                <li><a href="#amor-amor-amor">Amor Amor Amor</a></li>
+                <li><a href="#digno-eres">Digno eres tu</a></li>
+                <li><a href="#el-amor-que-tu-me-das">El amor que Tú me das</a></li>
+                <li><a href="#el-sonido-del-silencio">El sonido del silencio</a></li>
+                <li><a href="#jardin-de-rosas">Jardín de Rosas</a></li>
+                <li><a href="#me-has-atraido">Me has Atraído</a></li>
+                <li><a href="#me-robaste-el-corazon">Me Robaste el Corazón</a></li>
+                <li><a href="#pegado-a-ti">Pegado a Ti</a></li>
+                <li><a href="#que-eres-para-mi">Que eres para Mi</a></li>
+                <li><a href="#quien-soy-yo">Quien soy Yo</a></li>
+                <li><a href="#reparame">Reparame</a></li>
+                <li><a href="#rodeas-la-eternidad">Rodeas la Eternidad</a></li>
+                <li><a href="#sueno-de-morir">Sueño de Morir</a></li>
+                <li><a href="#toda-la-gloria">Toda la Gloria</a></li>
+            </ul>
+        </div>
+
+        <!-- Menú desplegable de Cantos de Navidad -->
+        <div class="category">
+            <div class="category-title">
+                Cantos de Navidad
+                <span class="category-icon">▶</span>
+            </div>
+            <ul class="songs-list">
+                <li><a href="#al-mundo-paz">Al mundo paz</a></li>
+                <li><a href="#es-navidad">Es Navidad</a></li>
+            </ul>
+        </div>
+
+        <!-- Ejemplo de contenido de canción (A quién iré) -->
+        <section class="song-content" id="a-quien-ire">
+            <div class="transpose-controls">
+                <div class="current-key">Tonalidad actual: <span id="current-key">D</span></div>
+                <div class="transpose-buttons">
+                    <button onclick="transpose(-1)">Bajar ½ tono</button>
+                    <button onclick="transpose(1)">Subir ½ tono</button>
+                    <button onclick="resetKey()">Original (D)</button>
+                </div>
+                <div>Seleccionar tonalidad:</div>
+                <div class="key-selector" id="key-selector">
+                    <!-- Las teclas se generarán con JavaScript -->
+                </div>
+            </div>
+
+            <h2 class="song-title">A quién iré (LEE)</h2>
+
+            <!-- Sección de tutoriales por instrumento -->
+            <div class="tutorials-section">
+                <h3>🎵 Tutoriales por Instrumento</h3>
+                <div class="tutorials-grid">
+                    <div class="tutorial-card">
+                        <h4>Piano</h4>
+                        <div class="video-placeholder" data-song="A quién iré" data-instrument="piano">
+                            Haz clic para buscar tutorial de piano
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <h4>Guitarra</h4>
+                        <div class="video-placeholder" data-song="A quién iré" data-instrument="guitarra">
+                            Haz clic para buscar tutorial de guitarra
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <h4>Bajo</h4>
+                        <div class="video-placeholder" data-song="A quién iré" data-instrument="bajo">
+                            Haz clic para buscar tutorial de bajo
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <h4>Batería</h4>
+                        <div class="video-placeholder" data-song="A quién iré" data-instrument="bateria">
+                            Haz clic para buscar tutorial de batería
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <h4>Canto</h4>
+                        <div class="video-placeholder" data-song="A quién iré" data-instrument="canto">
+                            Haz clic para buscar tutorial de canto
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transition-box">
+                <h3>🎼 Transiciones entre Acordes</h3>
+                <div class="transition-item">
+                    <strong>Original:</strong> D → Bm<br>
+                    <strong>Con transición:</strong> D → Em → Bm
+                </div>
+                <div class="transition-item">
+                    <strong>Original:</strong> Bm → G<br>
+                    <strong>Con transición:</strong> Bm → Am → G
+                </div>
+                <div class="transition-item">
+                    <strong>Original:</strong> G → D<br>
+                    <strong>Con transición:</strong> G → A → D
+                </div>
+                <div class="transition-item">
+                    <strong>Original:</strong> D → Em<br>
+                    <strong>Con transición:</strong> D → D/F# → Em
+                </div>
+                <div class="transition-item">
+                    <strong>Original:</strong> Em → A9<br>
+                    <strong>Con transición:</strong> Em → F#m7b5 → A9
+                </div>
+            </div>
+
+            <div class="jazz-box">
+                <h3>🎷 Sugerencias de Arreglos Jazzeros</h3>
+
+                <div class="jazz-subsection">
+                    <h4>Progresión Jazz alternativa:</h4>
+                    <div class="chord-progression">
+                        Dmaj7 - D6/9 - Bm9 - A13sus4 - Dmaj9 - D6/9 - A13
+                    </div>
+                </div>
+
+                <div class="jazz-subsection">
+                    <h4>Substituciones recomendadas:</h4>
+                    <div class="transition-item">
+                        <strong>D</strong> → Dmaj7 o D6/9
+                    </div>
+                    <div class="transition-item">
+                        <strong>Bm</strong> → Bm9 o Bm7
+                    </div>
+                    <div class="transition-item">
+                        <strong>G</strong> → Gmaj9 o G6/9
+                    </div>
+                    <div class="transition-item">
+                        <strong>A9</strong> → A13sus4 o A7alt
+                    </div>
+                </div>
+
+                <div class="jazz-subsection">
+                    <h4>Reharmonización Avanzada:</h4>
+                    <div class="chord-progression">
+                        Dmaj7 - B7#11 - Em9 - A13sus4 - Dmaj7#11 - D6/9 - A7alt
+                    </div>
+                </div>
+
+                <div class="jazz-subsection">
+                    <h4>Walking Bass Line:</h4>
+                    <div class="chord-progression">
+                        D - D/C# - Bm - Bm/A - B - B/F# - D/A - A7
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de escalas para improvisación -->
+            <div class="scales-section">
+                <h3>🎶 Escalas para Improvisación</h3>
+                <div class="scales-container" id="scales-container">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Sección de diagramas de acordes complejos -->
+            <div class="chord-diagrams">
+                <h3>🖐 Diagramas de Acordes</h3>
+                <div class="chord-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="guitar">Guitarra</button>
+                    <button class="filter-btn" data-filter="piano">Piano</button>
+                    <button class="filter-btn" data-filter="bass">Bajo</button>
+                </div>
+                <div class="chord-diagrams-grid" id="chord-diagrams-grid">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <div class="lyrics" id="song-lyrics">
+                <h4>INTRO:</h4>
+                <span class="chord">Gmaj7</span>&nbsp;-&nbsp;<span class="chord">A9</span>&nbsp;-&nbsp;<span
+                    class="chord">Bm7</span>&nbsp;-&nbsp;<span class="chord">A9</span>
+
+                <span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">D/C#</span>
+                A quién iré en necesidad
+                <span
+                    class="chord">Bm</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>
+                A quién iré en busca de paz
+                <span
+                    class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;<span class="chord">A9</span>
+                Y quién podrá mi vida saciar de verdaaaa-ad
+
+                <span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">D/C#</span>
+                Quién mas tendrá de mi compasión
+                <span
+                    class="chord">Bm</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>
+                Y entenderá mi corazón
+                <span
+                    class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">A9</span>
+                Quién cambiará mi eternidad sino Tú Jesús
+
+                Coro:
+                <span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">G</span>
+                Cristo a donde más podría ir
+                <span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">G</span>&nbsp;&nbsp;&nbsp;<span class="chord">D/F#</span>
+                Cristo que otro lugar puede existir
+                <span
+                    class="chord">Em</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>
+                Sólo tu tiene palabras de Amor
+                <span
+                    class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9</span>
+                Camino al Padre y verdad eres Tú
+                <span
+                    class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">G</span>
+                Cristo adonde más podría ir.
+            </div>
+
+            <a href="#indice" class="back-btn">Volver al índice</a>
+        </section>
+
+        <!-- Librería de Acordes -->
+        <section class="chord-library" id="chord-library">
+            <h2>📚 Librería Completa de Acordes</h2>
+
+            <div class="instrument-tabs" id="instrument-tabs">
+                <div class="instrument-tab active" data-instrument="guitar">Guitarra</div>
+                <div class="instrument-tab" data-instrument="piano">Piano</div>
+                <div class="instrument-tab" data-instrument="bass">Bajo</div>
+            </div>
+
+            <div class="chord-types" id="chord-types">
+                <div class="chord-type-btn active" data-type="all">Todos</div>
+                <div class="chord-type-btn" data-type="major">Mayores</div>
+                <div class="chord-type-btn" data-type="minor">Menores</div>
+                <div class="chord-type-btn" data-type="7">Dominantes</div>
+                <div class="chord-type-btn" data-type="maj7">Mayor 7</div>
+                <div class="chord-type-btn" data-type="m7">Menor 7</div>
+                <div class="chord-type-btn" data-type="sus">Suspendidos</div>
+                <div class="chord-type-btn" data-type="dim">Disminuidos</div>
+                <div class="chord-type-btn" data-type="aug">Aumentados</div>
+                <div class="chord-type-btn" data-type="extended">Extendidos</div>
+            </div>
+
+            <!-- Contenedor para acordes de guitarra -->
+            <div class="chord-detail-container active" id="guitar-chords">
+                <h3>Acordes de Guitarra</h3>
+
+                <div class="chord-grid" id="guitar-chords-grid">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Contenedor para acordes de piano -->
+            <div class="chord-detail-container" id="piano-chords">
+                <h3>Acordes de Piano</h3>
+
+                <div class="chord-grid" id="piano-chords-grid">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Contenedor para acordes de bajo -->
+            <div class="chord-detail-container" id="bass-chords">
+                <h3>Acordes de Bajo</h3>
+
+                <div class="chord-grid" id="bass-chords-grid">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+            </div>
+
+            <a href="#indice" class="back-btn">Volver al índice</a>
+        </section>
+    </div>
+
+    <script src="assets/js/scripts.js"></script>
+</body>
+
+</html>
