@@ -4,95 +4,29 @@ const genericChordImages = {
     bass: 'assets/img/bass/6196550.png'
 };
 
-
-// Objeto con las imágenes en base64 para cada instrumento y acorde
-const chordImagesBase64 = {
+// Objeto con las imágenes para cada instrumento y acorde
+const chordImages = {
     guitar: {
-        // Acordes mayores
-        'C': { main: 'assets/img/guitar/mayores/c-mayor.webp' },
-        'C#': { main: '' },
-        'Db': { main: '' },
-        'D': { main: '' },
-        'D#': { main: '' },
-        'Eb': { main: '' },
-        'E': { main: '' },
-        'Fb': { main: '' },
-        'E#': { main: '' },
-        'F': { main: '' },
-        'F#': { main: '' },
-        'Gb': { main: '' },
-        'G': { main: '' },
-        'G#': { main: '' },
-        'Ab': { main: '' },
-        'A':   { main: '' },
-        'A#':  { main: '' },
-        'Bb':  { main: '' },
-        'B':   { main: '' },
-
-        // Acordes menores
-        'Cm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Cm' },
-        'C#m': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C#m' },
-        'Dbm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Dbm' },
-        'Dm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Dm' },
-        'D#m': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_D#m' },
-        'Ebm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Ebm' },
-        'Em': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Em' },
-        'Fm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Fm' },
-        'F#m': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_F#m' },
-        'Gbm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Gbm' },
-        'Gm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Gm' },
-        'G#m': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_G#m' },
-        'Abm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Abm' },
-        'Am': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Am' },
-        'A#m': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_A#m' },
-        'Bbm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Bbm' },
-        'Bm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Bm' },
-
-        // Acordes séptima
-        'C7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C7' },
-        'C#7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C#7' },
-        'D7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_D7' },
-        'D#7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_D#7' },
-        'E7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_E7' },
-        'F7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_F7' },
-        'F#7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_F#7' },
-        'G7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_G7' },
-        'G#7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_G#7' },
-        'A7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_A7' },
-        'A#7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_A#7' },
-        'B7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_B7' },
-
-        // Acordes mayores séptima
-        'Cmaj7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Cmaj7' },
-        'C#maj7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C#maj7' },
-        'Dmaj7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Dmaj7' },
-
-        // Acordes menores séptima
-        'Cm7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Cm7' },
-        'C#m7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C#m7' },
-        'Dm7': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Dm7' },
-
-        // Acordes suspendidos
-        'Csus2': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Csus2' },
-        'Csus4': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Csus4' },
-
-        // Acordes aumentados y disminuidos
-        'Caug': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Caug' },
-        'Cdim': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_Cdim' },
-
-        // Slash chords
-        'C/E': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C_E' },
-        'C/G': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_C_G' }
+        'C': {
+            main: 'assets/img/guitar/mayores/c-mayor.webp',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'D': {
+            main: 'assets/img/guitar/mayores/d-mayor.webp',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        }
     },
-
     piano: {
-        'C': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_PIANO_C' },
-        'Cm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_PIANO_Cm' }
+        'C': {
+            main: 'assets/img/piano/c-mayor.webp',
+            fallback: 'assets/img/piano/default-piano.png'
+        }
     },
-
     bass: {
-        'C': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_BASSO_C' },
-        'Cm': { main: 'data:image/png;base64,REEMPLAZA_CON_TU_BASE64_BASSO_Cm' }
+        'C': {
+            main: 'assets/img/bass/c-mayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        }
     }
 };
 
@@ -430,9 +364,9 @@ function getUniqueChordsFromLyrics() {
     });
     return Array.from(chords);
 }
+
 // Función para mostrar detalles del acorde (simulado)
 function showChordDetail(chord, instrument) {
-
     // Ocultar todos los contenidos de canciones primero
     document.querySelectorAll('.song-content').forEach(content => {
         content.style.display = 'none';
@@ -565,71 +499,6 @@ function generateChordDetailContent(chord, instrument) {
     `;
     content.appendChild(generalInfo);
 
-    // Generar diagrama específico del instrumento
-    const diagramSection = document.createElement('div');
-    diagramSection.innerHTML = `<h3>Diagrama para ${instrument}</h3>`;
-
-    const diagramContainer = document.createElement('div');
-    diagramContainer.className = 'chord-diagram-large';
-    diagramContainer.setAttribute('data-chord', chord);
-
-    if (instrument === 'Guitarra') {
-        generateGuitarDiagram(diagramContainer, chord);
-    } else if (instrument === 'Piano') {
-        generatePianoDiagram(diagramContainer, chord, chordNotes);
-    } else if (instrument === 'Bajo') {
-        generateBassDiagram(diagramContainer, chord);
-    }
-
-    diagramSection.appendChild(diagramContainer);
-
-    // Agregar digitación
-    const fingering = document.createElement('div');
-    fingering.className = 'chord-fingers';
-    fingering.innerHTML = `<p><strong>Digitación recomendada:</strong> ${getFingering(chord, instrument)}</p>`;
-    diagramSection.appendChild(fingering);
-
-    content.appendChild(diagramSection);
-
-    // Agregar variaciones del acorde
-    const variations = document.createElement('div');
-    variations.innerHTML = `
-                <h3>Variaciones de ${chord} en ${instrument}</h3>
-                <p>Estas son algunas posiciones alternativas para este acorde:</p>
-            `;
-
-    const variationsGrid = document.createElement('div');
-    variationsGrid.className = 'chord-grid';
-
-    getChordVariations(chord, instrument).forEach(variation => {
-        const variationCard = document.createElement('div');
-        variationCard.className = 'chord-variant';
-
-        const variationDiagram = document.createElement('div');
-        variationDiagram.className = 'chord-diagram-large';
-        variationDiagram.setAttribute('data-chord', chord);
-
-        if (instrument === 'Guitarra') {
-            generateGuitarDiagram(variationDiagram, chord, variation.position);
-        } else if (instrument === 'Piano') {
-            generatePianoDiagram(variationDiagram, chord, variation.notes);
-        } else if (instrument === 'Bajo') {
-            generateBassDiagram(variationDiagram, chord, variation.position);
-        }
-
-        variationCard.innerHTML = `
-                    <h4>${variation.name}</h4>
-                    ${variationDiagram.outerHTML}
-                    <div class="chord-notes">Notas: ${variation.notes.join(' - ')}</div>
-                    <div class="chord-fingers">Digitación: ${variation.fingering}</div>
-                `;
-
-        variationsGrid.appendChild(variationCard);
-    });
-
-    variations.appendChild(variationsGrid);
-    content.appendChild(variations);
-
     // Agregar progresiones comunes
     const progressions = document.createElement('div');
     progressions.innerHTML = `
@@ -647,23 +516,45 @@ function generateChordDetailContent(chord, instrument) {
     content.appendChild(progressions);
 }
 
-// Función auxiliar actualizada
+// Función auxiliar CORREGIDA - Esta es la clave del problema
 function getChordImage(chord, instrument) {
-    // Verifica si existe imagen para este acorde e instrumento
-    if (chordImagesBase64[instrument] && chordImagesBase64[instrument][chord]) {
-        const chordData = chordImagesBase64[instrument][chord];
-
-        return `
-            <div class="chord-detail-main-img">
-                <img src="${chordData.main}" 
-                     alt="${chord} en ${instrument}" 
-                     class="chord-detail-img"
-                     style="max-width: 100%; height: auto;">
-                <p class="chord-image-caption">Diagrama completo para ${chord} en ${instrument}</p>
-            </div>
-        `;
+    console.log('=== DEBUG getChordImage ===');
+    console.log('Chord recibido:', chord);
+    console.log('Instrument recibido:', instrument);
+    
+    // Normalizar el nombre del instrumento
+    let normalizedInstrument = instrument;
+    if (instrument === 'Guitarra') normalizedInstrument = 'guitar';
+    if (instrument === 'Piano') normalizedInstrument = 'piano';
+    if (instrument === 'Bajo') normalizedInstrument = 'bass';
+    
+    console.log('Instrumento normalizado:', normalizedInstrument);
+    console.log('¿Existe instrumento?', chordImages.hasOwnProperty(normalizedInstrument));
+    
+    const instrumentData = chordImages[normalizedInstrument];
+    if (!instrumentData) {
+        console.log('Instrumentos disponibles:', Object.keys(chordImages));
+        return `<p class="chord-detail-no-img">Instrumento no soportado: ${instrument}</p>`;
     }
-    return '<p class="chord-detail-no-img">No hay imagen disponible para este acorde</p>';
+
+    const chordData = instrumentData[chord];
+    if (!chordData) {
+        console.log('Acordes disponibles para', normalizedInstrument + ':', Object.keys(instrumentData));
+        return '<p class="chord-detail-no-img">No hay imagen disponible para este acorde</p>';
+    }
+
+    console.log('✅ Imagen encontrada:', chordData.main);
+    
+    return `
+        <div class="chord-detail-main-img">
+            <img src="${chordData.main}" 
+                 alt="${chord} en ${instrument}" 
+                 class="chord-detail-img" 
+                 style="max-width: 100%; height: auto;"
+                 onerror="this.src='${chordData.fallback}'; this.onerror=null;">
+            <p class="chord-image-caption">Diagrama para ${chord} en ${instrument}</p>
+        </div>
+    `;
 }
 
 // Obtener digitación recomendada
@@ -990,8 +881,6 @@ function getChordIntervals(suffix) {
     return 'Consulta un diccionario de acordes';
 }
 
-
-
 // Configurar los filtros de acordes
 function setupChordFilters() {
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1171,6 +1060,7 @@ function showSongContent(songId) {
         }
     }
 }
+
 // Configurar los toggles de categorías
 function setupCategoryToggles() {
     document.querySelectorAll('.category-title').forEach(title => {
@@ -1223,9 +1113,6 @@ function generateChordLibrary() {
     });
 }
 
-
-
-
 // Modifica los event listeners de categorías
 function setupCategoryToggles() {
     document.querySelectorAll('.category-title').forEach(title => {
@@ -1251,6 +1138,7 @@ function setupCategoryToggles() {
         }, { passive: true });
     });
 }
+
 function addChordCard(grid, chord, instrument) {
     const chordCard = document.createElement('div');
     chordCard.className = 'chord-variant';
@@ -1316,7 +1204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             searchSong();
         }
     });
-
 
     // Inicializar escalas y diagramas
     updateScales();
