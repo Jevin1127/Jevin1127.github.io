@@ -11,20 +11,104 @@ const chordImages = {
             main: 'assets/img/guitar/mayores/c-mayor.webp',
             fallback: 'assets/img/guitar/default-guitar.png'
         },
+        'C#': {
+            main: 'assets/img/guitar/mayores/csosmayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
         'D': {
-            main: 'assets/img/guitar/mayores/d-mayor.webp',
+            main: 'assets/img/guitar/mayores/d-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'D#': {
+            main: 'assets/img/guitar/mayores/dsosmayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'E': {
+            main: 'assets/img/guitar/mayores/e-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'F': {
+            main: 'assets/img/guitar/mayores/f-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'F#': {
+            main: 'assets/img/guitar/mayores/fsosmayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'G': {
+            main: 'assets/img/guitar/mayores/g-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'G#': {
+            main: 'assets/img/guitar/mayores/gsosmayor.jpg',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'A': {
+            main: 'assets/img/guitar/mayores/a-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'A#': {
+            main: 'assets/img/guitar/mayores/asosmayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'B': {
+            main: 'assets/img/guitar/mayores/b-mayor.png',
             fallback: 'assets/img/guitar/default-guitar.png'
         }
     },
     piano: {
         'C': {
-            main: 'assets/img/piano/c-mayor.webp',
+            main: 'assets/img/piano/mayores/c-mayor.jpg',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'C#': {
+            main: 'assets/img/piano/mayores/csosmayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'D': {
+            main: 'assets/img/piano/mayores/d-mayor.png',
+            ffallback: 'assets/img/piano/default-piano.png'
+        },
+        'D#': {
+            main: 'assets/img/piano/mayores/dsosmayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'E': {
+            main: 'assets/img/piano/mayores/e-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'F': {
+            main: 'assets/img/piano/mayores/f-mayor.png',
+            ffallback: 'assets/img/piano/default-piano.png'
+        },
+        'F#': {
+            main: 'assets/img/piano/mayores/fsosmayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'G': {
+            main: 'assets/img/piano/mayores/g-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'G#': {
+            main: 'assets/img/piano/mayores/gsosmayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'A': {
+            main: 'assets/img/piano/mayores/a-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'A#': {
+            main: 'assets/img/piano/mayores/asosmayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'B': {
+            main: 'assets/img/piano/mayores/b-mayor.png',
             fallback: 'assets/img/piano/default-piano.png'
         }
     },
     bass: {
         'C': {
-            main: 'assets/img/bass/c-mayor.webp',
+            main: 'assets/img/bass/mayores/c-mayor.jpg',
             fallback: 'assets/img/bass/default-bass.png'
         }
     }
