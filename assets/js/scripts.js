@@ -110,49 +110,109 @@ const chordImages = {
         'C': {
             main: 'assets/img/bass/mayores/c-mayor.png',
             fallback: 'assets/img/bass/default-bass.png'
+        },        
+        'Cmaj7': {
+            main: 'assets/img/bass/mayores7/c-mayor7.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },        
+        'C7': {
+            main: 'assets/img/bass/dominantes7/c7.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },        
+        'Cm': {
+            main: 'assets/img/bass/menores/c-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },        
+        'Cm7': {
+            main: 'assets/img/bass/menores7/c-menor7.webp',
+            fallback: 'assets/img/bass/default-bass.png'
         },
         'C#': {
             main: 'assets/img/bass/mayores/csosmayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'C#m': {
+            main: 'assets/img/bass/menores/csosmenor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
         'D': {
             main: 'assets/img/bass/mayores/d-mayor.webp',
             ffallback: 'assets/img/bass/default-bass.png'
         },
+        'Dm': {
+            main: 'assets/img/bass/menores/d-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'D#': {
             main: 'assets/img/bass/mayores/dsosmayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'D#m': {
+            main: 'assets/img/bass/menores/dsosmenor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
         'E': {
             main: 'assets/img/bass/mayores/e-mayor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
+        'Em': {
+            main: 'assets/img/bass/menores/e-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'F': {
             main: 'assets/img/bass/mayores/f-mayor.webp',
             ffallback: 'assets/img/bass/default-bass.png'
         },
+        'Fm': {
+            main: 'assets/img/bass/menores/f-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'F#': {
             main: 'assets/img/bass/mayores/fsosmayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'F#m': {
+            main: 'assets/img/bass/menores/fsosmenor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
         'G': {
             main: 'assets/img/bass/mayores/g-mayor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
+        'Gm': {
+            main: 'assets/img/bass/menores/g-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'G#': {
             main: 'assets/img/bass/mayores/gsosmayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'G#m': {
+            main: 'assets/img/bass/menores/gsosmenor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
         'A': {
             main: 'assets/img/bass/mayores/a-mayor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
+        'Am': {
+            main: 'assets/img/bass/menores/a-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'A#': {
             main: 'assets/img/bass/mayores/asosmayor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
+        'A#m': {
+            main: 'assets/img/bass/menores/asosmenor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
         'B': {
             main: 'assets/img/bass/mayores/b-mayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'Bm': {
+            main: 'assets/img/bass/menores/b-menor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         }
     }
