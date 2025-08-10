@@ -1,29 +1,8 @@
-const baseURL = window.location.href.includes('github.io') 
-    ? 'https://jevin1127.github.io/PRESBYTERIAN/'
-    : '';
-
 const genericChordImages = {
-    guitar: baseURL + 'assets/img/guitar/guitar.webp',
-    piano: baseURL + 'assets/img/piano/piano.webp',
-    bass: baseURL + 'assets/img/bass/6196550.png'
+    guitar: 'assets/img/guitar/guitar.webp',
+    piano: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
+    bass: 'assets/img/bass/6196550.png'
 };
-
-// Función de diagnóstico
-function checkImageUrls() {
-    console.log('=== Verificación de imágenes ===');
-    console.log('Guitarra:', genericChordImages.guitar);
-    console.log('Piano:', genericChordImages.piano);
-    console.log('Bajo:', genericChordImages.bass);
-    
-    // Verificar acceso a las imágenes
-    [genericChordImages.guitar, genericChordImages.piano, genericChordImages.bass].forEach(url => {
-        fetch(url)
-            .then(response => 
-                console.log(url, response.ok ? '✅ Existe' : '❌ No existe')
-            )
-            .catch(() => console.log(url, '❌ Error al cargar'));
-    });
-}
 
 // Objeto con las imágenes para cada instrumento y acorde
 const chordImages = {
