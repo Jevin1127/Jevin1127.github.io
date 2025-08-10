@@ -1,5 +1,5 @@
 const genericChordImages = {
-    guitar: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/guitar.webp',
+    guitar: 'assets/img/guitar/guitar.webp',
     piano: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
     bass: 'assets/img/bass/6196550.png'
 };
@@ -706,43 +706,38 @@ function generateChordDetailContent(chord, instrument) {
 
 // Función auxiliar CORREGIDA - Esta es la clave del problema
 function getChordImage(chord, instrument) {
-    console.log('=== DEBUG getChordImage ===');
-    console.log('Chord recibido:', chord);
-    console.log('Instrument recibido:', instrument);
+    // Normalizar nombres de instrumentos
+    const instrumentMap = {
+        'Guitarra': 'guitar',
+        'Piano': 'piano',
+        'Bajo': 'bass'
+    };
     
-    // Normalizar el nombre del instrumento
-    let normalizedInstrument = instrument;
-    if (instrument === 'Guitarra') normalizedInstrument = 'guitar';
-    if (instrument === 'Piano') normalizedInstrument = 'piano';
-    if (instrument === 'Bajo') normalizedInstrument = 'bass';
+    const normalizedInstrument = instrumentMap[instrument] || instrument.toLowerCase();
     
-    console.log('Instrumento normalizado:', normalizedInstrument);
-    console.log('¿Existe instrumento?', chordImages.hasOwnProperty(normalizedInstrument));
-    
-    const instrumentData = chordImages[normalizedInstrument];
-    if (!instrumentData) {
-        console.log('Instrumentos disponibles:', Object.keys(chordImages));
+    // Verificar si el instrumento existe
+    if (!chordImages[normalizedInstrument]) {
+        console.error(`Instrumento no soportado: ${instrument}`);
         return `<p class="chord-detail-no-img">Instrumento no soportado: ${instrument}</p>`;
     }
-
-    const chordData = instrumentData[chord];
-    if (!chordData) {
-        console.log('Acordes disponibles para', normalizedInstrument + ':', Object.keys(instrumentData));
-        return '<p class="chord-detail-no-img">No hay imagen disponible para este acorde</p>';
-    }
-
-    console.log('✅ Imagen encontrada:', chordData.main);
     
-    return `
-        <div class="chord-detail-main-img">
-            <img src="${chordData.main}" 
-                 alt="${chord} en ${instrument}" 
-                 class="chord-detail-img" 
-                 style="max-width: 100%; height: auto;"
-                 onerror="this.src='${chordData.fallback}'; this.onerror=null;">
-            <p class="chord-image-caption">Diagrama para ${chord} en ${instrument}</p>
-        </div>
-    `;
+    // Buscar el acorde exacto primero
+    if (chordImages[normalizedInstrument][chord]) {
+        const chordData = chordImages[normalizedInstrument][chord];
+        return `
+            <div class="chord-detail-main-img">
+                <img src="${chordData.main}" 
+                     alt="${chord} en ${instrument}" 
+                     class="chord-detail-img" 
+                     onerror="this.onerror=null; this.src='${chordData.fallback || chordData.ffallback || ''}'">
+                <p class="chord-image-caption">Diagrama para ${chord} en ${instrument}</p>
+            </div>
+        `;
+    }
+    
+    // Si no se encuentra el acorde exacto, buscar variaciones
+    console.warn(`No se encontró imagen para ${chord} en ${instrument}`);
+    return '<p class="chord-detail-no-img">No hay imagen disponible para este acorde</p>';
 }
 
 // Obtener digitación recomendada
@@ -1383,6 +1378,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setupInstrumentTabs();
     setupChordTypeFilters();
 
+    updateScales();
+    updateChordDiagrams();
+
+    // Generar la librería de acordes
+    generateChordLibrary();
+    setupChordFilters();
+    setupInstrumentTabs();
+    setupChordTypeFilters();
+    
     // Mostrar la primera canción por defecto
     showSongContent('a-quien-ire');
 
@@ -1394,9 +1398,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Inicializar escalas y diagramas
-    updateScales();
-    updateChordDiagrams();
 
-    // Generar la librería de acordes
-    generateChordLibrary();
 });
