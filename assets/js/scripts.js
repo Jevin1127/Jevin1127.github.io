@@ -1,7 +1,7 @@
 const genericChordImages = {
-    guitar: 'assets/img/guitar/guitar.webp',
-    piano: 'assets/img/guitar/guitar.webp',
-    bass: 'assets/img/bass/6196550.png'
+    guitar: 'assets/img/guitar/guitar.webp?v=' + Date.now(),
+    piano: 'assets/img/piano/piano.webp?v=' + Date.now(),
+    bass: 'assets/img/bass/6196550.png?v=' + Date.now()
 };
 
 // Objeto con las imágenes para cada instrumento y acorde
