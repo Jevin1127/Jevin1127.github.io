@@ -1,8 +1,29 @@
+const baseURL = window.location.href.includes('github.io') 
+    ? 'https://jevin1127.github.io/PRESBYTERIAN/'
+    : '';
+
 const genericChordImages = {
-    guitar: 'assets/img/guitar/guitar.webp?v=' + Date.now(),
-    piano: 'assets/img/piano/piano.webp?v=' + Date.now(),
-    bass: 'assets/img/bass/6196550.png?v=' + Date.now()
+    guitar: baseURL + 'assets/img/guitar/guitar.webp',
+    piano: baseURL + 'assets/img/piano/piano.webp',
+    bass: baseURL + 'assets/img/bass/6196550.png'
 };
+
+// Función de diagnóstico
+function checkImageUrls() {
+    console.log('=== Verificación de imágenes ===');
+    console.log('Guitarra:', genericChordImages.guitar);
+    console.log('Piano:', genericChordImages.piano);
+    console.log('Bajo:', genericChordImages.bass);
+    
+    // Verificar acceso a las imágenes
+    [genericChordImages.guitar, genericChordImages.piano, genericChordImages.bass].forEach(url => {
+        fetch(url)
+            .then(response => 
+                console.log(url, response.ok ? '✅ Existe' : '❌ No existe')
+            )
+            .catch(() => console.log(url, '❌ Error al cargar'));
+    });
+}
 
 // Objeto con las imágenes para cada instrumento y acorde
 const chordImages = {
