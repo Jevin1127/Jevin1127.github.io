@@ -1,5 +1,5 @@
 const genericChordImages = {
-    guitar: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/guitar.webp',
+    guitar: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/guitarra.webp',
     piano: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
     bass: 'assets/img/bass/6196550.png'
 };
