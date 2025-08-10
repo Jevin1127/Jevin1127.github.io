@@ -4,7 +4,6 @@ const genericChordImages = {
     bass: 'assets/img/bass/6196550.png'
 };
 
-
 // Objeto con las imágenes para cada instrumento y acorde
 const chordImages = {
     guitar: {
