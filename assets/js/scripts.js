@@ -597,7 +597,7 @@ function createChordDetailSection() {
                 </div>
                 
                 <a href="#chord-library" class="back-btn">Volver a la Librería de Acordes</a>
-                <a href="#indice" class="back-btn">Volver al índice</a>
+                <a href="../index.html" class="back-btn">Volver al índice</a>
             `;
 
     document.querySelector('.container').appendChild(section);

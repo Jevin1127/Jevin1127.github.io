@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <title>Librería de Acordes</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Librería de Acordes -->
+        <section class="chord-library" id="chord-library">
+            <div class="library-header">
+                <a href="../index.html" class="back-btn">← Volver al Menú Principal</a>
+                <h2>📚 Librería Completa de Acordes</h2>
+
+                <!-- Barra de búsqueda -->
+                <div class="chord-search-container">
+                    <input type="text" id="chord-search" placeholder="Buscar acorde (ej: C, Am7, F#maj7)">
+                    <button id="search-btn">🔍</button>
+                </div>
+            </div>
+
+            <div class="instrument-tabs" id="instrument-tabs">
+                <div class="instrument-tab active" data-instrument="guitar">Guitarra</div>
+                <div class="instrument-tab" data-instrument="piano">Piano</div>
+                <div class="instrument-tab" data-instrument="bass">Bajo</div>
+            </div>
+
+            <div class="chord-types" id="chord-types">
+                <div class="chord-type-btn active" data-type="all">Todos</div>
+                <div class="chord-type-btn" data-type="major">Mayores</div>
+                <div class="chord-type-btn" data-type="minor">Menores</div>
+                <div class="chord-type-btn" data-type="7">Dominantes</div>
+                <div class="chord-type-btn" data-type="maj7">Mayor 7</div>
+                <div class="chord-type-btn" data-type="m7">Menor 7</div>
+                <div class="chord-type-btn" data-type="sus">Suspendidos</div>
+                <div class="chord-type-btn" data-type="dim">Disminuidos</div>
+                <div class="chord-type-btn" data-type="aug">Aumentados</div>
+                <div class="chord-type-btn" data-type="extended">Extendidos</div>
+            </div>
+
+            <!-- Contenedor para acordes de guitarra -->
+            <div class="chord-detail-container active" id="guitar-chords">
+                <h3>Acordes de Guitarra</h3>
+                <div class="instrument-description">
+                    <p>Diagramas de acordes para guitarra con posiciones de dedos y cuerdas al aire.</p>
+                </div>
+                <div class="chord-grid" id="guitar-chords-grid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Contenedor para acordes de piano -->
+            <div class="chord-detail-container" id="piano-chords">
+                <h3>Acordes de Piano</h3>
+                <div class="instrument-description">
+                    <p>Acordes para piano mostrando las teclas y digitaciones recomendadas.</p>
+                </div>
+                <div class="chord-grid" id="piano-chords-grid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Contenedor para acordes de bajo -->
+            <div class="chord-detail-container" id="bass-chords">
+                <h3>Acordes de Bajo</h3>
+                <div class="instrument-description">
+                    <p>Posiciones de acordes para bajo de 4 y 5 cuerdas.</p>
+                </div>
+                <div class="chord-grid" id="bass-chords-grid">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <div class="library-footer">
+                <a href="../index.html" class="back-btn">← Volver al Menú Principal</a>
+            </div>
+        </section>
+    </div>
+
+    <script src="../assets/js/scripts.js"></script> <!-- Tus funciones existentes -->
+    <script src="../assets/js/chord.js"></script> <!-- Nueva inicialización -->
+</body>
+
+</html>
