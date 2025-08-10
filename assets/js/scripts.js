@@ -1,45 +1,8 @@
 const genericChordImages = {
-    guitar: {
-        main: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/guitar.webp',
-        fallback: 'https://jevin1127.github.io/PRESBYTERIAN/assets/img/guitar/default-guitar.png'
-    },
-    piano: {
-        main: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
-        fallback: 'assets/img/piano/default-piano.png'
-    },
-    bass: {
-        main: 'assets/img/bass/6196550.png',
-        fallback: 'assets/img/bass/default-bass.png'
-    }
+    guitar: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
+    piano: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
+    bass: 'assets/img/bass/6196550.png'
 };
-
-function loadImageWithFallback(imgElement, mainUrl, fallbackUrl) {
-    imgElement.src = mainUrl;
-    imgElement.onerror = function () {
-        this.onerror = null; // Evitar bucle infinito
-        this.src = fallbackUrl;
-        console.warn(`Fallo al cargar ${mainUrl}, usando fallback`);
-    };
-}
-
-// Ejemplo de uso en tu función addChordCard:
-function addChordCard(grid, chord, instrumentName, instrumentKey) {
-    const chordCard = document.createElement('div');
-    chordCard.className = `chord-variant ${instrumentKey}-chord`;
-
-    const img = document.createElement('img');
-    img.alt = `${chord} en ${instrumentName}`;
-
-    // Cargar imagen con sistema de fallback
-    loadImageWithFallback(
-        img,
-        genericChordImages[instrumentKey].main,
-        genericChordImages[instrumentKey].fallback
-    );
-
-    chordCard.appendChild(img);
-    grid.appendChild(chordCard);
-}
 
 // Objeto con las imágenes para cada instrumento y acorde
 const chordImages = {
@@ -147,19 +110,19 @@ const chordImages = {
         'C': {
             main: 'assets/img/bass/mayores/c-mayor.png',
             fallback: 'assets/img/bass/default-bass.png'
-        },
+        },        
         'Cmaj7': {
             main: 'assets/img/bass/mayores7/c-mayor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },
+        },        
         'C7': {
             main: 'assets/img/bass/dominantes7/c7.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },
+        },        
         'Cm': {
             main: 'assets/img/bass/menores/c-menor.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },
+        },        
         'Cm7': {
             main: 'assets/img/bass/menores7/c-menor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
@@ -746,16 +709,16 @@ function getChordImage(chord, instrument) {
     console.log('=== DEBUG getChordImage ===');
     console.log('Chord recibido:', chord);
     console.log('Instrument recibido:', instrument);
-
+    
     // Normalizar el nombre del instrumento
     let normalizedInstrument = instrument;
     if (instrument === 'Guitarra') normalizedInstrument = 'guitar';
     if (instrument === 'Piano') normalizedInstrument = 'piano';
     if (instrument === 'Bajo') normalizedInstrument = 'bass';
-
+    
     console.log('Instrumento normalizado:', normalizedInstrument);
     console.log('¿Existe instrumento?', chordImages.hasOwnProperty(normalizedInstrument));
-
+    
     const instrumentData = chordImages[normalizedInstrument];
     if (!instrumentData) {
         console.log('Instrumentos disponibles:', Object.keys(chordImages));
@@ -769,7 +732,7 @@ function getChordImage(chord, instrument) {
     }
 
     console.log('✅ Imagen encontrada:', chordData.main);
-
+    
     return `
         <div class="chord-detail-main-img">
             <img src="${chordData.main}" 
