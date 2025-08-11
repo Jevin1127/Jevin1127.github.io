@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="../../assets/css/songs.css">
+    <title>A quien iré</title>
+</head>
+
+
+<body>
+    <div class="container">
+        <!-- Ejemplo de contenido de canción (A quién iré) -->
+        <section class="song-content" id="a-quien-ire">
+
+            <h2 class="song-title">A quién iré (LEE)</h2>
+            <div class="transpose-controls">
+                <div class="current-key">Tonalidad actual: <span id="current-key">D</span></div>
+                <div class="transpose-buttons">
+                    <button onclick="transpose(-1)">Bajar ½ tono</button>
+                    <button onclick="transpose(1)">Subir ½ tono</button>
+                    <button onclick="resetKey()">Original (D)</button>
+                </div>
+                <div>Seleccionar tonalidad:</div>
+                <div class="key-selector" id="key-selector">
+                    <!-- Las teclas se generarán con JavaScript -->
+                </div>
+            </div>
+
+            <!-- Sección letra -->
+            <div class="section-box lyrics-container">
+                <h3 class="section-title">🎤 Letra y Acordes</h3>
+                <div class="lyrics" id="song-lyrics">
+                    <h4>INTRO:</h4>
+                    <span class="chord">Gmaj7</span>&nbsp;-&nbsp;<span class="chord">A9</span>&nbsp;-&nbsp;<span
+                        class="chord">Bm7</span>&nbsp;-&nbsp;<span class="chord">A9</span>
+
+                    <span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">D/C#</span>
+                    A quién iré en necesidad
+                    <span
+                        class="chord">Bm</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>
+                    A quién iré en busca de paz
+                    <span
+                        class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;<span class="chord">A9</span>
+                    Y quién podrá mi vida saciar de verdaaaa-ad
+
+                    <span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">D/C#</span>
+                    Quién mas tendrá de mi compasión
+                    <span
+                        class="chord">Bm</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>
+                    Y entenderá mi corazón
+                    <span
+                        class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">A9</span>
+                    Quién cambiará mi eternidad sino Tú Jesús
+
+                    Coro:
+                    <span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">G</span>
+                    Cristo a donde más podría ir
+                    <span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">G</span>&nbsp;&nbsp;&nbsp;<span class="chord">D/F#</span>
+                    Cristo que otro lugar puede existir
+                    <span
+                        class="chord">Em</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>
+                    Sólo tu tiene palabras de Amor
+                    <span
+                        class="chord">G</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9</span>
+                    Camino al Padre y verdad eres Tú
+                    <span
+                        class="chord">D</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                        class="chord">A9/F#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="chord">G</span>
+                    Cristo adonde más podría ir.
+                </div>
+            </div>
+
+            <!-- Sección de diagramas de acordes complejos -->
+            <div class="section-box chord-diagrams">
+                <h3 class="section-title">🖐 Diagramas de Acordes</h3>
+                <div class="chord-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="guitar">Guitarra</button>
+                    <button class="filter-btn" data-filter="piano">Piano</button>
+                    <button class="filter-btn" data-filter="bass">Bajo</button>
+                </div>
+                <div class="chord-diagrams-grid" id="chord-diagrams-grid">
+                    <!-- Se llenará dinámicamente con JavaScript -->
+                </div>
+
+                
+            </div>
+
+            <div class="song-content">
+
+                <div class="section-box transition-box">
+                    <h3 class="section-title">🎼 Transiciones entre Acordes</h3>
+                    <div class="transition-item">
+                        <strong>Original:</strong> D → Bm<br>
+                        <strong>Con transición:</strong> D → Em → Bm
+                    </div>
+                    <div class="transition-item">
+                        <strong>Original:</strong> Bm → G<br>
+                        <strong>Con transición:</strong> Bm → Am → G
+                    </div>
+                    <div class="transition-item">
+                        <strong>Original:</strong> G → D<br>
+                        <strong>Con transición:</strong> G → A → D
+                    </div>
+                    <div class="transition-item">
+                        <strong>Original:</strong> D → Em<br>
+                        <strong>Con transición:</strong> D → D/F# → Em
+                    </div>
+                    <div class="transition-item">
+                        <strong>Original:</strong> Em → A9<br>
+                        <strong>Con transición:</strong> Em → F#m7b5 → A9
+                    </div>
+                </div>
+
+                <div class="section-box jazz-box">
+                    <h3 class="section-title">🎷 Sugerencias de Arreglos Jazzeros</h3>
+
+                    <div class="jazz-subsection">
+                        <h4>Progresión Jazz alternativa:</h4>
+                        <div class="chord-progression">
+                            Dmaj7 - D6/9 - Bm9 - A13sus4 - Dmaj9 - D6/9 - A13
+                        </div>
+                    </div>
+
+                    <div class="jazz-subsection">
+                        <h4>Substituciones recomendadas:</h4>
+                        <div class="transition-item">
+                            <strong>D</strong> → Dmaj7 o D6/9
+                        </div>
+                        <div class="transition-item">
+                            <strong>Bm</strong> → Bm9 o Bm7
+                        </div>
+                        <div class="transition-item">
+                            <strong>G</strong> → Gmaj9 o G6/9
+                        </div>
+                        <div class="transition-item">
+                            <strong>A9</strong> → A13sus4 o A7alt
+                        </div>
+                    </div>
+
+                    <div class="jazz-subsection">
+                        <h4>Reharmonización Avanzada:</h4>
+                        <div class="chord-progression">
+                            Dmaj7 - B7#11 - Em9 - A13sus4 - Dmaj7#11 - D6/9 - A7alt
+                        </div>
+                    </div>
+
+                    <div class="jazz-subsection">
+                        <h4>Walking Bass Line:</h4>
+                        <div class="chord-progression">
+                            D - D/C# - Bm - Bm/A - B - B/F# - D/A - A7
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de escalas para improvisación -->
+                <div class="section-box scales-section">
+                    <h3 class="section-title">🎶 Escalas para Improvisación</h3>
+                    <div class="scales-container" id="scales-container">
+                        <!-- Se llenará dinámicamente con JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Sección de tutoriales por instrumento -->
+                <div class="tutorials-section">
+                    <h3 class="section-title">🎵 Tutoriales por Instrumento</h3>
+                    <div class="tutorials-grid">
+                        <div class="tutorial-card">
+                            <h4>Piano</h4>
+                            <div class="video-placeholder" data-song="A quién iré" data-instrument="piano">
+                                Haz clic para buscar tutorial de piano
+                            </div>
+                        </div>
+                        <div class="tutorial-card">
+                            <h4>Guitarra</h4>
+                            <div class="video-placeholder" data-song="A quién iré" data-instrument="guitarra">
+                                Haz clic para buscar tutorial de guitarra
+                            </div>
+                        </div>
+                        <div class="tutorial-card">
+                            <h4>Bajo</h4>
+                            <div class="video-placeholder" data-song="A quién iré" data-instrument="bajo">
+                                Haz clic para buscar tutorial de bajo
+                            </div>
+                        </div>
+                        <div class="tutorial-card">
+                            <h4>Batería</h4>
+                            <div class="video-placeholder" data-song="A quién iré" data-instrument="bateria">
+                                Haz clic para buscar tutorial de batería
+                            </div>
+                        </div>
+                        <div class="tutorial-card">
+                            <h4>Canto</h4>
+                            <div class="video-placeholder" data-song="A quién iré" data-instrument="canto">
+                                Haz clic para buscar tutorial de canto
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <a href="../../index.html" class="back-btn">Volver al menú principal</a>
+        </section>
+    </div>
+    </div>
+
+
+    <script src="../../assets/js/scripts.js"></script>
+    <script src="../../assets/js/chord.js"></script>
+    <script src="../../assets/js/songs.js"></script>
+
+</body>
+
+</html>

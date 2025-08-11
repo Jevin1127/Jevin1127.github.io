@@ -1,7 +1,7 @@
 const genericChordImages = {
-    guitar: 'https://jevin1127.github.io/assets/img/guitar/guitar.webp', 
-    piano: 'assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
-    bass: 'assets/img/bass/6196550.png'
+    guitar: 'https://jevin1127.github.io/assets/img/guitar/guitar.webp',
+    piano: 'https://jevin1127.github.io/assets/img/piano/32407b370080d1d7699b97799c01a300-doodle-de-instrumentos-musicales-para-piano.webp',
+    bass: 'https://jevin1127.github.io/assets/img/bass/6196550.png'
 };
 
 // Objeto con las imágenes para cada instrumento y acorde
@@ -110,19 +110,19 @@ const chordImages = {
         'C': {
             main: 'assets/img/bass/mayores/c-mayor.png',
             fallback: 'assets/img/bass/default-bass.png'
-        },        
+        },
         'Cmaj7': {
             main: 'assets/img/bass/mayores7/c-mayor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },        
+        },
         'C7': {
             main: 'assets/img/bass/dominantes7/c7.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },        
+        },
         'Cm': {
             main: 'assets/img/bass/menores/c-menor.webp',
             fallback: 'assets/img/bass/default-bass.png'
-        },        
+        },
         'Cm7': {
             main: 'assets/img/bass/menores7/c-menor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
@@ -709,16 +709,16 @@ function getChordImage(chord, instrument) {
     console.log('=== DEBUG getChordImage ===');
     console.log('Chord recibido:', chord);
     console.log('Instrument recibido:', instrument);
-    
+
     // Normalizar el nombre del instrumento
     let normalizedInstrument = instrument;
     if (instrument === 'Guitarra') normalizedInstrument = 'guitar';
     if (instrument === 'Piano') normalizedInstrument = 'piano';
     if (instrument === 'Bajo') normalizedInstrument = 'bass';
-    
+
     console.log('Instrumento normalizado:', normalizedInstrument);
     console.log('¿Existe instrumento?', chordImages.hasOwnProperty(normalizedInstrument));
-    
+
     const instrumentData = chordImages[normalizedInstrument];
     if (!instrumentData) {
         console.log('Instrumentos disponibles:', Object.keys(chordImages));
@@ -732,7 +732,7 @@ function getChordImage(chord, instrument) {
     }
 
     console.log('✅ Imagen encontrada:', chordData.main);
-    
+
     return `
         <div class="chord-detail-main-img">
             <img src="${chordData.main}" 
@@ -1223,40 +1223,22 @@ function setupSongLinks() {
     }, { passive: false });
 }
 
-// Mostrar el contenido de una canción específica
-function showSongContent(songId) {
-    // Ocultar todos los contenidos primero
-    const allContents = document.querySelectorAll('.song-content');
-    for (let i = 0; i < allContents.length; i++) {
-        allContents[i].style.display = 'none';
-    }
 
-    // Mostrar solo el contenido solicitado
-    const songContent = document.getElementById(songId);
-    if (songContent) {
-        songContent.style.display = 'block';
 
-        // Scroll suave con polyfill para Android si es necesario
-        if ('scrollBehavior' in document.documentElement.style) {
-            window.scrollTo({
-                top: songContent.offsetTop - 20,
-                behavior: 'smooth'
-            });
-        } else {
-            // Fallback para navegadores antiguos
-            window.scrollTo(0, songContent.offsetTop - 20);
-        }
-    }
-}
 
-// Configurar los toggles de categorías
+// En tu scripts.js principal (para el index.html)
 function setupCategoryToggles() {
     document.querySelectorAll('.category-title').forEach(title => {
-        title.addEventListener('click', () => {
-            title.parentElement.classList.toggle('active');
+        title.addEventListener('click', function () {
+            // Solo alternar visualmente (opcional)
+            this.parentElement.classList.toggle('active');
+            const icon = this.querySelector('.category-icon');
+            icon.textContent = this.parentElement.classList.contains('active') ? '▼' : '▶';
         });
     });
 }
+
+
 
 // Generar la librería de acordes
 function generateChordLibrary() {
@@ -1303,29 +1285,66 @@ function generateChordLibrary() {
 
 // Modifica los event listeners de categorías
 function setupCategoryToggles() {
-    document.querySelectorAll('.category-title').forEach(title => {
-        title.addEventListener('click', () => {
-            const parent = title.parentElement;
-            parent.classList.toggle('active');
+    const categories = document.querySelectorAll('.category');
 
-            if (parent.classList.contains('active')) {
-                const category = parent.querySelector('.songs-list-container').getAttribute('data-category');
-                loadSongs(category);
-            }
+    categories.forEach(category => {
+        const title = category.querySelector('.category-title');
+        const content = category.querySelector('.category-content');
+        const icon = title.querySelector('.category-icon');
+
+        // Configurar evento click
+        title.addEventListener('click', () => {
+            const isOpen = content.style.display === 'block';
+
+            // Alternar visibilidad
+            content.style.display = isOpen ? 'none' : 'block';
+            icon.textContent = isOpen ? '▶' : '▼';
+
+            // Cerrar otras categorías si se desea (opcional)
+            // closeOtherCategories(category);
         });
 
-        // También para eventos táctiles
-        title.addEventListener('touchstart', () => {
-            const parent = title.parentElement;
-            parent.classList.toggle('active');
-
-            if (parent.classList.contains('active')) {
-                const category = parent.querySelector('.songs-list-container').getAttribute('data-category');
-                loadSongs(category);
-            }
-        }, { passive: true });
+        // Estado inicial (opcional: abrir primera categoría)
+        if (category === categories[0]) {
+            content.style.display = 'block';
+            icon.textContent = '▼';
+        } else {
+            content.style.display = 'none';
+        }
     });
 }
+
+function closeOtherCategories(currentCategory) {
+    document.querySelectorAll('.category').forEach(cat => {
+        if (cat !== currentCategory) {
+            cat.querySelector('.category-content').style.display = 'none';
+            cat.querySelector('.category-icon').textContent = '▶';
+        }
+    });
+}
+
+// FUNCIONALIDAD DE BÚSQUEDA (si la necesitas)
+function setupSearchFunctionality() {
+    const searchInput = document.getElementById('song-search');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function () {
+        const searchTerm = this.value.toLowerCase();
+        const allSongs = document.querySelectorAll('.songs-list a');
+
+        allSongs.forEach(song => {
+            const songName = song.textContent.toLowerCase();
+            const listItem = song.closest('li');
+
+            if (songName.includes(searchTerm)) {
+                listItem.style.display = 'block';
+            } else {
+                listItem.style.display = 'none';
+            }
+        });
+    });
+}
+
 
 function addChordCard(grid, chord, instrument) {
     const chordCard = document.createElement('div');
@@ -1361,22 +1380,24 @@ function addChordCard(grid, chord, instrument) {
 document.addEventListener('DOMContentLoaded', () => {
 
     // Añade este event listener para el botón de volver
-    document.addEventListener('click', function (e) {
-        if (e.target.matches('.back-btn[href="#chord-library"]')) {
+    header.addEventListener('click', () => {
+        const category = header.parentElement;
+        category.classList.toggle('active');
+    });
+
+    // También permitir abrir/cerrar con Enter o Espacio para accesibilidad
+    header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            document.getElementById('chord-library').style.display = 'block';
-            document.getElementById('chord-detail').style.display = 'none';
-            window.scrollTo({
-                top: document.getElementById('chord-library').offsetTop - 20,
-                behavior: 'smooth'
-            });
+            header.parentElement.classList.toggle('active');
         }
     });
 
+    setupCategoryToggles();
+    setupSearchFunctionality();
     initKeyButtons();
     updateTransitions();
     updateJazzSuggestions();
-    setupCategoryToggles();
     setupSongLinks();
     setupTutorialPlaceholders();
     setupChordFilters();
@@ -1399,4 +1420,137 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generar la librería de acordes
     generateChordLibrary();
+});
+
+document.querySelectorAll('.category-header').forEach(header => {
+    header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('active');
+    });
+});
+
+// === Buscador de cantos mejorado ===
+const searchInput = document.getElementById('song-search');
+const searchButton = document.getElementById('search-button');
+const searchResults = document.getElementById('search-results');
+
+// Quitar acentos y normalizar texto
+function normalizeText(text) {
+    return text
+        .normalize("NFD") // separa acentos
+        .replace(/[\u0300-\u036f]/g, "") // elimina diacríticos
+        .toLowerCase()
+        .trim();
+}
+
+// Calcular similitud usando distancia de Levenshtein
+function levenshteinDistance(a, b) {
+    const matrix = Array.from({ length: a.length + 1 }, (_, i) =>
+        Array(b.length + 1).fill(0)
+    );
+
+    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            matrix[i][j] = Math.min(
+                matrix[i - 1][j] + 1,      // eliminación
+                matrix[i][j - 1] + 1,      // inserción
+                matrix[i - 1][j - 1] + cost // sustitución
+            );
+        }
+    }
+    return matrix[a.length][b.length];
+}
+
+function similarity(a, b) {
+    const distance = levenshteinDistance(a, b);
+    return 1 - distance / Math.max(a.length, b.length);
+}
+
+function searchSongs() {
+    const queryRaw = searchInput.value;
+    const query = normalizeText(queryRaw);
+    searchResults.innerHTML = '';
+
+    if (!query) {
+        searchResults.style.display = 'none';
+        return;
+    }
+
+    const allSongs = document.querySelectorAll('.songs-list a');
+    const matches = Array.from(allSongs).filter(song => {
+        const songName = normalizeText(song.textContent);
+        return (
+            songName.includes(query) || // coincidencia directa
+            similarity(songName, query) >= 0.7 // tolerancia a errores
+        );
+    });
+
+    if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No se encontraron cantos.</div>';
+        searchResults.style.display = 'block';
+        return;
+    }
+
+    matches.forEach(song => {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.textContent = song.textContent;
+        item.addEventListener('click', () => {
+            window.location.href = song.getAttribute('href');
+        });
+        searchResults.appendChild(item);
+    });
+
+    searchResults.style.display = 'block';
+}
+
+// Eventos
+searchButton.addEventListener('click', searchSongs);
+searchInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') searchSongs();
+});
+
+
+// Reemplazar el event listener actual con este código más robusto
+function initializeApp() {
+    // Verificar que los elementos existen antes de manipularlos
+    const keySelector = document.getElementById('key-selector');
+    const currentKeyElement = document.getElementById('current-key');
+    const chordDiagramsGrid = document.getElementById('chord-diagrams-grid');
+    const scalesContainer = document.getElementById('scales-container');
+    
+    if (keySelector) initKeyButtons();
+    if (currentKeyElement) updateKey();
+    if (chordDiagramsGrid) updateChordDiagrams();
+    if (scalesContainer) updateScales();
+    
+    setupTutorialPlaceholders();
+    setupChordFilters();
+    // ... otras inicializaciones
+}
+
+// Usar DOMContentLoaded y verificar elementos
+document.addEventListener('DOMContentLoaded', function() {
+    // Primero verificar elementos críticos
+    const container = document.querySelector('.container');
+    if (!container) {
+        console.error('No se encontró el contenedor principal');
+        return;
+    }
+    
+    initializeApp();
+});
+
+// Mover la inicialización de header dentro del DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header'); // o el selector correcto
+    if (header) {
+        header.addEventListener('click', () => {
+            const category = header.parentElement;
+            if (category) category.classList.toggle('active');
+        });
+    }
 });

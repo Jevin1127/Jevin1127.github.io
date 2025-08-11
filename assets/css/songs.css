@@ -1,0 +1,649 @@
+/* songs.css - Estilos optimizados para páginas de canciones */
+
+/* ===== VARIABLES (Consistentes con el tema principal) ===== */
+:root {
+    --primary-bg: #0a0f1c;
+    --secondary-bg: #1a2332;
+    --accent-bg: #2a3441;
+    --primary-text: #e2e8f0;
+    --secondary-text: #94a3b8;
+    --accent-color: #3b82f6;
+    --warning-color: #f59e0b;
+    --success-color: #10b981;
+    --border-color: #334155;
+    --hover-bg: #374151;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== RESET Y TIPOGRAFÍA ===== */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+}
+
+/* ===== ESTRUCTURA PRINCIPAL ===== */
+.song-content {
+    background: var(--secondary-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem auto;
+    box-shadow: var(--shadow-lg);
+    max-width: 1000px;
+    border: 1px solid var(--border-color);
+}
+
+.song-title {
+    color: var(--warning-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+}
+
+/* ===== CONTROLES DE TRANSPOSICIÓN ===== */
+.transpose-controls {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.current-key {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--success-color);
+    margin-bottom: 1rem;
+}
+
+.transpose-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-weight: 500;
+}
+
+button:hover {
+    background: var(--success-color);
+    transform: translateY(-1px);
+}
+
+.key-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.key-btn {
+    background: var(--secondary-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.key-btn:hover, .key-btn.active {
+    background: var(--warning-color);
+    color: var(--primary-bg);
+    border-color: var(--warning-color);
+}
+
+/* ===== TUTORIALES POR INSTRUMENTO ===== */
+.tutorials-section {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.8rem 0;
+    border-left: 4px solid #8b5cf6; /* Color morado para distinguir */
+    box-shadow: var(--shadow);
+}
+
+.tutorials-section h3 {
+    color: var(--warning-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.tutorial-card {
+    background: var(--secondary-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.tutorial-card h4 {
+    color: var(--success-color);
+    padding: 1rem;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+}
+
+.video-placeholder {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-bg);
+    color: var(--secondary-text);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.video-placeholder:hover {
+    background: var(--hover-bg);
+    color: var(--warning-color);
+}
+
+/* Responsive para tutoriales */
+@media (max-width: 768px) {
+    .tutorials-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    .video-placeholder {
+        height: 100px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== DIAGRAMAS DE ACORDES - VERSIÓN COMPATIBLE ===== */
+.chord-diagrams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Estilo base para todos los diagramas */
+.chord-diagram {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: var(--secondary-bg);
+}
+
+.chord-diagram:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Contenedor de imagen - ESTILO COMPATIBLE */
+.chord-image-container {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+}
+
+/* Colores específicos por instrumento - COMPATIBLE CON TU JS */
+.guitar-chord .chord-image-container {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6) !important;
+}
+
+.piano-chord .chord-image-container {
+    background: linear-gradient(135deg, #991b1b, #dc2626) !important;
+}
+
+.bass-chord .chord-image-container {
+    background: linear-gradient(135deg, #065f46, #10b981) !important;
+}
+
+/* Estilos específicos para las imágenes de cada instrumento */
+.guitar-chord .chord-image-container img {
+    max-height: 85%;
+    width: auto;
+}
+
+.piano-chord .chord-image-container img {
+    max-width: 95%;
+    height: auto;
+}
+
+.bass-chord .chord-image-container img {
+    max-height: 80%;
+    width: auto;
+}
+
+/* Imágenes de acordes */
+.chord-image-container img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Área de información */
+.chord-info {
+    padding: 1rem;
+    text-align: center;
+    background: var(--accent-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.chord-name {
+    font-weight: bold;
+    color: var(--primary-text);
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.chord-instrument {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    opacity: 0.9;
+}
+/* Responsive para diagramas */
+@media (max-width: 768px) {
+    .chord-diagrams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+/* Contenedor de imagen de acorde - ARREGLADO */
+.chord-image-container {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+    background: transparent !important; /* Elimina fondos conflictivos */
+}
+
+/* Estilos específicos por instrumento */
+.guitar-chord {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.piano-chord {
+    background: linear-gradient(135deg, #991b1b, #dc2626);
+}
+
+.bass-chord {
+    background: linear-gradient(135deg, #065f46, #10b981);
+}
+
+/* Imágenes de acordes - ARREGLADO */
+.chord-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.chord-info {
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.chord-name {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.chord-instrument {
+    font-size: 0.85rem;
+    color: var(--secondary-text);
+    opacity: 0.9;
+}
+
+/* ===== LETRAS Y ACORDES ===== */
+.lyrics-container {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+}
+
+.lyrics {
+    white-space: pre-line;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--primary-text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.chord {
+    color: var(--accent-color);
+    font-weight: bold;
+    position: relative;
+    top: -1em;
+    font-size: 0.85em;
+    margin-right: 0.3em;
+    font-family: monospace;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .song-content {
+        padding: 1.5rem;
+    }
+    
+    .tutorials-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .chord-diagrams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .song-title {
+        font-size: 1.6rem;
+    }
+    
+    .transpose-buttons button {
+        width: 100%;
+    }
+}
+
+/* ===== SECCIONES EN CUADROS SEPARADOS ===== */
+.section-box {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.8rem 0;
+    border-left: 4px solid var(--accent-color);
+    box-shadow: var(--shadow);
+}
+
+/* Estilos específicos para cada sección */
+.transition-box {
+    border-left-color: var(--warning-color);
+}
+
+.jazz-box {
+    border-left-color: var(--success-color);
+}
+
+.scales-section {
+    border-left-color: #8b5cf6;
+}
+
+.chord-diagrams {
+    border-left-color: var(--accent-color);
+}
+
+.lyrics-container {
+    border-left-color: #ec4899;
+}
+
+/* Iconos en títulos */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--warning-color);
+    margin-top: 0;
+}
+
+/* ===== CONTENIDO DE SECCIONES ===== */
+/* Transiciones */
+.transition-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+/* Jazz */
+.chord-progression {
+    font-family: monospace;
+    background: var(--primary-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    color: var(--success-color);
+}
+
+/* Escalas */
+.scale-item {
+    margin-bottom: 1.5rem;
+}
+
+.scale-notes {
+    font-family: monospace;
+    background: var(--primary-bg);
+    padding: 0.5rem;
+    border-radius: 4px;
+    color: var(--warning-color);
+    display: inline-block;
+}
+
+/* Diagramas de acordes */
+.chord-diagram {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Letras */
+.lyrics {
+    line-height: 1.8;
+    color: var(--primary-text);
+}
+
+.chord {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* ===== BOTÓN VOLVER AL ÍNDICE ===== */
+.back-btn {
+    display: block;
+    width: fit-content;
+    margin: 2rem auto 0;
+    padding: 0.8rem 1.5rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--success-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .song-content {
+        padding: 1.5rem;
+    }
+    
+    .section-box {
+        padding: 1.2rem;
+    }
+}
+
+/* Opcional: Variante para estilos diferentes */
+.lyrics-container.special {
+    border-left-color: var(--warning-color);
+}
+
+/* ===== ESTRUCTURA PERFECTA PARA LETRA Y ACORDES ===== */
+.lyrics-container {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--success-color);
+    box-shadow: var(--shadow);
+}
+
+.section-title {
+    color: var(--warning-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.lyrics {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--primary-text);
+    line-height: 1.9;
+    white-space: pre-wrap;
+    font-size: 1.05rem;
+}
+
+/* Estilo para acordes - Versión perfectamente alineada */
+.chord {
+    color: var(--accent-color);
+    font-weight: bold;
+    position: relative;
+    top: -0.6em;
+    font-size: 0.82em;
+    margin-right: 0.15em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    letter-spacing: 0.3px;
+    height: 0;
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Ajuste para secciones */
+.lyrics h4 {
+    color: var(--success-color);
+    font-size: 1rem;
+    margin: 0.8rem 0 0.5rem 0;
+    font-style: italic;
+    display: inline-block;
+    background: rgba(0,0,0,0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Ajuste fino para espacios */
+.lyrics br {
+    content: " ";
+    display: block;
+    margin-bottom: 0.4em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lyrics-container {
+        padding: 1.2rem;
+    }
+    
+    .lyrics {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+    
+    .chord {
+        font-size: 0.78em;
+        top: -0.5em;
+    }
+}
+
+/* ===== ESTILO PARA CABECERA DE CANCIÓN ===== */
+.song-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.song-title {
+    color: var(--warning-color);
+    font-size: 1.8rem;
+    margin: 0; /* Eliminamos márgenes anteriores */
+    flex-grow: 1;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.back-btn:hover {
+    background: var(--success-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .song-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .back-btn {
+        order: -1; /* Mueve el botón arriba en móviles */
+        margin-bottom: 0.5rem;
+    }
+}

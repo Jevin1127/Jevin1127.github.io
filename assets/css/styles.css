@@ -53,6 +53,79 @@
            text-align: center;
        }
 
+       .songs-list {
+           display: none;
+       }
+
+       .category.active .songs-list {
+           display: block;
+       }
+
+
+       /* Animación de despliegue */
+       .category-content {
+           overflow: hidden;
+           max-height: 0;
+           opacity: 0;
+           transition: max-height 0.4s ease, opacity 0.4s ease;
+       }
+
+       .category.active .category-content {
+           max-height: 800px;
+           opacity: 1;
+       }
+
+
+       /* Animación del ícono */
+       .category-icon {
+           display: inline-block;
+           transition: transform 0.3s ease;
+       }
+
+       .category.active .category-icon {
+           transform: rotate(90deg);
+       }
+
+       /* Efecto visual en categoría activa */
+       .category.active .category-title {
+           background: var(--hover-bg);
+           color: var(--success-color);
+           box-shadow: var(--shadow-lg);
+       }
+
+       /* Asegurar que el header de categoría sea un flexbox */
+       .category-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           background: var(--accent-bg);
+           padding: 12px 15px;
+           cursor: pointer;
+           border-radius: 8px;
+           font-weight: bold;
+           transition: all 0.3s;
+       }
+
+       /* Flecha siempre visible a la derecha */
+       .category-icon {
+           font-size: 1.2rem;
+           color: var(--primary-text);
+           transition: transform 0.3s ease;
+       }
+
+       /* Rotación suave al abrir */
+       .category.active .category-icon {
+           transform: rotate(90deg);
+       }
+
+       /* Efecto visual en activo */
+       .category.active .category-header {
+           background: var(--hover-bg);
+           color: var(--success-color);
+           box-shadow: var(--shadow-lg);
+       }
+
+
        /* Estilos para la barra de búsqueda */
        .chord-search-container {
            display: flex;
@@ -129,6 +202,14 @@
            display: flex;
            align-items: center;
            justify-content: center;
+       }
+
+       .songs-list {
+           display: none;
+       }
+
+       .category.active .songs-list {
+           display: block;
        }
 
        .chord-image-container img {
