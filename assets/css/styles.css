@@ -1223,3 +1223,234 @@
        .chord-library-link:hover {
            background: var(--success-color);
        }
+
+       /* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Estilos para el contenido del acorde */
+.modal-chord-header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.modal-chord-header h2 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.chord-type {
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+.modal-chord-diagram {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.modal-chord-diagram img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 5px;
+}
+
+.modal-chord-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.chord-notes, .chord-fingering, .chord-progressions {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chord-progressions {
+    grid-column: span 2;
+}
+
+.chord-progressions p {
+    margin: 8px 0;
+    padding-left: 15px;
+    border-left: 3px solid #3498db;
+}
+
+/* Estilos para el modal de SweetAlert */
+/* Mejoras para el modal de acordes */
+.swal-chord-image {
+    margin: 20px 0;
+    position: relative;
+}
+
+.chord-diagram-img {
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+.chord-caption {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.swal-chord-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.swal-chord-details > div {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.chord-progressions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.chord-progressions li {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: #f0f7ff;
+    border-left: 3px solid #3085d6;
+    border-radius: 4px;
+}
+
+.custom-chord-modal {
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+}
+
+.modal-close-btn {
+    font-size: 24px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.modal-close-btn:hover {
+    color: #333;
+    transform: scale(1.1);
+}
+
+.swal-chord-image {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.chord-diagram-img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.chord-caption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Estilos para el modal de acordes */
+.chord-modal-popup {
+    border-radius: 12px;
+    max-width: 90vw; /* Limita el ancho máximo */
+}
+
+.chord-modal-image {
+    max-width: 100%;
+    max-height: 250px; /* Altura máxima reducida */
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    object-fit: contain; /* Mantiene la proporción */
+}
+
+.swal-chord-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.swal-chord-image {
+    margin: 0 auto;
+    max-width: 100%;
+    text-align: center;
+}
+
+.chord-caption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .chord-modal-popup {
+        width: 95% !important;
+    }
+    
+    .chord-modal-image {
+        max-height: 200px;
+    }
+}

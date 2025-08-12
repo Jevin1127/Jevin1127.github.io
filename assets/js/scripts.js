@@ -745,21 +745,184 @@ function getChordImage(chord, instrument) {
     `;
 }
 
+function getChordNotes(chord) {
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    const suffix = root ? chord.slice(root.length) : '';
+    const rootIndex = chordMap[root] || 0;
+    
+    // Simplificación - en una implementación real deberías calcular las notas correctas
+    if (suffix === 'm') {
+        return [root, chordNames[(rootIndex + 3) % 12], chordNames[(rootIndex + 7) % 12]];
+    } else if (suffix === '7') {
+        return [root, chordNames[(rootIndex + 4) % 12], chordNames[(rootIndex + 7) % 12], chordNames[(rootIndex + 10) % 12]];
+    } else {
+        // Acorde mayor por defecto
+        return [root, chordNames[(rootIndex + 4) % 12], chordNames[(rootIndex + 7) % 12]];
+    }
+}
+
 // Obtener digitación recomendada
 function getFingering(chord, instrument) {
-    // Esto es un ejemplo simplificado
-    if (instrument === 'Guitarra') {
-        if (chord.includes('maj7')) return '1 2 3 4';
-        if (chord.includes('m7')) return '1 2 3 4';
-        if (chord.includes('7')) return '1 2 3 4';
-        return '1 2 3 4';
-    } else if (instrument === 'Piano') {
-        return '1 3 5 (mano derecha) / 5 3 1 (mano izquierda)';
-    } else if (instrument === 'Bajo') {
-        return '1 2 4';
+    const inst = instrument.toLowerCase();
+    const root = chord.match(/^[A-G][#b]?/)?.[0] || '';
+    
+    if (inst.includes('guitar') || inst.includes('guitarra')) {
+        if (chord.includes('m')) {
+            return `Posición abierta: ${root}m - 1-3-4\nPosición en trastes: 5-7-8`;
+        }
+        return `Posición abierta: ${root} - 1-2-3\nPosición en trastes: 5-7-8`;
     }
-    return 'Consulta con tu instructor';
+    
+    if (inst.includes('piano')) {
+        return `Mano derecha: 1-3-5\nMano izquierda: 5-3-1\nInversiones disponibles`;
+    }
+    
+    if (inst.includes('bass') || inst.includes('bajo')) {
+        return `Posición media: 1-3-4\nPosición alta: 2-4`;
+    }
+    
+    return "Varias posiciones disponibles - Consulta con tu instructor";
 }
+
+function getCommonProgressions(chord) {
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    
+    return [
+        `${root} - ${transposeChord('C', chordMap[root] - chordMap['G'])} - ${transposeChord('D', chordMap[root] - chordMap['G'])}`,
+        `${root} - ${transposeChord('Em', chordMap[root] - chordMap['G'])} - ${transposeChord('Am', chordMap[root] - chordMap['G'])} - ${transposeChord('D', chordMap[root] - chordMap['G'])}`,
+        `${transposeChord('Am', chordMap[root] - chordMap['G'])} - ${transposeChord('F', chordMap[root] - chordMap['G'])} - ${root} - ${transposeChord('C', chordMap[root] - chordMap['G'])}`,
+        `${root} - ${transposeChord('D', chordMap[root] - chordMap['G'])} - ${transposeChord('Em', chordMap[root] - chordMap['G'])} - ${transposeChord('C', chordMap[root] - chordMap['G'])}`
+    ];
+}
+
+function getChordImagePath(chord, instrument) {
+    // Normalizar nombres de instrumentos
+    const instrumentMap = {
+        'guitarra': 'guitar',
+        'bajo': 'bass',
+        'piano': 'piano'
+    };
+    const instrumentKey = instrumentMap[instrument.toLowerCase()] || instrument.toLowerCase();
+    
+    // Lista completa de extensiones soportadas (ordenadas por preferencia)
+    const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg'];
+    
+    // Extraer la raíz del acorde
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    const suffix = chord.slice(root.length);
+    
+    // Normalizar nombre de la nota para el archivo
+    const normalizedRoot = root.replace('#', 'sos').replace('b', 'bem').toLowerCase();
+    
+    // Determinar tipo de acorde
+    let chordType = 'mayores';
+    let chordSuffix = '-mayor';
+    
+    if (suffix === 'm') {
+        chordType = 'menores';
+        chordSuffix = '-menor';
+    } else if (suffix === '7') {
+        chordType = 'dominantes';
+        chordSuffix = '7';
+    } else if (suffix === 'maj7') {
+        chordType = 'mayores7';
+        chordSuffix = '-mayor7';
+    } else if (suffix === 'm7') {
+        chordType = 'menores7';
+        chordSuffix = '-menor7';
+    } else if (suffix.includes('dim')) {
+        chordType = 'disminuidos';
+        chordSuffix = '-dim';
+    } else if (suffix.includes('aug')) {
+        chordType = 'aumentados';
+        chordSuffix = '-aug';
+    } else if (suffix.includes('sus')) {
+        chordType = 'suspendidos';
+        chordSuffix = '-sus';
+    }
+    
+    // Construir ruta base
+    const basePath = '../../assets/img/';
+    
+    // Generar todas las posibles combinaciones de nombres y extensiones
+    const possibleFileNames = [
+        `${normalizedRoot}${chordSuffix}`, // ej: d-mayor
+        `${normalizedRoot}`,               // ej: d
+        `${root.toLowerCase()}${chordSuffix}`, // ej: dmayor (sin guión)
+        `${root.toLowerCase()}`            // ej: d (nota sola)
+    ];
+    
+    // Generar todas las rutas posibles
+    const allPossiblePaths = [];
+    possibleFileNames.forEach(name => {
+        imageExtensions.forEach(ext => {
+            allPossiblePaths.push(`${basePath}${instrumentKey}/${chordType}/${name}${ext}`);
+        });
+    });
+    
+    // Devolver la primera ruta (la verificación real se hace con onerror)
+    return allPossiblePaths[0];
+}
+
+// Función para verificar si una imagen existe (simulada)
+function imageExists(url) {
+    // En producción, esto debería ser una verificación real con fetch o similar
+    // Para desarrollo, asumimos que todas las rutas son válidas
+    return true;
+}
+
+function debugImagePaths(chord, instrument) {
+    console.group('Depuración de rutas de imágenes');
+    console.log('Acorde:', chord);
+    console.log('Instrumento:', instrument);
+    
+    const instrumentKey = instrument.toLowerCase() === 'guitarra' ? 'guitar' : 
+                         instrument.toLowerCase() === 'bajo' ? 'bass' : 
+                         instrument.toLowerCase();
+    
+    console.log('Ruta base:', getBaseImagePath());
+    
+    const path = getChordImagePath(chord, instrument);
+    console.log('Ruta final generada:', path);
+    
+    // Verificar si la ruta es accesible (solo en servidor web)
+    if (window.location.protocol !== 'file:') {
+        fetch(path, { method: 'HEAD' })
+            .then(res => {
+                console.log('Imagen existe:', res.ok);
+                if (!res.ok) {
+                    console.warn('La imagen no se encuentra en la ruta especificada');
+                }
+            })
+            .catch(err => {
+                console.error('Error al verificar imagen:', err);
+            });
+    } else {
+        console.warn('No se puede verificar imagen en protocolo file://');
+    }
+    
+    console.groupEnd();
+}
+
+// Ejemplo de uso:
+// debugImagePaths('D', 'guitar');
+// debugImagePaths('Bm', 'guitar');
+
+
+// Precargar imágenes para mejor experiencia
+function preloadChordImages(chord, instrument) {
+    const mainImg = new Image();
+    mainImg.src = getChordImagePath(chord, instrument);
+    
+    const fallbackImg = new Image();
+    fallbackImg.src = 'assets/img/default-chord.png';
+}
+
+// Llamar esta función antes de mostrar el modal
+preloadChordImages(chord, instrument);
 
 // Obtener variaciones del acorde
 function getChordVariations(chord, instrument) {
@@ -1554,3 +1717,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
