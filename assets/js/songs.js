@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 3. Actualizar todos los elementos transponibles
     updateAllTransposableElements();
+
+        // 1. Inicializar controles de transposición
+    initKeyButtons();
+
+    // 2. Configurar placeholders de tutoriales
+    setupTutorialPlaceholders();
+
+    // 3. Actualizar todos los elementos transponibles
+    updateAllTransposableElements();
+
+    // 4. Configurar filtros de acordes
+    setupChordFilters();
 });
 
 // Funciones que necesitas copiar del script principal:
@@ -49,98 +61,51 @@ function updateAllTransposableElements() {
 }
 
 
-function showChordDetail(chord, instrument) {
-    const chordImgPath = getChordImagePath(chord, instrument);
-    const fallbackImg = '../../assets/img/default-chord.png';
-    
-    // Registrar función global para manejo de errores
-    window.handleChordImageError = function(img) {
-        const currentSrc = img.src;
-        console.log(`Error al cargar imagen: ${currentSrc}`);
-        
-        // Extraer información de la ruta fallida
-        const pathParts = currentSrc.split('/');
-        const fileName = pathParts.pop();
-        const basePath = pathParts.join('/') + '/';
-        const fileNameWithoutExt = fileName.split('.').slice(0, -1).join('.');
-        
-        // Lista de extensiones alternativas a probar
-        const altExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
-        
-        // Buscar la siguiente extensión disponible
-        const currentExt = '.' + fileName.split('.').pop();
-        const currentExtIndex = altExtensions.indexOf(currentExt);
-        const nextExtensions = [...altExtensions.slice(currentExtIndex + 1), ...altExtensions.slice(0, currentExtIndex)];
-        
-        // Intentar con cada extensión alternativa
-        for (const ext of nextExtensions) {
-            const newSrc = basePath + fileNameWithoutExt + ext;
-            if (newSrc !== currentSrc) {
-                console.log(`Probando alternativa: ${newSrc}`);
-                img.src = newSrc;
-                return;
-            }
-        }
-        
-        // Si ninguna extensión funciona, usar imagen por defecto
-        console.log(`Usando imagen por defecto: ${fallbackImg}`);
-        img.src = fallbackImg;
+function getChordImagePath(chord, instrument) {
+    const instrumentMap = {
+        'guitarra': 'guitar',
+        'bajo': 'bass',
+        'piano': 'piano'
     };
-
-    // Crear contenido HTML del modal
-    const htmlContent = `
-        <div class="swal-chord-container">
-            <div class="swal-chord-header">
-                <h3>${chord} en ${instrument}</h3>
-                <div class="chord-type">${getChordType(chord)}</div>
-            </div>
-            
-            <div class="swal-chord-image">
-                <img src="${chordImgPath}" alt="Diagrama de ${chord}" 
-                     class="chord-diagram-img"
-                     onerror="handleChordImageError(this)">
-                <div class="chord-caption">Diagrama para ${instrument}</div>
-            </div>
-            
-            <div class="swal-chord-details">
-                <div class="chord-notes">
-                    <strong>Notas:</strong> ${getChordNotes(chord).join(' - ')}
-                </div>
-                <div class="chord-fingering">
-                    <strong>Digitación:</strong> ${getFingering(chord, instrument)}
-                </div>
-            </div>
-            
-            <div class="chord-progressions">
-                <strong>Progresiones comunes:</strong>
-                <ul>
-                    ${getCommonProgressions(chord).map(p => `<li>${p}</li>`).join('')}
-                </ul>
-            </div>
-        </div>
-    `;
+    const instrumentKey = instrumentMap[instrument.toLowerCase()] || instrument.toLowerCase();
     
-    // Mostrar modal con SweetAlert
-    Swal.fire({
-        html: htmlContent,
-        width: '650px',
-        background: '#f8f8f8',
-        showConfirmButton: true,
-        confirmButtonText: 'Cerrar',
-        confirmButtonColor: '#3085d6',
-        showCloseButton: true,
-        customClass: {
-            popup: 'chord-modal-popup',
-            closeButton: 'chord-modal-close-btn'
-        },
-        willOpen: () => {
-            // Precargar imagen por defecto
-            const img = new Image();
-            img.src = fallbackImg;
-        }
+    const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg'];
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    const suffix = chord.slice(root.length);
+    const normalizedRoot = root.replace('#', 'sos').replace('b', 'bem').toLowerCase();
+    
+    let chordType = 'mayores';
+    let chordSuffix = '-mayor';
+    
+    if (suffix === 'm') {
+        chordType = 'menores';
+        chordSuffix = '-menor';
+    } else if (suffix === '7') {
+        chordType = 'dominantes';
+        chordSuffix = '7';
+    } else if (suffix === 'maj7') {
+        chordType = 'mayores7';
+        chordSuffix = '-mayor7';
+    }
+    
+    const basePath = '../../assets/img/';
+    const possibleFileNames = [
+        `${normalizedRoot}${chordSuffix}`,
+        `${normalizedRoot}`,
+        `${root.toLowerCase()}${chordSuffix}`,
+        `${root.toLowerCase()}`
+    ];
+    
+    const allPossiblePaths = [];
+    possibleFileNames.forEach(name => {
+        imageExtensions.forEach(ext => {
+            allPossiblePaths.push(`${basePath}${instrumentKey}/${chordType}/${name}${ext}`);
+        });
     });
+    
+    return allPossiblePaths[0];
 }
-
 // Función auxiliar para determinar el tipo de acorde
 function getChordType(chord) {
     const rootMatch = chord.match(/^[A-G][#b]?/);

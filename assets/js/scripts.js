@@ -797,74 +797,85 @@ function getCommonProgressions(chord) {
     ];
 }
 
-function getChordImagePath(chord, instrument) {
-    // Normalizar nombres de instrumentos
-    const instrumentMap = {
-        'guitarra': 'guitar',
-        'bajo': 'bass',
-        'piano': 'piano'
+function showChordDetail(chord, instrument) {
+    const chordImgPath = getChordImagePath(chord, instrument);
+    const fallbackImg = '../../assets/img/default-chord.png';
+    
+    // Función para manejo de errores de imagen (igual que antes)
+    window.handleChordImageError = function(img) {
+        const currentSrc = img.src;
+        console.log(`Error al cargar imagen: ${currentSrc}`);
+        
+        const pathParts = currentSrc.split('/');
+        const fileName = pathParts.pop();
+        const basePath = pathParts.join('/') + '/';
+        const fileNameWithoutExt = fileName.split('.').slice(0, -1).join('.');
+        
+        const altExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
+        const currentExt = '.' + fileName.split('.').pop();
+        const currentExtIndex = altExtensions.indexOf(currentExt);
+        const nextExtensions = [...altExtensions.slice(currentExtIndex + 1), ...altExtensions.slice(0, currentExtIndex)];
+        
+        for (const ext of nextExtensions) {
+            const newSrc = basePath + fileNameWithoutExt + ext;
+            if (newSrc !== currentSrc) {
+                img.src = newSrc;
+                return;
+            }
+        }
+        
+        img.src = fallbackImg;
     };
-    const instrumentKey = instrumentMap[instrument.toLowerCase()] || instrument.toLowerCase();
+
+    // Contenido HTML del modal con estilos inline para el tamaño de la imagen
+    const htmlContent = `
+        <div class="swal-chord-container">
+            <div class="swal-chord-header">
+                <h3>${chord} en ${instrument}</h3>
+                <div class="chord-type">${getChordType(chord)}</div>
+            </div>
+            
+            <div class="swal-chord-image" style="text-align: center; margin: 15px 0;">
+                <img src="${chordImgPath}" alt="Diagrama de ${chord}" 
+                     style="max-width: 100%; max-height: 250px; width: auto; height: auto; border-radius: 8px; border: 1px solid #eee;"
+                     onerror="handleChordImageError(this)">
+                <div class="chord-caption" style="font-size: 0.9em; color: #666; margin-top: 8px; font-style: italic;">
+                    Diagrama para ${instrument}
+                </div>
+            </div>
+            
+            <div class="swal-chord-details" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
+                <div class="chord-notes" style="background: white; padding: 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <strong>Notas:</strong> ${getChordNotes(chord).join(' - ')}
+                </div>
+                <div class="chord-fingering" style="background: white; padding: 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <strong>Digitación:</strong> ${getFingering(chord, instrument)}
+                </div>
+            </div>
+            
+            <div class="chord-progressions" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <strong>Progresiones comunes:</strong>
+                <ul style="padding-left: 20px; margin: 10px 0 0 0;">
+                    ${getCommonProgressions(chord).map(p => `<li style="margin-bottom: 5px;">${p}</li>`).join('')}
+                </ul>
+            </div>
+        </div>
+    `;
     
-    // Lista completa de extensiones soportadas (ordenadas por preferencia)
-    const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg'];
-    
-    // Extraer la raíz del acorde
-    const rootMatch = chord.match(/^[A-G][#b]?/);
-    const root = rootMatch ? rootMatch[0] : 'C';
-    const suffix = chord.slice(root.length);
-    
-    // Normalizar nombre de la nota para el archivo
-    const normalizedRoot = root.replace('#', 'sos').replace('b', 'bem').toLowerCase();
-    
-    // Determinar tipo de acorde
-    let chordType = 'mayores';
-    let chordSuffix = '-mayor';
-    
-    if (suffix === 'm') {
-        chordType = 'menores';
-        chordSuffix = '-menor';
-    } else if (suffix === '7') {
-        chordType = 'dominantes';
-        chordSuffix = '7';
-    } else if (suffix === 'maj7') {
-        chordType = 'mayores7';
-        chordSuffix = '-mayor7';
-    } else if (suffix === 'm7') {
-        chordType = 'menores7';
-        chordSuffix = '-menor7';
-    } else if (suffix.includes('dim')) {
-        chordType = 'disminuidos';
-        chordSuffix = '-dim';
-    } else if (suffix.includes('aug')) {
-        chordType = 'aumentados';
-        chordSuffix = '-aug';
-    } else if (suffix.includes('sus')) {
-        chordType = 'suspendidos';
-        chordSuffix = '-sus';
-    }
-    
-    // Construir ruta base
-    const basePath = '../../assets/img/';
-    
-    // Generar todas las posibles combinaciones de nombres y extensiones
-    const possibleFileNames = [
-        `${normalizedRoot}${chordSuffix}`, // ej: d-mayor
-        `${normalizedRoot}`,               // ej: d
-        `${root.toLowerCase()}${chordSuffix}`, // ej: dmayor (sin guión)
-        `${root.toLowerCase()}`            // ej: d (nota sola)
-    ];
-    
-    // Generar todas las rutas posibles
-    const allPossiblePaths = [];
-    possibleFileNames.forEach(name => {
-        imageExtensions.forEach(ext => {
-            allPossiblePaths.push(`${basePath}${instrumentKey}/${chordType}/${name}${ext}`);
-        });
+    // Mostrar modal con SweetAlert (configuración igual)
+    Swal.fire({
+        html: htmlContent,
+        width: '650px',
+        background: '#f8f8f8',
+        showConfirmButton: true,
+        confirmButtonText: 'Cerrar',
+        confirmButtonColor: '#3085d6',
+        showCloseButton: true,
+        customClass: {
+            popup: 'chord-modal-popup',
+            closeButton: 'chord-modal-close-btn'
+        }
     });
-    
-    // Devolver la primera ruta (la verificación real se hace con onerror)
-    return allPossiblePaths[0];
 }
 
 // Función para verificar si una imagen existe (simulada)
