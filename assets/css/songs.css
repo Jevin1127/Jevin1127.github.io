@@ -104,7 +104,8 @@ button:hover {
     font-weight: 500;
 }
 
-.key-btn:hover, .key-btn.active {
+.key-btn:hover,
+.key-btn.active {
     background: var(--warning-color);
     color: var(--primary-bg);
     border-color: var(--warning-color);
@@ -116,7 +117,8 @@ button:hover {
     padding: 1.5rem;
     border-radius: 10px;
     margin: 1.8rem 0;
-    border-left: 4px solid #8b5cf6; /* Color morado para distinguir */
+    border-left: 4px solid #8b5cf6;
+    /* Color morado para distinguir */
     box-shadow: var(--shadow);
 }
 
@@ -179,7 +181,7 @@ button:hover {
     .tutorials-grid {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
-    
+
     .video-placeholder {
         height: 100px;
         font-size: 0.9rem;
@@ -258,7 +260,7 @@ button:hover {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 
 /* Área de información */
@@ -281,6 +283,7 @@ button:hover {
     color: var(--secondary-text);
     opacity: 0.9;
 }
+
 /* Responsive para diagramas */
 @media (max-width: 768px) {
     .chord-diagrams-grid {
@@ -296,7 +299,8 @@ button:hover {
     justify-content: center;
     padding: 1rem;
     position: relative;
-    background: transparent !important; /* Elimina fondos conflictivos */
+    background: transparent !important;
+    /* Elimina fondos conflictivos */
 }
 
 /* Estilos específicos por instrumento */
@@ -317,7 +321,7 @@ button:hover {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .chord-info {
@@ -371,11 +375,11 @@ button:hover {
     .song-content {
         padding: 1.5rem;
     }
-    
+
     .tutorials-grid {
         grid-template-columns: 1fr 1fr;
     }
-    
+
     .chord-diagrams-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
@@ -385,11 +389,11 @@ button:hover {
     .tutorials-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .song-title {
         font-size: 1.6rem;
     }
-    
+
     .transpose-buttons button {
         width: 100%;
     }
@@ -508,7 +512,7 @@ button:hover {
     .song-content {
         padding: 1.5rem;
     }
-    
+
     .section-box {
         padding: 1.2rem;
     }
@@ -556,7 +560,7 @@ button:hover {
     top: -0.6em;
     font-size: 0.82em;
     margin-right: 0.15em;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.3px;
     height: 0;
     display: inline-block;
@@ -570,7 +574,7 @@ button:hover {
     margin: 0.8rem 0 0.5rem 0;
     font-style: italic;
     display: inline-block;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
 }
@@ -587,12 +591,12 @@ button:hover {
     .lyrics-container {
         padding: 1.2rem;
     }
-    
+
     .lyrics {
         font-size: 0.95rem;
         line-height: 1.8;
     }
-    
+
     .chord {
         font-size: 0.78em;
         top: -0.5em;
@@ -612,7 +616,8 @@ button:hover {
 .song-title {
     color: var(--warning-color);
     font-size: 1.8rem;
-    margin: 0; /* Eliminamos márgenes anteriores */
+    margin: 0;
+    /* Eliminamos márgenes anteriores */
     flex-grow: 1;
 }
 
@@ -641,9 +646,10 @@ button:hover {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .back-btn {
-        order: -1; /* Mueve el botón arriba en móviles */
+        order: -1;
+        /* Mueve el botón arriba en móviles */
         margin-bottom: 0.5rem;
     }
 }
@@ -668,7 +674,8 @@ button:hover {
 .lyrics-line {
     margin-bottom: 1rem;
     position: relative;
-    min-height: 2.5em; /* Espacio para los acordes */
+    min-height: 2.5em;
+    /* Espacio para los acordes */
 }
 
 .lyrics-line.chords-only {
@@ -733,7 +740,8 @@ button:hover {
 .lyrics-line {
     margin-bottom: 1rem;
     position: relative;
-    min-height: 2.5em; /* Espacio para los acordes */
+    min-height: 2.5em;
+    /* Espacio para los acordes */
 }
 
 .lyrics-line.chords-only {
@@ -783,19 +791,19 @@ button:hover {
         padding: 0.8rem;
         margin: 0.8rem 0;
     }
-    
+
     .lyrics {
         font-size: 0.95rem;
     }
-    
+
     .lyrics-line {
         margin-bottom: 0.8rem;
     }
-    
+
     .lyrics-line .chord {
         font-size: 0.8em;
     }
-    
+
     .lyrics-line .text {
         padding-top: 0.7em;
     }
@@ -806,55 +814,55 @@ button:hover {
         padding: 0.6rem;
         border-radius: 6px;
     }
-    
+
     .lyrics {
         font-size: 0.9rem;
         line-height: 1.7;
     }
-    
+
     .lyrics-line {
         margin-bottom: 0.7rem;
         min-height: 2.2em;
     }
-    
+
     .lyrics-line .chord {
         font-size: 0.75em;
     }
-    
+
     .lyrics-line .text {
         padding-top: 0.6em;
     }
-    
+
     .lyrics-spacer {
         height: 1rem;
     }
-    
+
     /* Ajustar el tamaño de los recuadros */
     .section-box {
         padding: 0.8rem;
         margin: 0.8rem 0;
     }
-    
+
     .song-content {
         padding: 0.8rem;
     }
-    
+
     /* Ajustar tutoriales */
     .tutorials-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .video-placeholder {
         height: 90px;
         font-size: 0.85rem;
     }
-    
+
     /* Ajustar diagramas de acordes */
     .chord-diagrams-grid {
         grid-template-columns: 1fr 1fr;
         gap: 0.8rem;
     }
-    
+
     .chord-image-container {
         height: 110px;
     }
@@ -862,15 +870,29 @@ button:hover {
 
 /* Para pantallas muy pequeñas */
 @media (max-width: 360px) {
-    .lyrics {
-        font-size: 0.85rem;
+    .lyrics-line {
+        margin-bottom: 1rem;
     }
-    
+
+    .lyrics-line .line {
+        display: block;
+        white-space: pre;
+        /* respeta espacios para alinear acordes */
+        font-family: monospace;
+        /* acordes y letra alineados */
+    }
+
     .lyrics-line .chord {
-        font-size: 0.7em;
+        color: var(--accent-color);
+        font-weight: bold;
+        font-size: 0.85em;
     }
-    
-    .chord-diagrams-grid {
-        grid-template-columns: 1fr;
+
+    @media (max-width: 768px) {
+        .lyrics-line .line {
+            white-space: normal;
+            /* en móviles, permite salto sin romper */
+        }
     }
+
 }
