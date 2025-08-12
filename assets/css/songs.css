@@ -353,21 +353,15 @@ button:hover {
 }
 
 .lyrics {
-    white-space: pre-line;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: var(--primary-text);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    white-space: pre;
+    /* respeta los espacios y saltos de línea */
+    font-family: monospace;
+    /* alinea acorde/letra verticalmente */
 }
 
 .chord {
     color: var(--accent-color);
     font-weight: bold;
-    position: relative;
-    top: -1em;
-    font-size: 0.85em;
-    margin-right: 0.3em;
-    font-family: monospace;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -815,10 +809,7 @@ button:hover {
         border-radius: 6px;
     }
 
-    .lyrics {
-        font-size: 0.9rem;
-        line-height: 1.7;
-    }
+
 
     .lyrics-line {
         margin-bottom: 0.7rem;
@@ -877,10 +868,11 @@ button:hover {
     .lyrics-line .line {
         display: block;
         white-space: pre;
-        /* respeta espacios para alinear acordes */
+        /* Mantiene los espacios */
         font-family: monospace;
-        /* acordes y letra alineados */
+        /* Facilita alineación acorde/letra */
     }
+
 
     .lyrics-line .chord {
         color: var(--accent-color);
