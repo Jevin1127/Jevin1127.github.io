@@ -647,3 +647,147 @@ button:hover {
         margin-bottom: 0.5rem;
     }
 }
+
+/* Añadir al final del archivo songs.css */
+
+/* ===== MEJORAS ESPECÍFICAS PARA MÓVILES ===== */
+@media (max-width: 480px) {
+    /* Ajustes generales de espaciado */
+    .song-content {
+        padding: 1rem;
+    }
+    
+    .section-box {
+        padding: 1rem;
+        margin: 1.2rem 0;
+    }
+    
+    /* Mejorar la legibilidad de la letra y acordes */
+    .lyrics-container {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+    
+    .lyrics {
+        font-size: 1rem;
+        line-height: 1.7;
+        white-space: normal;
+    }
+    
+    .chord {
+        font-size: 0.8em;
+        top: -0.5em;
+        margin-right: 0.2em;
+    }
+    
+    /* Ajustar los controles de transposición */
+    .transpose-controls {
+        padding: 1rem;
+    }
+    
+    .transpose-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .transpose-buttons button {
+        width: 100%;
+        padding: 0.6rem;
+    }
+    
+    .key-selector {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+        gap: 0.5rem;
+    }
+    
+    /* Optimizar diagramas de acordes */
+    .chord-diagrams-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .chord-image-container {
+        height: 120px;
+        padding: 0.8rem;
+    }
+    
+    /* Mejorar los tutoriales por instrumento */
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tutorial-card {
+        margin-bottom: 0.5rem;
+    }
+    
+    .video-placeholder {
+        height: 100px;
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+    
+    /* Ajustar secciones de jazz y transiciones */
+    .transition-item, .jazz-subsection {
+        font-size: 0.95rem;
+        padding-bottom: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .chord-progression {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* Mejorar títulos */
+    .song-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Ajustar botón de volver */
+    .back-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        margin: 1.5rem auto 0;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .lyrics {
+        font-size: 0.95rem;
+    }
+    
+    .chord-diagrams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .key-selector {
+        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+    }
+}
+
+/* Mejora para la visualización de acordes en la letra */
+.lyrics-line {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0.5em;
+    line-height: 1.8;
+}
+
+/* Evitar que los acordes se corten */
+.chord {
+    white-space: nowrap;
+}
+
+/* Asegurar que el contenido no se salga de la pantalla */
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
