@@ -713,103 +713,164 @@ button:hover {
 }
 
 /* ===== AJUSTES ESPECÍFICOS PARA MÓVILES ===== */
-/* ESTILOS PARA LETRA EN MÓVILES */
-/* ESTILOS PARA VERSIÓN ORIGINAL (TEXTO A LA IZQUIERDA) */
-.lyrics-original {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Añade esto al final del archivo CSS */
+
+/* ===== ESTRUCTURA MEJORADA PARA LETRA Y ACORDES ===== */
+.lyrics-container {
+    padding: 1rem;
+    margin: 1rem 0;
+    background: var(--accent-bg);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.lyrics {
     font-size: 1rem;
     line-height: 1.8;
-    color: var(--primary-text);
-    white-space: pre-wrap;
+    white-space: normal;
 }
 
-.original-line {
+.lyrics-line {
+    margin-bottom: 1rem;
     position: relative;
-    margin-bottom: 1.2rem;
-    min-height: 1.8em;
+    min-height: 2.5em; /* Espacio para los acordes */
 }
 
-.chords-line {
+.lyrics-line.chords-only {
     min-height: auto;
     margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.lyrics-line .chords {
+    position: absolute;
+    top: -1.2em;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lyrics-line .chord {
+    position: static;
+    font-size: 0.85em;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin: 0 2px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.lyrics-line .text {
+    padding-top: 0.8em;
+    display: block;
+}
+
+.lyrics-spacer {
+    height: 1.5rem;
 }
 
 .section-label {
     font-style: italic;
     color: var(--success-color);
-    margin: 1.5rem 0 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.lyrics-original .chord {
-    color: var(--accent-color);
-    font-weight: bold;
-    font-size: 0.85em;
-    position: relative;
-    top: -0.8em;
-    margin-right: 0.3em;
-    height: 0;
-    display: inline-block;
-    line-height: 0;
-    white-space: nowrap;
-}
-
-.lyrics-original .lyric-text {
-    display: inline;
-    position: relative;
-    left: 0;
-    line-height: 1.8;
-}
-
-/* AJUSTES PARA MÓVILES */
+/* ===== AJUSTES ESPECÍFICOS PARA MÓVILES ===== */
 @media (max-width: 768px) {
-    .lyrics-original {
+    .lyrics-container {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+    
+    .lyrics {
         font-size: 0.95rem;
-        line-height: 1.7;
     }
     
-    .original-line {
-        margin-bottom: 1rem;
+    .lyrics-line {
+        margin-bottom: 0.8rem;
     }
     
-    .lyrics-original .chord {
+    .lyrics-line .chord {
         font-size: 0.8em;
-        top: -0.7em;
-        margin-right: 0.2em;
+    }
+    
+    .lyrics-line .text {
+        padding-top: 0.7em;
     }
 }
 
 @media (max-width: 480px) {
-    .lyrics-original {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        white-space: normal;
-    }
-    
-    .original-line {
-        margin-bottom: 0.8rem;
-        min-height: 1.6em;
-    }
-    
-    .lyrics-original .chord {
-        font-size: 0.75em;
-        top: -0.6em;
-    }
-    
-    .section-label {
-        margin: 1rem 0 0.3rem;
-    }
-    
     .lyrics-container {
+        padding: 0.6rem;
+        border-radius: 6px;
+    }
+    
+    .lyrics {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .lyrics-line {
+        margin-bottom: 0.7rem;
+        min-height: 2.2em;
+    }
+    
+    .lyrics-line .chord {
+        font-size: 0.75em;
+    }
+    
+    .lyrics-line .text {
+        padding-top: 0.6em;
+    }
+    
+    .lyrics-spacer {
+        height: 1rem;
+    }
+    
+    /* Ajustar el tamaño de los recuadros */
+    .section-box {
+        padding: 0.8rem;
+        margin: 0.8rem 0;
+    }
+    
+    .song-content {
         padding: 0.8rem;
     }
-}
-
-@media (max-width: 360px) {
-    .lyrics-original {
+    
+    /* Ajustar tutoriales */
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-placeholder {
+        height: 90px;
         font-size: 0.85rem;
     }
     
-    .lyrics-original .chord {
+    /* Ajustar diagramas de acordes */
+    .chord-diagrams-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+    
+    .chord-image-container {
+        height: 110px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .lyrics {
+        font-size: 0.85rem;
+    }
+    
+    .lyrics-line .chord {
         font-size: 0.7em;
+    }
+    
+    .chord-diagrams-grid {
+        grid-template-columns: 1fr;
     }
 }
