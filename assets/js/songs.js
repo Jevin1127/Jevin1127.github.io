@@ -3,7 +3,9 @@
 // Configuración básica para la página de canción
 document.addEventListener('DOMContentLoaded', function () {
     // 1. Inicializar controles de transposición
-    initKeyButtons();
+
+    
+
 
     // 2. Configurar placeholders de tutoriales
     setupTutorialPlaceholders();
