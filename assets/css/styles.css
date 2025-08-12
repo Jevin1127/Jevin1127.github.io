@@ -1585,3 +1585,54 @@
            color: #0066cc;
            font-weight: bold;
        }
+
+       .tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.tutorial-card {
+    width: 100%;
+    max-width: 280px; /* Tamaño más compacto */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.video-container {
+    position: right;
+    padding-bottom: 60%; /* Ajuste para proporción más cuadrada */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info {
+    padding: 12px;
+}
+
+.video-title {
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-source {
+    color: #666;
+    font-size: 12px;
+    margin: 0;
+}
+
