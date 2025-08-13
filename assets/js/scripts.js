@@ -797,6 +797,51 @@ function getCommonProgressions(chord) {
     ];
 }
 
+
+function showChordModal(chord, instrument) {
+    const normalizedInstrument = instrument.toLowerCase() === 'guitarra' ? 'guitar' : 
+                               instrument.toLowerCase() === 'bajo' ? 'bass' : 
+                               instrument.toLowerCase();
+    
+    const chordData = chordImages[normalizedInstrument][chord];
+    const imgSrc = chordData ? chordData.main : genericChordImages[normalizedInstrument];
+    const fallbackSrc = chordData ? chordData.fallback : genericChordImages[normalizedInstrument];
+
+    const htmlContent = `
+        <div class="modal-chord-content">
+            <h3>${chord} en ${instrument}</h3>
+            <div class="modal-chord-diagram">
+                <img src="${imgSrc}" alt="${chord}" onerror="this.src='${fallbackSrc}'">
+            </div>
+            <div class="modal-chord-info">
+                <p><strong>Notas:</strong> ${getChordNotes(chord).join(' - ')}</p>
+                <p><strong>Digitación:</strong> ${getFingering(chord, instrument)}</p>
+            </div>
+        </div>
+    `;
+
+    Swal.fire({
+        html: htmlContent,
+        width: '600px',
+        showConfirmButton: true,
+        confirmButtonText: 'Cerrar'
+    });
+}
+
+// En la inicialización de la página de canción
+function setupSongPage() {
+    // ... otras configuraciones
+    
+    // Configurar clics en diagramas de acordes para abrir modal
+    document.querySelectorAll('.chord-diagram').forEach(diagram => {
+        diagram.addEventListener('click', function() {
+            const chord = this.closest('[data-chord]').getAttribute('data-chord');
+            const instrument = this.closest('[data-instrument]').getAttribute('data-instrument');
+            showChordModal(chord, instrument);
+        });
+    });
+}
+
 function showChordDetail(chord, instrument) {
     const chordImgPath = getChordImagePath(chord, instrument);
     const fallbackImg = '../../assets/img/default-chord.png';

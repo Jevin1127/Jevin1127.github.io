@@ -9,11 +9,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <title>Librería de Acordes</title>
+
 </head>
 
 <body>
     <div class="container">
-
         <!-- Librería de Acordes -->
         <section class="chord-library" id="chord-library">
             <div class="library-header">
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Contenedor para acordes de guitarra -->
-            <div class="chord-detail-container active" id="guitar-chords">
+            <div class="instrument-chords-container">
                 <h3>Acordes de Guitarra</h3>
                 <div class="instrument-description">
                     <p>Diagramas de acordes para guitarra con posiciones de dedos y cuerdas al aire.</p>
@@ -55,10 +55,11 @@
                 <div class="chord-grid" id="guitar-chords-grid">
                     <!-- Se llenará dinámicamente -->
                 </div>
+                <div class="chord-detail-container" id="guitar-chord-detail"></div>
             </div>
 
             <!-- Contenedor para acordes de piano -->
-            <div class="chord-detail-container" id="piano-chords">
+            <div class="instrument-chords-container">
                 <h3>Acordes de Piano</h3>
                 <div class="instrument-description">
                     <p>Acordes para piano mostrando las teclas y digitaciones recomendadas.</p>
@@ -66,10 +67,11 @@
                 <div class="chord-grid" id="piano-chords-grid">
                     <!-- Se llenará dinámicamente -->
                 </div>
+                <div class="chord-detail-container" id="piano-chord-detail"></div>
             </div>
 
             <!-- Contenedor para acordes de bajo -->
-            <div class="chord-detail-container" id="bass-chords">
+            <div class="instrument-chords-container">
                 <h3>Acordes de Bajo</h3>
                 <div class="instrument-description">
                     <p>Posiciones de acordes para bajo de 4 y 5 cuerdas.</p>
@@ -77,6 +79,7 @@
                 <div class="chord-grid" id="bass-chords-grid">
                     <!-- Se llenará dinámicamente -->
                 </div>
+                <div class="chord-detail-container" id="bass-chord-detail"></div>
             </div>
 
             <div class="library-footer">
@@ -85,8 +88,7 @@
         </section>
     </div>
 
-    <script src="../assets/js/scripts.js"></script> <!-- Tus funciones existentes -->
-    <script src="../assets/js/chord.js"></script> <!-- Nueva inicialización -->
+    <script src="../assets/js/chord.js"></script>
 </body>
 
 </html>
