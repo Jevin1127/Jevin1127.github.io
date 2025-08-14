@@ -35,6 +35,25 @@
                     <!-- Las teclas se generarán con JavaScript -->
                 </div>
             </div>
+            <!-- Reproductor de audio -->
+
+            <!-- Controles de transposición -->
+            <div class="transpose-controls">
+
+                <!-- Audio centrado -->
+                <div class="audio-container" style="text-align: center; margin-bottom: 15px;">
+                    <p style="margin: 5px 0; font-weight: bold;">🎵 Audio del canto (Reproducir)</p>
+                    <audio id="song-audio" controls>
+                        <source src="../../assets/audio/vialactea.mp3" type="audio/mp3">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+
+            </div>
+
+
+            <!-- Librería Tone.js antes de songs.js -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.2.11/Tone.min.js"></script>
 
             <!-- Sección letra -->
             <div class="section-box lyrics-container">
