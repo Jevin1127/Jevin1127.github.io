@@ -4,7 +4,16 @@
 document.addEventListener('DOMContentLoaded', function () {
     // 1. Inicializar controles de transposición
 
-    
+        document.body.addEventListener("click", ensureToneStarted);
+
+    // También si hay interacción táctil (móviles)
+    document.body.addEventListener("touchstart", ensureToneStarted);
+
+    // Si usas un botón play de <audio>, detecta también
+    const audioEl = document.getElementById("song-audio");
+    if (audioEl) {
+        audioEl.addEventListener("play", ensureToneStarted);
+    }
 
 
     // 2. Configurar placeholders de tutoriales
@@ -456,6 +465,18 @@ function getChordNotes(chord) {
 /***********************
  *  PITCH + TRANSPOSICIÓN
  ***********************/
+
+function ensureToneStarted() {
+    if (Tone.context.state !== "running") {
+        Tone.start().then(() => {
+            console.log("Tone.js iniciado (AudioContext activo)");
+        }).catch(err => {
+            console.error("Error al iniciar Tone.js", err);
+        });
+    }
+}
+
+
 window.chordImages = window.chordImages || {}; // evita doble declaración
 
 // --- AUDIO / Tone.js ---
