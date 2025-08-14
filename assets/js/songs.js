@@ -456,171 +456,89 @@ function getChordNotes(chord) {
 /***********************
  *  PITCH + TRANSPOSICIÓN
  ***********************/
-window.chordImages = window.chordImages || {}; // evita doble declaración
-
-// --- AUDIO / Tone.js ---
+// Variables globales
 let tonePitch = null;
-let mediaSrc = null;
-let audioEl = null;
+let player = null;
+let totalSemitoneOffset = 0;
+let BASE_KEY = 'D';
 
-// --- Estado de transposición (en semitonos) ---
-let totalSemitoneOffset = 0;   // desplazamiento actual
-let BASE_KEY = 'D';            // tonalidad original del audio (se detecta abajo)
-
-// Mapa de notas (doce semitonos)
-const KEYS = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-const FLAT_TO_SHARP = { 'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#' };
-
-function toSharp(k){ return FLAT_TO_SHARP[k] || k; }
-function idxOf(k){ return KEYS.indexOf(toSharp(k)); }
-
-// Distancia en semitonos desde 'fromKey' hasta 'toKey' (valor absoluto con signo)
-function semitoneDistance(fromKey, toKey) {
-  const a = idxOf(fromKey), b = idxOf(toKey);
-  if (a < 0 || b < 0) return 0;
-  // distancia absoluta basada en origen (¡no el camino más corto!)
-  // para que coincida exactamente con el audio grabado en BASE_KEY
-  let diff = b - a;
-  if (diff > 11) diff -= 12;
-  if (diff < -11) diff += 12;
-  return diff;
-}
-
-// Detecta BASE_KEY al cargar (ej. del botón "Original (D)" o del span actual)
+// Detecta la tonalidad original desde el botón "Original (X)"
 function detectBaseKey() {
-  // 1) Intentar leer del texto del botón "Original (X)"
-  const originalBtn = document.querySelector('.transpose-buttons button:nth-child(3)');
-  const fromBtn = originalBtn?.textContent || '';
-  const m = fromBtn.match(/\(([A-G][#b]?)\)/i);
-  if (m && m[1]) return toSharp(m[1].toUpperCase());
-
-  // 2) O del span #current-key al inicio
-  const span = document.getElementById('current-key');
-  const k = span?.textContent?.trim().toUpperCase();
-  if (k && idxOf(k) >= 0) return toSharp(k);
-
-  return 'D';
+    const originalBtn = document.querySelector('.transpose-buttons button:nth-child(3)');
+    const match = originalBtn?.textContent.match(/\(([A-G][#b]?)\)/i);
+    if (match) return match[1].toUpperCase();
+    return 'D';
 }
 
-/* ------------------ Tone.js setup ------------------ */
 function setupPitchShift() {
     if (!window.Tone) {
-        console.warn('Tone.js no está cargado');
+        console.warn("Tone.js no está cargado");
         return;
     }
 
-    if (mediaSrc) {
-        console.log("PitchShift ya inicializado");
-        return; // evita crear MediaElementSource dos veces
-    }
-
-    audioEl = document.getElementById('song-audio');
-    if (!audioEl) {
-        console.warn('No encontré #song-audio');
+    if (player) {
+        console.log("Tone.Player ya inicializado");
         return;
     }
 
     BASE_KEY = detectBaseKey();
 
-    const ctx = Tone.getContext().rawContext;
-    mediaSrc = ctx.createMediaElementSource(audioEl);
-
+    // Creamos el PitchShifter
     tonePitch = new Tone.PitchShift({
-        pitch: 0,         // tono inicial
-        windowSize: 0.15, // mejor calidad
+        pitch: 0,
+        windowSize: 0.15,
         delayTime: 0,
         feedback: 0
     }).toDestination();
 
-    Tone.connect(mediaSrc, tonePitch);
+    // Cargamos el audio con Tone.Player (evita CORS)
+    player = new Tone.Player({
+        url: "assets/audio/vialactea.mp3", // Ruta al MP3 dentro de tu repo
+        autostart: false, // no inicia hasta que el usuario de play
+        loop: false
+    }).connect(tonePitch);
 
-    // Asegurar que Tone.js inicia con cualquier interacción
+    // Asegurar que el AudioContext inicia al primer clic
     const startTone = () => {
-        Tone.start().then(() => {
-            console.log("Tone.js iniciado (AudioContext activo)");
-        }).catch(err => console.error("Error iniciando Tone.js", err));
+        Tone.start().then(() => console.log("Tone.js iniciado"));
     };
-
-    // Escuchar clic en cualquier parte de la página o botones
-    document.addEventListener('click', startTone, { once: true });
-    document.addEventListener('touchstart', startTone, { once: true });
-
-    console.log("PitchShift configurado correctamente");
+    document.addEventListener("click", startTone, { once: true });
 }
 
-
-/* ----- Cambiar pitch exacto (absoluto) ----- */
-window.setPitchShift = function(semitones) {
-  totalSemitoneOffset = semitones;
-  if (tonePitch) tonePitch.pitch = semitones;
+// Cambiar pitch absoluto
+window.setPitchShift = function (semitones) {
+    totalSemitoneOffset = semitones;
+    if (tonePitch) tonePitch.pitch = semitones;
 };
 
-/* ------------------ ENGANCHAR TUS CONTROLES EXISTENTES ------------------ */
-// Guardamos las funciones originales si existen (de tus scripts)
-const _originalTranspose = typeof transpose === 'function' ? transpose : null;
-const _originalResetKey  = typeof resetKey  === 'function' ? resetKey  : null;
-const _originalSetKey    = typeof setKey    === 'function' ? setKey    : null;
+// Sobrescribir botones existentes
+const _originalTranspose = typeof transpose === "function" ? transpose : null;
+const _originalResetKey = typeof resetKey === "function" ? resetKey : null;
 
-/* 
- * transpose(±1): sigue haciendo lo tuyo (acordes) y además mueve el audio
- * totalSemitoneOffset lleva el acumulado actual.
- */
-window.transpose = function(deltaSemi) {
-  if (_originalTranspose) _originalTranspose(deltaSemi);
-  window.setPitchShift(totalSemitoneOffset + deltaSemi);
+window.transpose = function (delta) {
+    if (_originalTranspose) _originalTranspose(delta);
+    window.setPitchShift(totalSemitoneOffset + delta);
 };
 
-/* 
- * resetKey(): NO reinicia el <audio> ni su salida nativa; solo:
- * - resetea acordes/UI (tu función)
- * - pone el pitch del audio en 0 semitonos (tono original)
- */
-window.resetKey = function() {
-  if (_originalResetKey) _originalResetKey();
-  window.setPitchShift(0);
+window.resetKey = function () {
+    if (_originalResetKey) _originalResetKey();
+    window.setPitchShift(0);
 };
 
-/*
- * setKey('X'): selección directa de tonalidad desde los botones del selector.
- * - Deja que tu setKey original haga el trabajo de acordes/UI.
- * - Calcula cuántos semitonos hay de BASE_KEY (grabación) a 'X'
- *   y aplica ese pitch al MP3.
- */
-window.setKey = function(targetKey) {
-  const tgt = toSharp(String(targetKey).toUpperCase());
-  if (_originalSetKey) _originalSetKey(tgt);
-
-  const shiftFromBase = semitoneDistance(BASE_KEY, tgt);
-  window.setPitchShift(shiftFromBase);
-
-  // (opcional) marcar botón activo si tu código no lo hace
-  const ks = document.getElementById('key-selector');
-  if (ks) {
-    ks.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    const btn = Array.from(ks.querySelectorAll('button')).find(b => b.textContent.trim().toUpperCase() === tgt);
-    if (btn) btn.classList.add('active');
-  }
-
-  // (opcional) actualizar el span "Tonalidad actual"
-  const span = document.getElementById('current-key');
-  if (span) span.textContent = tgt;
+// Control manual de reproducción con Tone.Player
+window.playAudio = function () {
+    if (player && !player.state || player.state === "stopped") {
+        player.start();
+    }
 };
 
-/* ------------------ LISTOS ------------------ */
-document.addEventListener('DOMContentLoaded', setupPitchShift);
+window.stopAudio = function () {
+    if (player && player.state === "started") {
+        player.stop();
+    }
+};
 
-/* 
- * (Opcional) por si tu generador de botones no añade onclick,
- * delegamos el click del selector a setKey():
- */
-const ks = document.getElementById('key-selector');
-if (ks && !ks.__pitchHooked) {
-  ks.addEventListener('click', (e) => {
-    const btn = e.target.closest('button');
-    if (btn) window.setKey(btn.textContent.trim());
-  });
-  ks.__pitchHooked = true;
-}
+document.addEventListener("DOMContentLoaded", setupPitchShift);
 
 
 
