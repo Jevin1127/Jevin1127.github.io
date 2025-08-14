@@ -16,6 +16,10 @@ const chordImages = {
             main: '../assets/img/guitar/mayores/d-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
+        'D/C#': {
+            main: '../assets/img/guitar/slash/dcsos.png',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
         'D#': {
             main: '../assets/img/guitar/mayores/dsosmayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
@@ -34,6 +38,10 @@ const chordImages = {
         },
         'G': {
             main: '../assets/img/guitar/mayores/g-mayor.png',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
+        'Gmaj7': {
+            main: '../assets/img/guitar/mayores7/g-mayor7.webp',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'G#': {
@@ -66,6 +74,10 @@ const chordImages = {
             main: '../assets/img/piano/mayores/d-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
+        'D/C#': {
+            main: '../assets/img/piano/slash/dcsos.jpg',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
         'D#': {
             main: '../assets/img/piano/mayores/dsosmayor.png',
             fallback: '../assets/img/piano/default-piano.png'
@@ -86,12 +98,28 @@ const chordImages = {
             main: '../assets/img/piano/mayores/g-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
+        'Gmaj7': {
+            main: '../assets/img/piano/mayores7/g-mayor7.webp',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'Gmin7': {
+            main: '../assets/img/piano/menores7/g-menor7.webp',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
         'G#': {
             main: '../assets/img/piano/mayores/gsosmayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'A': {
             main: '../assets/img/piano/mayores/a-mayor.png',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'A9/F#': {
+            main: '../assets/img/piano/slash/a9fsos.jpg',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'Amin7': {
+            main: '../assets/img/piano/menores7/a-menor7.webp',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'A#': {
@@ -176,6 +204,10 @@ const chordImages = {
             main: '../assets/img/bass/mayores/g-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
         },
+        'Gmaj7': {
+            main: '../assets/img/bass/mayores7/g-mayor7.webp',
+            fallback: '../assets/img/bass/default-bass.png'
+        },
         'Gm': {
             main: '../assets/img/bass/menores/g-menor.webp',
             fallback: '../assets/img/bass/default-bass.png'
@@ -223,7 +255,7 @@ const defaultImages = {
 };
 
 // Configuración inicial
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log("Inicializando librería de acordes");
     setupChordLibrary();
     setupChordSearch();
@@ -241,53 +273,71 @@ function generateInstrumentChords(instrumentKey, instrumentName) {
     const grid = document.getElementById(`${instrumentKey}-chords-grid`);
     if (!grid) return;
 
-    const availableChords = Object.keys(chordImages[instrumentKey] || []);
+    grid.innerHTML = ''; // Limpiar primero
     
-    if (availableChords.length === 0) {
-        grid.innerHTML = `<p class="no-chords">No hay acordes disponibles para ${instrumentName}</p>`;
-        return;
-    }
-
-    availableChords.sort((a, b) => a.localeCompare(b)).forEach(chord => {
-        const chordCard = document.createElement('div');
-        chordCard.className = `chord-variant ${instrumentKey}-chord`;
-        chordCard.setAttribute('data-chord-type', getChordType(chord));
-        chordCard.setAttribute('title', `${chord} en ${instrumentName}`);
-
-        // Asegurarse de que estamos accediendo correctamente a las rutas
-        const chordData = chordImages[instrumentKey][chord];
-        const imgSrc = chordData?.main || defaultImages[instrumentKey];
-        const fallbackSrc = chordData?.fallback || defaultImages[instrumentKey];
-
-        chordCard.innerHTML = `
-            <h4>${chord}</h4>
-            <div class="chord-image-container">
-                <img src="${imgSrc}" alt="${chord} en ${instrumentName}" 
-                     onerror="this.src='${fallbackSrc}'">
-            </div>
-            <div class="chord-info">
-                <span class="chord-instrument">${instrumentName}</span>
-            </div>
-        `;
-
-        chordCard.addEventListener('click', () => {
-            showChordDetails(chord, instrumentName, instrumentKey);
-        });
-
-        grid.appendChild(chordCard);
+    // Ordenar acordes: primero los básicos, luego los slash chords
+    const allChords = Object.keys(chordImages[instrumentKey] || []);
+    const basicChords = allChords.filter(c => !c.includes('/'));
+    const slashChords = allChords.filter(c => c.includes('/'));
+    
+    // Generar acordes básicos
+    basicChords.sort().forEach(chord => {
+        createChordCard(chord, instrumentKey, instrumentName, grid);
     });
+    
+    // Generar slash chords (si existen)
+    if (slashChords.length > 0) {
+
+        
+        slashChords.sort().forEach(chord => {
+            createChordCard(chord, instrumentKey, instrumentName, grid);
+        });
+    }
 }
+
+function createChordCard(chord, instrumentKey, instrumentName, container) {
+    const chordCard = document.createElement('div');
+    chordCard.className = `chord-variant ${instrumentKey}-chord`;
+    chordCard.setAttribute('data-chord-type', getChordType(chord));
+    chordCard.setAttribute('title', `${chord} en ${instrumentName}`);
+
+    const chordData = chordImages[instrumentKey][chord];
+    const imgSrc = chordData?.main || defaultImages[instrumentKey];
+    const fallbackSrc = chordData?.fallback || defaultImages[instrumentKey];
+
+    chordCard.innerHTML = `
+        <h4>${chord}</h4>
+        <div class="chord-image-container">
+            <img src="${imgSrc}" alt="${chord} en ${instrumentName}" 
+                 onerror="this.src='${fallbackSrc}'">
+        </div>
+        <div class="chord-info">
+            <span class="chord-instrument">${instrumentName}</span>
+            <span class="chord-type">${getChordTypeName(chord)}</span>
+        </div>
+    `;
+
+    chordCard.addEventListener('click', () => {
+        showChordDetails(chord, instrumentName, instrumentKey);
+    });
+
+    container.appendChild(chordCard);
+}
+
 
 function showChordDetails(chord, instrumentName, instrumentKey) {
     const detailContainer = document.getElementById(`${instrumentKey}-chord-detail`);
     const grid = document.getElementById(`${instrumentKey}-chords-grid`);
-    
+
     grid.style.display = 'none';
     detailContainer.style.display = 'block';
 
     const chordData = chordImages[instrumentKey][chord];
     const imgSrc = chordData?.main || defaultImages[instrumentKey];
     const fallbackSrc = chordData?.fallback || defaultImages[instrumentKey];
+
+    // Verificar si la imagen existe antes de mostrarla
+    const imgExists = chordData?.main ? true : false;
 
     detailContainer.innerHTML = `
         <div class="chord-detail-header">
@@ -296,11 +346,13 @@ function showChordDetails(chord, instrumentName, instrumentKey) {
         </div>
         
         <div class="chord-detail-content" style="display: flex; flex-direction: column; align-items: center;">
+            ${imgExists ? `
             <div class="chord-diagram-large" style="width: 100%; max-width: 500px; margin: 20px 0;">
                 <img src="${imgSrc}" alt="${chord}" 
                      style="width: 100%; height: auto; max-height: 400px; object-fit: contain;"
                      onerror="this.src='${fallbackSrc}'">
             </div>
+            ` : `<p class="no-image">Imagen no disponible</p>`}
             
             <div class="chord-info-details" style="width: 100%; max-width: 600px;">
                 <h3>Información del Acorde</h3>
@@ -318,10 +370,11 @@ function showChordDetails(chord, instrumentName, instrumentKey) {
     `;
 }
 
+
 function hideChordDetail(instrumentKey) {
     const detailContainer = document.getElementById(`${instrumentKey}-chord-detail`);
     const grid = document.getElementById(`${instrumentKey}-chords-grid`);
-    
+
     if (detailContainer) detailContainer.style.display = 'none';
     if (grid) grid.style.display = 'grid';
 }
@@ -334,28 +387,40 @@ function handleImageError(imgElement, fallbackSrc) {
 }
 // Funciones auxiliares para información de acordes
 function getChordType(chord) {
-    if (chord.includes('m') && chord.includes('7')) return 'm7';
-    if (chord.includes('m')) return 'minor';
+    // 1. Primero detectamos slash chords (ej: A/C, D/F#)
+    if (chord.includes('/')) {
+        return 'slash';
+    }
+
+    // 2. Luego detectamos otros tipos específicos
     if (chord.includes('maj7') || chord.includes('M7')) return 'maj7';
+    if (chord.includes('m7') || chord.includes('min7')) return 'm7';
     if (chord.includes('7')) return '7';
+    if (chord.includes('m') || chord.includes('min')) return 'minor';
     if (chord.includes('sus')) return 'sus';
     if (chord.includes('dim')) return 'dim';
     if (chord.includes('aug')) return 'aug';
-    if (chord.includes('9') || chord.includes('11') || chord.includes('13')) return 'extended';
+    if (chord.match(/(9|11|13)/)) return 'extended';
     return 'major';
 }
 
 function getChordTypeName(chord) {
+    if (chord.includes('/')) {
+        const [baseChord, bassNote] = chord.split('/');
+        return `${getChordTypeName(baseChord)}/${bassNote}`;
+    }
+    
     const types = {
         'major': 'Mayor',
         'minor': 'Menor',
-        '7': 'Séptima dominante',
-        'maj7': 'Séptima mayor',
-        'm7': 'Séptima menor',
+        '7': '7ma Dominante',
+        'maj7': '7ma Mayor',
+        'm7': '7ma Menor',
         'sus': 'Suspendido',
         'dim': 'Disminuido',
         'aug': 'Aumentado',
-        'extended': 'Extendido'
+        'extended': 'Extendido',
+        'slash': 'Con bajo diferente'
     };
     return types[getChordType(chord)] || 'Mayor';
 }
@@ -365,7 +430,7 @@ function getChordNotes(chord) {
     const root = rootMatch ? rootMatch[0] : 'C';
     const suffix = root ? chord.slice(root.length) : '';
     const rootIndex = getNoteIndex(root);
-    
+
     if (suffix === 'm') {
         return [
             root,
@@ -398,7 +463,7 @@ function getChordNotes(chord) {
 
 function getIntervals(chord) {
     const type = getChordType(chord);
-    switch(type) {
+    switch (type) {
         case 'major': return 'Tónica - 3ª Mayor - 5ª Justa';
         case 'minor': return 'Tónica - 3ª Menor - 5ª Justa';
         case '7': return 'Tónica - 3ª Mayor - 5ª Justa - 7ª Menor';
@@ -435,7 +500,7 @@ function getFingering(chord, instrument) {
 function getCommonProgressions(chord) {
     const rootMatch = chord.match(/^[A-G][#b]?/);
     const root = rootMatch ? rootMatch[0] : 'C';
-    
+
     return [
         `${root} - ${transposeChord('G', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('F', getNoteIndex(root) - getNoteIndex('C'))}`,
         `${root} - ${transposeChord('Am', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('F', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('G', getNoteIndex(root) - getNoteIndex('C'))}`,
@@ -469,10 +534,10 @@ function transposeSingleChord(chord, semitones) {
 function setupInstrumentTabs() {
     const tabs = document.querySelectorAll('.instrument-tab');
     tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             tabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
-            
+
             const instrument = this.getAttribute('data-instrument');
             document.querySelectorAll('.instrument-chords-container').forEach(container => {
                 container.style.display = 'none';
@@ -480,52 +545,104 @@ function setupInstrumentTabs() {
             document.querySelector(`#${instrument}-chords-grid`).parentElement.style.display = 'block';
         });
     });
-    
+
     // Activar la primera pestaña por defecto
     document.querySelector('.instrument-tab').click();
 }
 
 function setupChordTypeFilters() {
     const buttons = document.querySelectorAll('.chord-type-btn');
+    
+    // Guardar texto original para no duplicar al actualizar counts
+    buttons.forEach(btn => {
+        btn.dataset.originalText = btn.textContent;
+    });
+    
     buttons.forEach(btn => {
         btn.addEventListener('click', function() {
+            // Activar botón seleccionado
             buttons.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             
             const type = this.getAttribute('data-type');
-            const activeTab = document.querySelector('.instrument-tab.active');
-            const instrument = activeTab ? activeTab.getAttribute('data-instrument') : 'guitar';
-            const chords = document.querySelectorAll(`#${instrument}-chords-grid .chord-variant`);
-            
-            chords.forEach(chord => {
-                const chordType = chord.getAttribute('data-chord-type');
-                chord.style.display = (type === 'all' || chordType === type) ? 'block' : 'none';
-            });
+            filterChordsByType(type);
         });
     });
     
-    // Activar el filtro "Todos" por defecto
-    document.querySelector('.chord-type-btn').click();
+    // Filtrar inicialmente
+    filterChordsByType('all');
+}
+
+function filterChordsByType(type) {
+    const activeTab = document.querySelector('.instrument-tab.active');
+    if (!activeTab) return;
+    
+    const instrument = activeTab.getAttribute('data-instrument');
+    const chords = document.querySelectorAll(`#${instrument}-chords-grid .chord-variant`);
+    
+    chords.forEach(chord => {
+        const chordName = chord.querySelector('h4').textContent;
+        const chordType = getChordType(chordName);
+        
+        // Mostrar u ocultar según el filtro
+        if (type === 'all') {
+            chord.style.display = 'block';
+        } else if (type === 'slash') {
+            chord.style.display = chordType === 'slash' ? 'block' : 'none';
+        } else {
+            // Para otros tipos, ocultar los slash chords a menos que sea el filtro específico
+            chord.style.display = (chordType === type && !chordName.includes('/')) ? 'block' : 'none';
+        }
+    });
+    
+    // Actualizar contadores
+    updateFilterCounts();
+}
+
+function updateFilterCounts() {
+    const activeTab = document.querySelector('.instrument-tab.active');
+    if (!activeTab) return;
+    
+    const instrument = activeTab.getAttribute('data-instrument');
+    const chords = Array.from(document.querySelectorAll(`#${instrument}-chords-grid .chord-variant`));
+    
+    document.querySelectorAll('.chord-type-btn').forEach(btn => {
+        const type = btn.getAttribute('data-type');
+        let count;
+        
+        if (type === 'all') {
+            count = chords.length;
+        } else if (type === 'slash') {
+            count = chords.filter(c => c.querySelector('h4').textContent.includes('/')).length;
+        } else {
+            count = chords.filter(c => {
+                const chordName = c.querySelector('h4').textContent;
+                return getChordType(chordName) === type && !chordName.includes('/');
+            }).length;
+        }
+        
+        btn.textContent = `${btn.dataset.originalText} (${count})`;
+    });
 }
 
 function setupChordSearch() {
     const searchInput = document.getElementById('chord-search');
     const searchBtn = document.getElementById('search-btn');
-    
+
     function performSearch() {
         const term = searchInput.value.trim().toUpperCase();
         const activeTab = document.querySelector('.instrument-tab.active');
         const instrument = activeTab ? activeTab.getAttribute('data-instrument') : 'guitar';
         const chords = document.querySelectorAll(`#${instrument}-chords-grid .chord-variant`);
-        
+
         chords.forEach(chord => {
             const chordName = chord.querySelector('h4').textContent.toUpperCase();
             chord.style.display = chordName.includes(term) ? 'block' : 'none';
         });
     }
-    
+
     searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', function(e) {
+    searchInput.addEventListener('keyup', function (e) {
         if (e.key === 'Enter') performSearch();
     });
 }

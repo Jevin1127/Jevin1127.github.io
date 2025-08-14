@@ -63,6 +63,8 @@ function updateAllTransposableElements() {
 }
 
 
+// songs.js - Modificación específica para rutas de slash chords
+// songs.js - Versión corregida manteniendo la funcionalidad original pero mejorando slash chords
 function getChordImagePath(chord, instrument) {
     const instrumentMap = {
         'guitarra': 'guitar',
@@ -70,7 +72,33 @@ function getChordImagePath(chord, instrument) {
         'piano': 'piano'
     };
     const instrumentKey = instrumentMap[instrument.toLowerCase()] || instrument.toLowerCase();
-    
+
+    // 1. Primero verificar si tenemos una imagen definida para este acorde
+    if (window.chordImages && window.chordImages[instrumentKey] && window.chordImages[instrumentKey][chord]) {
+        return window.chordImages[instrumentKey][chord].main;
+    }
+
+    // 2. Manejo específico para slash chords (ej: D/C#, A/C, D/F#)
+    if (chord.includes('/')) {
+        const slashChordName = chord
+            .replace('#', 'sos')  // Transforma C# a Csos
+            .replace('b', 'bem') // Transforma Bb a Bbem
+            .replace('/', '')    // Elimina la barra
+            .toLowerCase();      // Todo a minúsculas
+
+        // Intentar con .png primero
+        const slashPath = `../../assets/img/${instrumentKey}/slash/${slashChordName}.png`;
+        
+        // Verificar si existe esta imagen en el objeto chordImages
+        if (window.chordImages && window.chordImages[instrumentKey] && window.chordImages[instrumentKey][chord]) {
+            return window.chordImages[instrumentKey][chord].main;
+        }
+        
+        // Si no existe en chordImages, usar la ruta generada
+        return slashPath;
+    }
+
+    // 3. Comportamiento original para acordes regulares (que ya te funcionaba)
     const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg'];
     const rootMatch = chord.match(/^[A-G][#b]?/);
     const root = rootMatch ? rootMatch[0] : 'C';
@@ -99,14 +127,16 @@ function getChordImagePath(chord, instrument) {
         `${root.toLowerCase()}`
     ];
     
-    const allPossiblePaths = [];
-    possibleFileNames.forEach(name => {
-        imageExtensions.forEach(ext => {
-            allPossiblePaths.push(`${basePath}${instrumentKey}/${chordType}/${name}${ext}`);
-        });
-    });
+    // Devolver la primera combinación posible
+    for (const name of possibleFileNames) {
+        for (const ext of imageExtensions) {
+            const path = `${basePath}${instrumentKey}/${chordType}/${name}${ext}`;
+            return path;
+        }
+    }
     
-    return allPossiblePaths[0];
+    // Fallback final
+    return `../../assets/img/${instrumentKey}/default-${instrumentKey}.png`;
 }
 // Función auxiliar para determinar el tipo de acorde
 function getChordType(chord) {

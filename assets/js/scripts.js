@@ -19,6 +19,10 @@ const chordImages = {
             main: 'assets/img/guitar/mayores/d-mayor.png',
             fallback: 'assets/img/guitar/default-guitar.png'
         },
+        'D/C#': {
+            main: 'assets/img/guitar/slash/dcsos.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
         'D#': {
             main: 'assets/img/guitar/mayores/dsosmayor.png',
             fallback: 'assets/img/guitar/default-guitar.png'
@@ -37,6 +41,10 @@ const chordImages = {
         },
         'G': {
             main: 'assets/img/guitar/mayores/g-mayor.png',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
+        'Gmaj7': {
+            main: 'assets/img/guitar/mayores7/g-mayor7.webp',
             fallback: 'assets/img/guitar/default-guitar.png'
         },
         'G#': {
@@ -69,6 +77,10 @@ const chordImages = {
             main: 'assets/img/piano/mayores/d-mayor.png',
             ffallback: 'assets/img/piano/default-piano.png'
         },
+        'D/C#': {
+            main: 'assets/img/piano/slash/dcsos.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
         'D#': {
             main: 'assets/img/piano/mayores/dsosmayor.png',
             fallback: 'assets/img/piano/default-piano.png'
@@ -89,12 +101,24 @@ const chordImages = {
             main: 'assets/img/piano/mayores/g-mayor.png',
             fallback: 'assets/img/piano/default-piano.png'
         },
+        'Gmaj7': {
+            main: 'assets/img/piano/mayores7/g-mayor7.webp',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
         'G#': {
             main: 'assets/img/piano/mayores/gsosmayor.png',
             fallback: 'assets/img/piano/default-piano.png'
         },
         'A': {
             main: 'assets/img/piano/mayores/a-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'Amin7': {
+            main: 'assets/img/piano/menores7/a-menor7.webp',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'A9/F#': {
+            main: 'assets/img/piano/slash/a9fsos.jpg',
             fallback: 'assets/img/piano/default-piano.png'
         },
         'A#': {
@@ -177,6 +201,10 @@ const chordImages = {
         },
         'G': {
             main: 'assets/img/bass/mayores/g-mayor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'Gmaj7': {
+            main: 'assets/img/bass/mayores7/g-mayor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
         'Gm': {
