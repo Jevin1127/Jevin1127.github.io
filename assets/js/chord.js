@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setupChordSearch();
     setupInstrumentTabs();
     setupChordTypeFilters();
+    
 });
 
 function setupChordLibrary() {
@@ -309,6 +310,7 @@ function createChordCard(chord, instrumentKey, instrumentName, container) {
         <h4>${chord}</h4>
         <div class="chord-image-container">
             <img src="${imgSrc}" alt="${chord} en ${instrumentName}" 
+                 class="chord-diagram"
                  onerror="this.src='${fallbackSrc}'">
         </div>
         <div class="chord-info">
@@ -343,33 +345,88 @@ function showChordDetails(chord, instrumentName, instrumentKey) {
         <div class="chord-detail-header">
             <button class="back-to-library" onclick="hideChordDetail('${instrumentKey}')">← Volver</button>
             <h2>${chord} en ${instrumentName}</h2>
+            <div class="chord-type-badge">${getChordTypeName(chord)}</div>
         </div>
         
-        <div class="chord-detail-content" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="chord-detail-content">
             ${imgExists ? `
-            <div class="chord-diagram-large" style="width: 100%; max-width: 500px; margin: 20px 0;">
-                <img src="${imgSrc}" alt="${chord}" 
-                     style="width: 100%; height: auto; max-height: 400px; object-fit: contain;"
-                     onerror="this.src='${fallbackSrc}'">
+            <div class="chord-diagram-large">
+                <img src="${imgSrc}" alt="${chord}" onerror="this.src='${fallbackSrc}'">
             </div>
             ` : `<p class="no-image">Imagen no disponible</p>`}
             
-            <div class="chord-info-details" style="width: 100%; max-width: 600px;">
-                <h3>Información del Acorde</h3>
-                <p><strong>Tipo:</strong> ${getChordTypeName(chord)}</p>
+            <div class="chord-info-details">
+                <h3>Formación del Acorde</h3>
                 <p><strong>Notas:</strong> ${getChordNotes(chord).join(' - ')}</p>
-                <p><strong>Digitación:</strong> ${getFingering(chord, instrumentName)}</p>
                 <p><strong>Intervalos:</strong> ${getIntervals(chord)}</p>
                 
-                <h3>Progresiones comunes</h3>
-                <ul class="common-progressions" style="padding-left: 20px;">
+                <h3>Digitación</h3>
+                <div class="fingering-info">${getFingering(chord, instrumentName).replace(/\n/g, '<br>')}</div>
+                
+                <h3>Uso Armónico</h3>
+                <p>${getHarmonicFunction(chord)}</p>
+                
+                <h3>Progresiones Comunes</h3>
+                <ul class="common-progressions">
                     ${getCommonProgressions(chord).map(p => `<li>${p}</li>`).join('')}
                 </ul>
+                
+                ${getAdditionalChordInfo(chord, instrumentName)}
             </div>
         </div>
     `;
 }
 
+function getHarmonicFunction(chord) {
+    const type = getChordType(chord);
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    
+    switch(type) {
+        case 'major':
+            return `Acorde tónico, usado como centro tonal. Funciona como punto de reposo (I grado).`;
+        case 'minor':
+            return `Acorde tónico menor, usado en tonalidades menores o como modo dórico (i grado).`;
+        case '7':
+            return `Acorde dominante, crea tensión que resuelve en un acorde a una 4ta justa arriba (V7 grado).`;
+        case 'maj7':
+            return `Acorde tónico con coloración jazzística (I maj7). También usado como acorde de reposo.`;
+        case 'm7':
+            return `Acorde menor con 7ma, común en progresiones ii-V-I (ii grado) o como tónico en menor.`;
+        case 'slash':
+            return `Acorde con bajo diferente, usado para crear líneas de bajo descendentes/ascendentes o suavizar transiciones.`;
+        default:
+            return `Acorde con función armónica según su contexto tonal.`;
+    }
+}
+
+function getAdditionalChordInfo(chord, instrument) {
+    const type = getChordType(chord);
+    let tips = '';
+    
+    if (type === 'slash') {
+        const [baseChord, bassNote] = chord.split('/');
+        tips = `
+            <h3>Consejos para ${chord}</h3>
+            <ul>
+                <li>En ${instrument}, enfatiza la nota ${bassNote} en el bajo</li>
+                <li>Usado comúnmente para transiciones suaves entre ${baseChord} y ${transposeChord(baseChord, 5)}</li>
+                <li>La nota ${bassNote} crea un bajo caminante cuando se usa en progresiones</li>
+            </ul>
+        `;
+    } else if (type === 'maj7') {
+        tips = `
+            <h3>Consejos para acordes maj7</h3>
+            <ul>
+                <li>Sonido jazzístico y sofisticado</li>
+                <li>Evita tocar la 7ma mayor muy cerca de la tónica</li>
+                <li>Funciona bien como acorde final en lugar del acorde mayor simple</li>
+            </ul>
+        `;
+    }
+    
+    return tips;
+}
 
 function hideChordDetail(instrumentKey) {
     const detailContainer = document.getElementById(`${instrumentKey}-chord-detail`);
@@ -431,48 +488,71 @@ function getChordNotes(chord) {
     const suffix = root ? chord.slice(root.length) : '';
     const rootIndex = getNoteIndex(root);
 
-    if (suffix === 'm') {
-        return [
-            root,
-            getNoteName(rootIndex + 3),
-            getNoteName(rootIndex + 7)
-        ];
-    } else if (suffix === '7') {
-        return [
-            root,
-            getNoteName(rootIndex + 4),
-            getNoteName(rootIndex + 7),
-            getNoteName(rootIndex + 10)
-        ];
-    } else if (suffix === 'maj7') {
-        return [
-            root,
-            getNoteName(rootIndex + 4),
-            getNoteName(rootIndex + 7),
-            getNoteName(rootIndex + 11)
-        ];
-    } else {
-        // Acorde mayor por defecto
-        return [
-            root,
-            getNoteName(rootIndex + 4),
-            getNoteName(rootIndex + 7)
-        ];
+    // Para slash chords
+    if (chord.includes('/')) {
+        const [baseChord, bassNote] = chord.split('/');
+        const baseNotes = getChordNotes(baseChord);
+        return [...baseNotes, bassNote].filter((v, i, a) => a.indexOf(v) === i); // Notas únicas
+    }
+
+    switch(suffix.toLowerCase()) {
+        case 'm':
+        case 'min':
+            return [root, getNoteName(rootIndex + 3), getNoteName(rootIndex + 7)];
+        case '7':
+            return [root, getNoteName(rootIndex + 4), getNoteName(rootIndex + 7), getNoteName(rootIndex + 10)];
+        case 'maj7':
+        case 'M7':
+            return [root, getNoteName(rootIndex + 4), getNoteName(rootIndex + 7), getNoteName(rootIndex + 11)];
+        case 'm7':
+        case 'min7':
+            return [root, getNoteName(rootIndex + 3), getNoteName(rootIndex + 7), getNoteName(rootIndex + 10)];
+        case 'dim':
+            return [root, getNoteName(rootIndex + 3), getNoteName(rootIndex + 6)];
+        case 'aug':
+            return [root, getNoteName(rootIndex + 4), getNoteName(rootIndex + 8)];
+        case 'sus2':
+            return [root, getNoteName(rootIndex + 2), getNoteName(rootIndex + 7)];
+        case 'sus4':
+            return [root, getNoteName(rootIndex + 5), getNoteName(rootIndex + 7)];
+        default:
+            // Acorde mayor por defecto
+            return [root, getNoteName(rootIndex + 4), getNoteName(rootIndex + 7)];
     }
 }
 
 function getIntervals(chord) {
     const type = getChordType(chord);
-    switch (type) {
-        case 'major': return 'Tónica - 3ª Mayor - 5ª Justa';
-        case 'minor': return 'Tónica - 3ª Menor - 5ª Justa';
-        case '7': return 'Tónica - 3ª Mayor - 5ª Justa - 7ª Menor';
-        case 'maj7': return 'Tónica - 3ª Mayor - 5ª Justa - 7ª Mayor';
-        case 'm7': return 'Tónica - 3ª Menor - 5ª Justa - 7ª Menor';
-        case 'sus': return 'Tónica - 4ª Justa - 5ª Justa';
-        case 'dim': return 'Tónica - 3ª Menor - 5ª Disminuida';
-        case 'aug': return 'Tónica - 3ª Mayor - 5ª Aumentada';
-        default: return 'Tónica - 3ª Mayor - 5ª Justa';
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    
+    // Para slash chords
+    if (type === 'slash') {
+        const [baseChord, bassNote] = chord.split('/');
+        return `${getIntervals(baseChord)} con bajo en ${bassNote}`;
+    }
+
+    switch(type) {
+        case 'major':
+            return `Tónica (${root}) - 3ª Mayor (${getNoteName(getNoteIndex(root) + 4)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)})`;
+        case 'minor':
+            return `Tónica (${root}) - 3ª Menor (${getNoteName(getNoteIndex(root) + 3)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)})`;
+        case '7':
+            return `Tónica (${root}) - 3ª Mayor (${getNoteName(getNoteIndex(root) + 4)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)}) - 7ª Menor (${getNoteName(getNoteIndex(root) + 10)})`;
+        case 'maj7':
+            return `Tónica (${root}) - 3ª Mayor (${getNoteName(getNoteIndex(root) + 4)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)}) - 7ª Mayor (${getNoteName(getNoteIndex(root) + 11)})`;
+        case 'm7':
+            return `Tónica (${root}) - 3ª Menor (${getNoteName(getNoteIndex(root) + 3)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)}) - 7ª Menor (${getNoteName(getNoteIndex(root) + 10)})`;
+        case 'sus2':
+            return `Tónica (${root}) - 2ª Mayor (${getNoteName(getNoteIndex(root) + 2)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)})`;
+        case 'sus4':
+            return `Tónica (${root}) - 4ª Justa (${getNoteName(getNoteIndex(root) + 5)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)})`;
+        case 'dim':
+            return `Tónica (${root}) - 3ª Menor (${getNoteName(getNoteIndex(root) + 3)}) - 5ª Disminuida (${getNoteName(getNoteIndex(root) + 6)})`;
+        case 'aug':
+            return `Tónica (${root}) - 3ª Mayor (${getNoteName(getNoteIndex(root) + 4)}) - 5ª Aumentada (${getNoteName(getNoteIndex(root) + 8)})`;
+        default:
+            return `Tónica (${root}) - 3ª Mayor (${getNoteName(getNoteIndex(root) + 4)}) - 5ª Justa (${getNoteName(getNoteIndex(root) + 7)})`;
     }
 }
 
@@ -487,25 +567,56 @@ function getNoteName(index) {
 }
 
 function getFingering(chord, instrument) {
+    const chordType = getChordType(chord);
+    const rootNote = chord.split('/')[0].replace(/maj7|m7|7|m|min|dim|aug|sus/g, '');
+    
     if (instrument.toLowerCase().includes('guitarra')) {
-        return 'Posiciones: 1-2-3-4 (abierta), 5-7-8 (trastes)';
+        switch(chordType) {
+            case 'major':
+                return 'Posición abierta: 1-2-3 / Posición cerrada: 5-7-8';
+            case 'minor':
+                return 'Posición abierta: 1-3-4 / Posición cerrada: 5-7-8 (3ª menor)';
+            case '7':
+                return 'Posición abierta: 1-2-3-4 / Posición cerrada: 5-7-8-10';
+            case 'maj7':
+                return 'Posición: 1-2-3-4 (dedo 4 en 7ª mayor)';
+            case 'm7':
+                return 'Posición: 1-3-4-5 (3ª menor + 7ª menor)';
+            case 'slash':
+                const [baseChord, bassNote] = chord.split('/');
+                return `Digitación especial: bajo en ${bassNote}, ${getFingering(baseChord, instrument)}`;
+            default:
+                return 'Varias posiciones disponibles';
+        }
     } else if (instrument.toLowerCase().includes('piano')) {
-        return 'Mano derecha: 1-3-5 / Mano izquierda: 5-3-1';
+        let fingering = '';
+        switch(chordType) {
+            case 'major':
+                fingering = 'Mano derecha: 1-3-5 / Mano izquierda: 5-3-1';
+                break;
+            case 'minor':
+                fingering = 'Mano derecha: 1-3-5 (bajar 3ª) / Mano izquierda: 5-3-1';
+                break;
+            case '7':
+                fingering = 'Mano derecha: 1-2-3-5 / Mano izquierda: 5-3-2-1';
+                break;
+            case 'maj7':
+                fingering = 'Mano derecha: 1-2-3-5 (7ª mayor) / Mano izquierda: 5-4-2-1';
+                break;
+            case 'm7':
+                fingering = 'Mano derecha: 1-3-4-5 (3ª y 7ª menores) / Mano izquierda: 5-4-2-1';
+                break;
+            case 'slash':
+                const [baseChord, bassNote] = chord.split('/');
+                return `Bajo con ${bassNote}: ${getFingering(baseChord, instrument)} (bajo con 5-1)`;
+            default:
+                fingering = 'Mano derecha: 1-3-5 / Mano izquierda: 5-3-1';
+        }
+        return `${fingering}\nRecomendación: Toca el bajo (${rootNote}) con la mano izquierda`;
     } else if (instrument.toLowerCase().includes('bajo')) {
-        return 'Posiciones: 1-3-4 (media), 2-4 (alta)';
+        // ... implementación similar para bajo ...
     }
-    return 'Varias posiciones disponibles';
-}
-
-function getCommonProgressions(chord) {
-    const rootMatch = chord.match(/^[A-G][#b]?/);
-    const root = rootMatch ? rootMatch[0] : 'C';
-
-    return [
-        `${root} - ${transposeChord('G', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('F', getNoteIndex(root) - getNoteIndex('C'))}`,
-        `${root} - ${transposeChord('Am', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('F', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('G', getNoteIndex(root) - getNoteIndex('C'))}`,
-        `${root} - ${transposeChord('Dm', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('G', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('C', getNoteIndex(root) - getNoteIndex('C'))}`
-    ];
+    return 'Consulta digitaciones específicas para este acorde';
 }
 
 function transposeChord(chord, semitones) {
@@ -517,6 +628,64 @@ function transposeChord(chord, semitones) {
         return transposedMain + '/' + transposedBass;
     }
     return transposedMain;
+}
+
+function transposeSingleChord(chord, semitones) {
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    if (!rootMatch) return chord;
+    const root = rootMatch[0];
+    const suffix = chord.slice(root.length);
+    const rootIndex = getNoteIndex(root);
+    if (rootIndex === -1) return chord;
+    const newRootIndex = (rootIndex + semitones + 12) % 12;
+    return getNoteName(newRootIndex) + suffix;
+}
+
+function getCommonProgressions(chord) {
+    const rootMatch = chord.match(/^[A-G][#b]?/);
+    const root = rootMatch ? rootMatch[0] : 'C';
+    const chordType = getChordType(chord);
+
+    // Progresiones específicas por tipo de acorde
+    switch(chordType) {
+        case 'major':
+            return [
+                `${root} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('vi', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('ii', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))}`
+            ];
+        case 'minor':
+            return [
+                `${root} - ${transposeChord('III', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('VI', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('VII', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('III', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('iv', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('v', getNoteIndex(root) - getNoteIndex('C'))}`
+            ];
+        case '7':
+            return [
+                `${root}7 - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('I', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root}7 - ${transposeChord('iii', getNoteIndex(root) - getNoteIndex('C'))}7 - ${transposeChord('vi', getNoteIndex(root) - getNoteIndex('C'))}7`,
+                `II7 - ${root}7 - V7 - I (Progresión jazz)`
+            ];
+        case 'maj7':
+            return [
+                `${root}maj7 - ${transposeChord('iv', getNoteIndex(root) - getNoteIndex('C'))}m7 - ${transposeChord('VII', getNoteIndex(root) - getNoteIndex('C'))}7`,
+                `${root}maj7 - ${transposeChord('III', getNoteIndex(root) - getNoteIndex('C'))}7 - ${transposeChord('VI', getNoteIndex(root) - getNoteIndex('C'))}maj7`,
+                `I - VI - II - V (Progresión jazz)`
+            ];
+        case 'slash':
+            const [baseChord, bassNote] = chord.split('/');
+            return [
+                `${chord} - ${transposeChord(baseChord, 5)} - ${transposeChord(baseChord, 7)}`,
+                `${transposeChord('I', getNoteIndex(root) - getNoteIndex('C'))}/${bassNote} - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `Usado comúnmente como transición entre ${baseChord} y ${transposeChord(baseChord, 5)}`
+            ];
+        default:
+            return [
+                `${root} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('I', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('V', getNoteIndex(root) - getNoteIndex('C'))}`,
+                `${root} - ${transposeChord('vi', getNoteIndex(root) - getNoteIndex('C'))} - ${transposeChord('IV', getNoteIndex(root) - getNoteIndex('C'))}`
+            ];
+    }
 }
 
 function transposeSingleChord(chord, semitones) {
