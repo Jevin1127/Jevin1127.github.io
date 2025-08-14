@@ -504,31 +504,50 @@ function detectBaseKey() {
 
 /* ------------------ Tone.js setup ------------------ */
 function setupPitchShift() {
-  if (!window.Tone) { console.warn('Tone.js no está cargado'); return; }
+    if (!window.Tone) {
+        console.warn('Tone.js no está cargado');
+        return;
+    }
 
-  audioEl = document.getElementById('song-audio');
-  if (!audioEl) { console.warn('No encontré #song-audio'); return; }
-  if (mediaSrc) return; // ya inicializado
+    if (mediaSrc) {
+        console.log("PitchShift ya inicializado");
+        return; // evita crear MediaElementSource dos veces
+    }
 
-  BASE_KEY = detectBaseKey();
+    audioEl = document.getElementById('song-audio');
+    if (!audioEl) {
+        console.warn('No encontré #song-audio');
+        return;
+    }
 
-  const ctx = Tone.getContext().rawContext;
-  mediaSrc = ctx.createMediaElementSource(audioEl);
+    BASE_KEY = detectBaseKey();
 
-  // Pitch shifter (mejor calidad con windowSize > 0.1)
-  tonePitch = new Tone.PitchShift({
-    pitch: 0,
-    windowSize: 0.15,
-    delayTime: 0,
-    feedback: 0
-  }).toDestination();
+    const ctx = Tone.getContext().rawContext;
+    mediaSrc = ctx.createMediaElementSource(audioEl);
 
-  // Conectar <audio> -> pitch -> salida
-  Tone.connect(mediaSrc, tonePitch);
+    tonePitch = new Tone.PitchShift({
+        pitch: 0,         // tono inicial
+        windowSize: 0.15, // mejor calidad
+        delayTime: 0,
+        feedback: 0
+    }).toDestination();
 
-  // Desbloquear audio en primer gesto del usuario
-  document.addEventListener('click', () => { Tone.start(); }, { once: true });
+    Tone.connect(mediaSrc, tonePitch);
+
+    // Asegurar que Tone.js inicia con cualquier interacción
+    const startTone = () => {
+        Tone.start().then(() => {
+            console.log("Tone.js iniciado (AudioContext activo)");
+        }).catch(err => console.error("Error iniciando Tone.js", err));
+    };
+
+    // Escuchar clic en cualquier parte de la página o botones
+    document.addEventListener('click', startTone, { once: true });
+    document.addEventListener('touchstart', startTone, { once: true });
+
+    console.log("PitchShift configurado correctamente");
 }
+
 
 /* ----- Cambiar pitch exacto (absoluto) ----- */
 window.setPitchShift = function(semitones) {
