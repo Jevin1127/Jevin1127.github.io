@@ -479,6 +479,11 @@ function ensureToneStarted() {
 
 window.chordImages = window.chordImages || {}; // evita doble declaración
 
+// Variables adicionales necesarias
+let audioContext = null;
+let audioBuffer = null;
+let offlineContext = null;
+
 // --- AUDIO / Tone.js ---
 let tonePitch = null;
 let mediaSrc = null;
