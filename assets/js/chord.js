@@ -20,12 +20,20 @@ const chordImages = {
             main: '../assets/img/guitar/slash/dcsos.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
+        'D/F#': {
+            main: '../assets/img/guitar/slash/dfsos.jpg',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
         'D#': {
             main: '../assets/img/guitar/mayores/dsos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'E': {
             main: '../assets/img/guitar/mayores/e-mayor.png',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
+        'Em': {
+            main: '../assets/img/guitar/menores/e-menor.webp',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'F': {
@@ -56,12 +64,28 @@ const chordImages = {
             main: '../assets/img/guitar/mayores/a-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
+        'A9/F#': {
+            main: '../assets/img/piano/slash/a9fsos.jpg',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'A9': {
+            main: '../assets/img/piano/mayores9/a-mayor9.webp',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
         'A#': {
             main: '../assets/img/guitar/mayores/asos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'B': {
             main: '../assets/img/guitar/mayores/b-mayor.png',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
+        'Bm': {
+            main: '../assets/img/guitar/menores/b-menor.webp',
+            fallback: '../assets/img/guitar/default-guitar.png'
+        },
+        'Bm7': {
+            main: '../assets/img/guitar/menores7/b-menor7.webp',
             fallback: '../assets/img/guitar/default-guitar.png'
         }
     },
@@ -120,6 +144,10 @@ const chordImages = {
         },
         'A': {
             main: '../assets/img/piano/mayores/a-mayor.png',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'A9': {
+            main: '../assets/img/piano/mayores9/a-mayor9.webp',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'A9/F#': {

@@ -107,13 +107,14 @@ function getChordImagePath(chord, instrument) {
         return slashPath;
     }
 
-    // 3. Comportamiento original para acordes regulares (que ya te funcionaba)
+    // 3. Comportamiento mejorado para acordes extendidos (m7, 9, etc.)
     const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg'];
     const rootMatch = chord.match(/^[A-G][#b]?/);
     const root = rootMatch ? rootMatch[0] : 'C';
     const suffix = chord.slice(root.length);
     const normalizedRoot = root.replace('#', 'sos').replace('b', 'bem').toLowerCase();
     
+    // Mapeo mejorado de tipos de acordes
     let chordType = 'mayores';
     let chordSuffix = '-mayor';
     
@@ -123,16 +124,44 @@ function getChordImagePath(chord, instrument) {
     } else if (suffix === '7') {
         chordType = 'dominantes';
         chordSuffix = '7';
-    } else if (suffix === 'maj7') {
+    } else if (suffix === 'maj7' || suffix === 'M7') {
         chordType = 'mayores7';
         chordSuffix = '-mayor7';
+    } else if (suffix === 'm7') {
+        chordType = 'menores7';
+        chordSuffix = '-menor7';
+    } else if (suffix === '9') {
+        chordType = 'mayores9';
+        chordSuffix = '-mayor9';
+    } else if (suffix === 'm9') {
+        chordType = 'menores9';
+        chordSuffix = '-menor9';
+    } else if (suffix === 'dim') {
+        chordType = 'disminuidos';
+        chordSuffix = '-disminuido';
+    } else if (suffix === 'aug') {
+        chordType = 'aumentados';
+        chordSuffix = '-aumentado';
+    } else if (suffix === 'sus2') {
+        chordType = 'suspendidos2';
+        chordSuffix = '-sus2';
+    } else if (suffix === 'sus4') {
+        chordType = 'suspendidos4';
+        chordSuffix = '-sus4';
     }
     
     const basePath = '../../assets/img/';
+    
+    // Orden de búsqueda mejorado:
+    // 1. Primero buscar con el sufijo completo (ej: a-mayor9)
+    // 2. Luego buscar solo el tipo (ej: a9)
+    // 3. Finalmente buscar solo la raíz (ej: a)
     const possibleFileNames = [
         `${normalizedRoot}${chordSuffix}`,
+        `${normalizedRoot}${suffix.toLowerCase()}`,
         `${normalizedRoot}`,
         `${root.toLowerCase()}${chordSuffix}`,
+        `${root.toLowerCase()}${suffix.toLowerCase()}`,
         `${root.toLowerCase()}`
     ];
     
@@ -140,6 +169,12 @@ function getChordImagePath(chord, instrument) {
     for (const name of possibleFileNames) {
         for (const ext of imageExtensions) {
             const path = `${basePath}${instrumentKey}/${chordType}/${name}${ext}`;
+            // Verificar si esta ruta existe en chordImages
+            const chordKey = `${root}${suffix}`;
+            if (window.chordImages && window.chordImages[instrumentKey] && window.chordImages[instrumentKey][chordKey]) {
+                return window.chordImages[instrumentKey][chordKey].main;
+            }
+            // Si no está en chordImages, usar la ruta generada
             return path;
         }
     }

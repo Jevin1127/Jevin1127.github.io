@@ -59,6 +59,10 @@ const chordImages = {
             main: 'assets/img/guitar/mayores/a-mayor.png',
             fallback: 'assets/img/guitar/default-guitar.png'
         },
+        'A9': {
+            main: 'assets/img/guitar/mayores9/a-mayor9.webp',
+            fallback: 'assets/img/guitar/default-guitar.png'
+        },
         'A#': {
             main: 'assets/img/guitar/mayores/asos-mayor.png',
             fallback: 'assets/img/guitar/default-guitar.png'
