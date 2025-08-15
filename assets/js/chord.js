@@ -9,7 +9,7 @@ const chordImages = {
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'C#': {
-            main: '../assets/img/guitar/mayores/csosmayor.png',
+            main: '../assets/img/guitar/mayores/csos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'D': {
@@ -21,7 +21,7 @@ const chordImages = {
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'D#': {
-            main: '../assets/img/guitar/mayores/dsosmayor.png',
+            main: '../assets/img/guitar/mayores/dsos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'E': {
@@ -33,7 +33,7 @@ const chordImages = {
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'F#': {
-            main: '../assets/img/guitar/mayores/fsosmayor.png',
+            main: '../assets/img/guitar/mayores/fsos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'G': {
@@ -45,15 +45,19 @@ const chordImages = {
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'G#': {
-            main: '../assets/img/guitar/mayores/gsosmayor.jpg',
+            main: '../assets/img/guitar/mayores/gsos-mayor.jpg',
             fallback: '../assets/img/guitar/default-guitar.png'
+        },
+        'G#maj7': {
+            main: '../assets/img/guitar/mayores7/gsos-mayor7.webp',
+            fallback: '../assets/img/guitar/default-piano.png'
         },
         'A': {
             main: '../assets/img/guitar/mayores/a-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'A#': {
-            main: '../assets/img/guitar/mayores/asosmayor.png',
+            main: '../assets/img/guitar/mayores/asos-mayor.png',
             fallback: '../assets/img/guitar/default-guitar.png'
         },
         'B': {
@@ -67,7 +71,7 @@ const chordImages = {
             fallback: '../assets/img/piano/default-piano.png'
         },
         'C#': {
-            main: '../assets/img/piano/mayores/csosmayor.png',
+            main: '../assets/img/piano/mayores/csos-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'D': {
@@ -79,7 +83,7 @@ const chordImages = {
             fallback: '../assets/img/piano/default-piano.png'
         },
         'D#': {
-            main: '../assets/img/piano/mayores/dsosmayor.png',
+            main: '../assets/img/piano/mayores/dsos-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'E': {
@@ -91,7 +95,7 @@ const chordImages = {
             fallback: '../assets/img/piano/default-piano.png'
         },
         'F#': {
-            main: '../assets/img/piano/mayores/fsosmayor.png',
+            main: '../assets/img/piano/mayores/fsos-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'G': {
@@ -107,7 +111,11 @@ const chordImages = {
             fallback: '../assets/img/piano/default-piano.png'
         },
         'G#': {
-            main: '../assets/img/piano/mayores/gsosmayor.png',
+            main: '../assets/img/piano/mayores/gsos-mayor.png',
+            fallback: '../assets/img/piano/default-piano.png'
+        },
+        'G#maj7': {
+            main: '../assets/img/piano/mayores7/gsos-mayor7.webp',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'A': {
@@ -118,12 +126,12 @@ const chordImages = {
             main: '../assets/img/piano/slash/a9fsos.jpg',
             fallback: '../assets/img/piano/default-piano.png'
         },
-        'Amin7': {
+        'Aminor7': {
             main: '../assets/img/piano/menores7/a-menor7.webp',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'A#': {
-            main: '../assets/img/piano/mayores/asosmayor.png',
+            main: '../assets/img/piano/mayores/asos-mayor.png',
             fallback: '../assets/img/piano/default-piano.png'
         },
         'B': {
@@ -153,7 +161,7 @@ const chordImages = {
             fallback: '../assets/img/bass/default-bass.png'
         },
         'C#': {
-            main: '../assets/img/bass/mayores/csosmayor.webp',
+            main: '../assets/img/bass/mayores/csos-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
         },
         'C#m': {
@@ -169,7 +177,7 @@ const chordImages = {
             fallback: '../assets/img/bass/default-bass.png'
         },
         'D#': {
-            main: '../assets/img/bass/mayores/dsosmayor.webp',
+            main: '../assets/img/bass/mayores/dsos-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
         },
         'D#m': {
@@ -193,7 +201,7 @@ const chordImages = {
             fallback: '../assets/img/bass/default-bass.png'
         },
         'F#': {
-            main: '../assets/img/bass/mayores/fsosmayor.webp',
+            main: '../assets/img/bass/mayores/fsos-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
         },
         'F#m': {
@@ -213,8 +221,12 @@ const chordImages = {
             fallback: '../assets/img/bass/default-bass.png'
         },
         'G#': {
-            main: '../assets/img/bass/mayores/gsosmayor.webp',
+            main: '../assets/img/bass/mayores/gsos-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
+        },
+        'G#maj7': {
+            main: '../assets/img/bass/mayores7/gsos-mayor7.webp',
+            fallback: '../assets/img/bass/default-piano.png'
         },
         'G#m': {
             main: '../assets/img/bass/menores/gsosmenor.webp',
@@ -229,7 +241,7 @@ const chordImages = {
             fallback: '../assets/img/bass/default-bass.png'
         },
         'A#': {
-            main: '../assets/img/bass/mayores/asosmayor.webp',
+            main: '../assets/img/bass/mayores/asos-mayor.webp',
             fallback: '../assets/img/bass/default-bass.png'
         },
         'A#m': {
@@ -449,15 +461,17 @@ function getChordType(chord) {
         return 'slash';
     }
 
-    // 2. Luego detectamos otros tipos específicos
-    if (chord.includes('maj7') || chord.includes('M7')) return 'maj7';
-    if (chord.includes('m7') || chord.includes('min7')) return 'm7';
-    if (chord.includes('7')) return '7';
-    if (chord.includes('m') || chord.includes('min')) return 'minor';
-    if (chord.includes('sus')) return 'sus';
-    if (chord.includes('dim')) return 'dim';
-    if (chord.includes('aug')) return 'aug';
-    if (chord.match(/(9|11|13)/)) return 'extended';
+    // 2. Luego detectamos otros tipos específicos con mejor prioridad
+    if (/maj7|M7/.test(chord)) return 'maj7';
+    if (/m7|min7/.test(chord)) return 'm7';
+    if (/7/.test(chord)) return '7';
+    if (/m|min/.test(chord)) return 'minor';
+    if (/sus/.test(chord)) return 'sus';
+    if (/dim/.test(chord)) return 'dim';
+    if (/aug/.test(chord)) return 'aug';
+    if (/(9|11|13)/.test(chord)) return 'extended';
+    
+    // Si no coincide con ninguno de los anteriores, es mayor
     return 'major';
 }
 

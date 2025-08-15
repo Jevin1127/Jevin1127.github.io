@@ -1699,3 +1699,197 @@ body, html {
     margin: 0;
 }
 
+/* Estilos mejorados para controles de instrumentos */
+.instrument-controls {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e3e7;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-header h4 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.selected-count {
+    background: #4a6fa5;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.instrument-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.instrument-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 2px solid #d1d7e0;
+    background: white;
+    color: #4a6fa5;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.instrument-btn .icon {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.instrument-btn:hover {
+    border-color: #4a6fa5;
+    background: #f0f4f8;
+}
+
+.instrument-btn.active {
+    background: #4a6fa5;
+    color: white;
+    border-color: #4a6fa5;
+}
+
+.instrument-btn.active .icon {
+    color: white;
+}
+
+.separator-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.process-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #4a6fa5, #28a745);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.process-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.process-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.process-btn .button-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.spinner {
+    margin-left: 10px;
+}
+
+.spinner-dots {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.file-input-container {
+    margin-left: auto;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background: #f0f4f8;
+    color: #4a6fa5;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.file-input-label:hover {
+    background: #e0e7f0;
+}
+
+.upload-icon {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+/* Estilos para la barra de progreso */
+#loading-indicator {
+    margin-top: 20px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #e0e3e7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a6fa5, #28a745);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #4a6fa5;
+    font-weight: 600;
+    min-width: 40px;
+}
+
+.status-message {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #7f8c8d;
+    text-align: center;
+}
