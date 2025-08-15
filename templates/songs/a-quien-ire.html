@@ -41,13 +41,114 @@
             <div class="transpose-controls">
 
                 <!-- Audio centrado -->
-                <div class="audio-container">
-                    <p><strong>Audio del canto:</strong></p>
-                    <audio id="song-audio" controls crossorigin="anonymous">
-                        <source src="https://archive.org/download/aquienire/aquienire.mp3" type="audio/mp3">
-                        Tu navegador no soporta el elemento de audio.
-                    </audio>
+                <div class="audio-wrapper">
+                    <div class="audio-container">
+                        <h3 class="audio-title">🎵 Audio del Canto 🎵</h3>
+                        <div class="audio-player">
+                            <audio id="song-audio" controls controlsList="nodownload" crossorigin="anonymous">
+                                <source src="https://archive.org/download/aquienire/aquienire.mp3" type="audio/mp3">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+                        </div>
+                        <p class="audio-note">Utiliza los controles superiores para cambiar el tono</p>
+                    </div>
                 </div>
+
+                <style>
+                    .audio-wrapper {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 2rem 0;
+                        padding: 0 1rem;
+                    }
+
+                    .audio-container {
+                        background: linear-gradient(145deg, #f0f6ff 0%, #e0ecff 100%);
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        width: 100%;
+                        max-width: 500px;
+                        box-shadow: 0 4px 20px rgba(0, 92, 175, 0.15);
+                        border: 1px solid #c8d8f0;
+                        text-align: center;
+                        transition: all 0.3s ease;
+                    }
+
+                    .audio-title {
+                        color: #005caf;
+                        margin: 0 0 1rem 0;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+                    }
+
+                    .audio-player {
+                        margin: 0 auto;
+                        width: 100%;
+                    }
+
+                    .audio-player audio {
+                        width: 100%;
+                        outline: none;
+                        min-height: 50px;
+                    }
+
+                    .audio-note {
+                        color: #4a6fa8;
+                        font-size: 0.85rem;
+                        margin: 1rem 0 0 0;
+                        font-style: italic;
+                    }
+
+                    /* Estilos para los controles del audio */
+                    audio::-webkit-media-controls-panel {
+                        background: linear-gradient(to bottom, #f8fbff, #e8f1ff);
+                        border-radius: 8px;
+                        border: 1px solid #c0d0e8;
+                    }
+
+                    audio::-webkit-media-controls-play-button,
+                    audio::-webkit-media-controls-mute-button {
+                        background-color: #9db2c4;
+                        border-radius: 50%;
+                        color: white;
+                    }
+
+                    audio::-webkit-media-controls-play-button:hover,
+                    audio::-webkit-media-controls-mute-button:hover {
+                        background-color: #b4c0cc;
+                    }
+
+                    audio::-webkit-media-controls-current-time-display,
+                    audio::-webkit-media-controls-time-remaining-display {
+                        color: #005caf;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                        font-size: 0.8rem;
+                    }
+
+                    audio::-webkit-media-controls-timeline {
+                        background-color: #d0e0f0;
+                        border-radius: 4px;
+                        margin: 0 10px;
+                    }
+
+                    audio::-webkit-media-controls-volume-slider {
+                        background-color: #d0e0f0;
+                        border-radius: 4px;
+                    }
+
+                    /* Efectos interactivos */
+                    .audio-container:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 6px 25px rgba(0, 92, 175, 0.25);
+                        background: linear-gradient(145deg, #e8f1ff 0%, #d8e6ff 100%);
+                    }
+
+                    .audio-container:focus-within {
+                        box-shadow: 0 0 0 3px rgba(0, 92, 175, 0.3);
+                    }
+                </style>
             </div>
 
             <!-- Librería Tone.js antes de songs.js -->
