@@ -89,12 +89,20 @@ const chordImages = {
             main: 'assets/img/piano/slash/dcsos.png',
             fallback: 'assets/img/piano/default-piano.png'
         },
+        'D/F#': {
+            main: 'assets/img/piano/slash/dfsos.jpg',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
         'D#': {
             main: 'assets/img/piano/mayores/dsos-mayor.png',
             fallback: 'assets/img/piano/default-piano.png'
         },
         'E': {
             main: 'assets/img/piano/mayores/e-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'Em': {
+            main: 'assets/img/piano/menores/e-menor.webp',
             fallback: 'assets/img/piano/default-piano.png'
         },
         'F': {
@@ -133,12 +141,20 @@ const chordImages = {
             main: 'assets/img/piano/slash/a9fsos.jpg',
             fallback: 'assets/img/piano/default-piano.png'
         },
+        'A9': {
+            main: 'assets/img/piano/mayores9/a-mayor9.webp',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
         'A#': {
             main: 'assets/img/piano/mayores/asos-mayor.png',
             fallback: 'assets/img/piano/default-piano.png'
         },
         'B': {
             main: 'assets/img/piano/mayores/b-mayor.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'Bm': {
+            main: 'assets/img/piano/menores/b-menor.webp',
             fallback: 'assets/img/piano/default-piano.png'
         }
     },
@@ -178,6 +194,14 @@ const chordImages = {
         'Dm': {
             main: 'assets/img/bass/menores/d-menor.webp',
             fallback: 'assets/img/bass/default-bass.png'
+        },
+        'D/F#': {
+            main: 'assets/img/bass/slash/dfsos.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
+        'D/C#': {
+            main: 'assets/img/bass/slash/dcsos.png',
+            fallback: 'assets/img/piano/default-piano.png'
         },
         'D#': {
             main: 'assets/img/bass/mayores/dsos-mayor.webp',
@@ -243,6 +267,14 @@ const chordImages = {
             main: 'assets/img/bass/menores/a-menor.webp',
             fallback: 'assets/img/bass/default-bass.png'
         },
+        'A9': {
+            main: 'assets/img/bass/mayores9/a-mayor9.png',
+            fallback: 'assets/img/bass/default-piano.png'
+        },
+        'A9/F#': {
+            main: '.assets/img/bass/slash/a9fsos.png',
+            fallback: 'assets/img/piano/default-piano.png'
+        },
         'A#': {
             main: 'assets/img/bass/mayores/asos-mayor.webp',
             fallback: 'assets/img/bass/default-bass.png'
@@ -257,6 +289,10 @@ const chordImages = {
         },
         'Bm': {
             main: 'assets/img/bass/menores/b-menor.webp',
+            fallback: 'assets/img/bass/default-bass.png'
+        },
+        'Bm7': {
+            main: 'assets/img/bass/menores7/b-menor7.webp',
             fallback: 'assets/img/bass/default-bass.png'
         }
     }
