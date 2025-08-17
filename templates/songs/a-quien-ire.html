@@ -466,6 +466,62 @@
     <script src="../../assets/js/chord.js"></script>
     <script src="../../assets/js/songs.js"></script>
 
+
+    <!-- Botones de navegación flotante -->
+<div class="floating-nav">
+    <button class="nav-btn" data-target="current-key-section" title="Tonalidad actual">🎼</button>
+    <button class="nav-btn" data-target="song-lyrics" title="Letra y Acordes">🎤</button>
+    <button class="nav-btn" data-target="chord-diagrams" title="Diagramas de Acordes">🖐</button>
+    <button class="nav-btn" data-target="transition-box" title="Transiciones">🔀</button>
+    <button class="nav-btn" data-target="jazz-box" title="Arreglos Jazz">🎷</button>
+    <button class="nav-btn" data-target="scales-container" title="Escalas">🎶</button>
+    <button class="nav-btn" data-target="tutorials-section" title="Tutoriales">🎵</button>
+</div>
+
+<style>
+    /* Estilos para la navegación flotante */
+    .floating-nav {
+        position: fixed;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 1000;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #005caf, #003d73);
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+        .nav-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+        }
+    }
+    
+</style>
+
 </body>
 
 </html>

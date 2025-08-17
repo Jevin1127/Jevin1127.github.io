@@ -2,6 +2,57 @@
 
 // Configuración básica para la página de canción
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Agregar IDs a las secciones si no los tienen
+    const sections = {
+        'current-key-section': document.querySelector('.transpose-controls'),
+        'song-lyrics': document.getElementById('song-lyrics'),
+        'chord-diagrams': document.querySelector('.chord-diagrams'),
+        'transition-box': document.querySelector('.transition-box'),
+        'jazz-box': document.querySelector('.jazz-box'),
+        'scales-container': document.getElementById('scales-container'),
+        'tutorials-section': document.querySelector('.tutorials-section')
+    };
+    
+    // Asignar IDs a las secciones
+    Object.entries(sections).forEach(([id, element]) => {
+        if (element && !element.id) {
+            element.id = id;
+        }
+    });
+    
+    // Configurar eventos de los botones de navegación
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Efecto visual de resaltado
+                targetElement.style.transition = 'box-shadow 0.5s ease';
+                targetElement.style.boxShadow = '0 0 0 3px rgba(0, 92, 175, 0.5)';
+                
+                setTimeout(() => {
+                    targetElement.style.boxShadow = 'none';
+                }, 1500);
+            }
+        });
+    });
+    
+    // Hacer los botones más accesibles en móviles
+    if ('ontouchstart' in window) {
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.style.width = '44px';
+            btn.style.height = '44px';
+            btn.style.fontSize = '18px';
+        });
+    }
+
     // 1. Inicializar controles de transposición
 
         document.body.addEventListener("click", ensureToneStarted);
