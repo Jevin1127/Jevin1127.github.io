@@ -1911,3 +1911,52 @@ body, html {
     font-style: italic;
     margin-top: 8px;
 }
+
+/* Estilos generales para las listas de canciones */
+.category-content {
+  width: 100%;
+  overflow: visible; /* Asegura que todo el contenido sea visible */
+}
+
+.songs-list {
+  display: block;
+  width: 100%;
+  column-count: 3; /* Tres columnas por defecto en desktop */
+  column-gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.songs-list li {
+  break-inside: avoid; /* Evita que los ítems se partan entre columnas */
+  margin-bottom: 5px;
+}
+
+/* Responsive para tablets */
+@media (max-width: 1024px) {
+  .songs-list {
+    column-count: 2; /* Dos columnas en tablets */
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .songs-list {
+    column-count: 1; /* Una columna en móviles */
+  }
+  
+  /* Para móviles en orientación horizontal */
+  @media (orientation: landscape) {
+    .songs-list {
+      column-count: 2; /* Dos columnas en horizontal */
+    }
+  }
+}
+
+/* Asegura que el contenedor no tenga límites de altura */
+.category-content {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}

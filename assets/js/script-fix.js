@@ -1,4 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+
+  // Función para ajustar columnas según el tamaño de pantalla
+  const adjustColumns = () => {
+    const songLists = document.querySelectorAll('.songs-list');
+    const screenWidth = window.innerWidth;
+
+    songLists.forEach(list => {
+      if (screenWidth >= 1024) {
+        list.style.columnCount = 3;
+      } else if (screenWidth >= 768) {
+        list.style.columnCount = 2;
+      } else {
+        list.style.columnCount = 1;
+      }
+    });
+  };
+
+  // Ajustar columnas al cargar y al cambiar tamaño
+  adjustColumns();
+  window.addEventListener('resize', adjustColumns);
+  
+  
   // Seleccionar todos los encabezados de categoría
   const categoryHeaders = document.querySelectorAll('.category-header');
   
