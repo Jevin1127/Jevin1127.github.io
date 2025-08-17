@@ -24,7 +24,7 @@
             <a href="../../index.html" class="back-btn">Volver al menú principal</a>
             <h2 class="song-title">A quién iré (LEE)</h2>
             <div class="transpose-controls">
-                <div class="current-key">Tonalidad actual: <span id="current-key">D</span></div>
+                <div class="current-key">🎼 Tonalidad actual: <span id="current-key">D</span></div>
                 <div class="transpose-buttons">
                     <button onclick="transpose(-1)">Bajar ½ tono</button>
                     <button onclick="transpose(1)">Subir ½ tono</button>
@@ -467,59 +467,194 @@
     <script src="../../assets/js/songs.js"></script>
 
 
-    <!-- Botones de navegación flotante -->
+<!-- Coloca esto antes del cierre </body> -->
 <div class="floating-nav">
-    <button class="nav-btn" data-target="current-key-section" title="Tonalidad actual">🎼</button>
-    <button class="nav-btn" data-target="song-lyrics" title="Letra y Acordes">🎤</button>
-    <button class="nav-btn" data-target="chord-diagrams" title="Diagramas de Acordes">🖐</button>
-    <button class="nav-btn" data-target="transition-box" title="Transiciones">🔀</button>
-    <button class="nav-btn" data-target="jazz-box" title="Arreglos Jazz">🎷</button>
-    <button class="nav-btn" data-target="scales-container" title="Escalas">🎶</button>
-    <button class="nav-btn" data-target="tutorials-section" title="Tutoriales">🎵</button>
+    <button id="nav-expand-btn">🎵</button>
+    <div class="nav-menu">
+        <button data-target="current-key-section" title="Tonalidad actual">🎼</button>
+        <button data-target="song-lyrics" title="Letra y Acordes">🎤</button>
+        <button data-target="chord-diagrams" title="Diagramas de Acordes">🖐</button>
+        <button data-target="transition-box" title="Transiciones">🔀</button>
+        <button data-target="jazz-box" title="Arreglos Jazz">🎷</button>
+        <button data-target="scales-container" title="Escalas">🎶</button>
+        <button data-target="tutorials-section" title="Tutoriales">🎵</button>
+    </div>
 </div>
 
 <style>
-    /* Estilos para la navegación flotante */
-    .floating-nav {
-        position: fixed;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        z-index: 1000;
-    }
-    
-    .nav-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(145deg, #005caf, #003d73);
-        color: white;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-    
-    @media (max-width: 768px) {
-        .nav-btn {
-            width: 36px;
-            height: 36px;
-            font-size: 14px;
+/* Estilos mejorados */
+.floating-nav {
+    position: fixed;
+    top: 20px;
+    right: 15px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#nav-expand-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #005caf, #003d73);
+    color: white;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1001;
+}
+
+#nav-expand-btn:hover {
+    transform: scale(1.1);
+}
+
+.nav-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.nav-menu.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-menu button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(240, 246, 255, 0.9);
+    border: 1px solid rgba(0, 92, 175, 0.15);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-menu button:hover {
+    background: #005caf;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Efecto de transparencia */
+.floating-nav.inactive {
+    opacity: 0.5;
+    transition: opacity 0.5s ease 5s;
+}
+
+/* Animación de resaltado */
+@keyframes section-highlight {
+    0% { box-shadow: 0 0 0 0 rgba(0, 92, 175, 0.3); }
+    50% { box-shadow: 0 0 0 10px rgba(0, 92, 175, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 92, 175, 0); }
+}
+</style>
+
+<script>
+// Script mejorado (puedes colocarlo en songs.js)
+document.addEventListener('DOMContentLoaded', function() {
+    const navExpandBtn = document.getElementById('nav-expand-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    const floatingNav = document.querySelector('.floating-nav');
+    let menuTimeout;
+
+    // Asegurar que las secciones tengan IDs
+    const sections = {
+        'current-key-section': document.querySelector('.transpose-controls'),
+        'song-lyrics': document.getElementById('song-lyrics'),
+        'chord-diagrams': document.querySelector('.chord-diagrams'),
+        'transition-box': document.querySelector('.transition-box'),
+        'jazz-box': document.querySelector('.jazz-box'),
+        'scales-container': document.getElementById('scales-container'),
+        'tutorials-section': document.querySelector('.tutorials-section')
+    };
+
+    // Asignar IDs si no existen
+    Object.entries(sections).forEach(([id, element]) => {
+        if (element && !element.id) element.id = id;
+    });
+
+    // Función para desplazar a sección
+    function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Resaltar sección
+            element.style.animation = 'section-highlight 1.5s ease';
+            setTimeout(() => element.style.animation = '', 1500);
         }
     }
+
+    // Control del menú
+    function toggleMenu() {
+        navMenu.classList.toggle('visible');
+        navExpandBtn.textContent = navMenu.classList.contains('visible') ? '✕' : '🎵';
+        floatingNav.classList.remove('inactive');
+        resetMenuTimer();
+    }
+
+    function resetMenuTimer() {
+        clearTimeout(menuTimeout);
+        if (navMenu.classList.contains('visible')) {
+            menuTimeout = setTimeout(() => {
+                navMenu.classList.remove('visible');
+                navExpandBtn.textContent = '🎵';
+                floatingNav.classList.add('inactive');
+            }, 5000);
+        }
+    }
+
+    // Event listeners
+    navExpandBtn.addEventListener('click', toggleMenu);
     
+    document.querySelectorAll('.nav-menu button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            scrollToSection(targetId);
+            resetMenuTimer();
+        });
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (!floatingNav.contains(e.target)) {
+            navMenu.classList.remove('visible');
+            navExpandBtn.textContent = '🎵';
+            resetMenuTimer();
+        }
+    });
+
+    // Inicializar estado
+    resetMenuTimer();
+});
+</script>
+
 </style>
 
 </body>
